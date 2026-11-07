@@ -32,9 +32,9 @@
   "home": {
     "hero": {
       "greetings": [
-        "Hola,",
-        "Hello,",
-        "Bonjour,"
+        { "word": "Hola,", "lang": "es" },
+        { "word": "Hello,", "lang": "en" },
+        { "word": "Bonjour,", "lang": "fr" }
       ],
       "name": "je suis Felipe.",
       "lead": "Développeur full-stack. Je conçois et livre des apps web, ",

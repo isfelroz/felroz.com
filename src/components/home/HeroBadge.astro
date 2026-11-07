@@ -7,7 +7,7 @@
 import Avatar3D from './Avatar3D.astro'
 
 interface Props {
-  greetings: string[]
+  greetings: { word: string; lang: string }[]
   name: string
   lead: string
   signal: string
@@ -18,7 +18,7 @@ const { greetings, name, lead, signal, avatarAlt } = Astro.props
 const last = greetings.length - 1
 ---
 
-<div class="hero-badge relative flex h-full flex-col gap-[18px]">
+<div class="hero-badge flex h-full flex-col gap-[18px]">
   <span class="hero-slot" aria-hidden="true"></span>
 
   <div class="hero-stage" data-stage>
@@ -31,10 +31,10 @@ const last = greetings.length - 1
       id="hero-title"
       class="text-[clamp(2.5rem,4.6vw,4.5rem)] leading-[1.02] font-bold tracking-[-0.035em] min-[1101px]:text-[clamp(2.4rem,3.4vw,3.4rem)]"
     >
-      <span class="sr-only">{greetings[last]} {name}</span>
+      <span class="sr-only">{greetings[last].word} {name}</span>
       <span aria-hidden="true"
         ><span class="hero-greet" data-greet
-          >{greetings.map((word, k) => <span class:list={{ on: k === last }}>{word}</span>)}</span
+          >{greetings.map(({ word, lang }, k) => <span lang={lang} class:list={{ on: k === last }}>{word}</span>)}</span
         ><br />{name}</span
       >
     </h1>
@@ -62,9 +62,13 @@ const last = greetings.length - 1
 
 <style is:global>
   /* Global (no scope attributes) so the lead's markup stays plain; every selector is hero-prefixed */
+  /* The slot hangs from the card face itself, whatever its padding */
+  [data-card-face]:has(> .hero-badge) {
+    position: relative;
+  }
   .hero-slot {
     position: absolute;
-    top: -19px; /* 9px from the card edge, through the p-7 padding */
+    top: 9px;
     left: 50%;
     width: 52px;
     height: 6px;
@@ -72,11 +76,6 @@ const last = greetings.length - 1
     translate: -50% 0;
     background: var(--color-carbone-deep);
     box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.6);
-  }
-  @media (max-width: 640px) {
-    .hero-slot {
-      top: -15px; /* p-6 padding */
-    }
   }
 
   .hero-stage {

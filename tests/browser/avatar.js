@@ -14,13 +14,17 @@
   const fcp = performance.getEntriesByType('paint').find((p) => p.name === 'first-contentful-paint')
   const glbBeforePaint = glb?.startTime < fcp?.startTime
 
-  // posterAfterError: a missing model falls back to a visible poster
+  // posterAfterError: a later missing model falls back to a visible poster that carries the alt again
   const failed = new Promise((r) => mv.addEventListener('error', r, { once: true }))
   mv.src = '/models/missing.glb'
   await Promise.race([failed, sleep(8000)])
   await sleep(300)
   const poster = mv.querySelector('img[slot="poster"]')
-  const posterAfterError = !!poster && poster.offsetHeight > 0 && getComputedStyle(poster).visibility !== 'hidden'
+  const posterAfterError =
+    !!poster &&
+    poster.offsetHeight > 0 && // 0 while model-viewer hides its poster slot (display: none)
+    poster.alt === mv.getAttribute('alt') &&
+    !mv.hasAttribute('src')
 
   return JSON.stringify({ loaded, glbBeforePaint, posterAfterError })
 })()

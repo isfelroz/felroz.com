@@ -33,7 +33,7 @@ const { alt } = Astro.props
     disable-tap
     loading="eager"
   >
-    <Image slot="poster" src={me} alt="" width={420} height={336} loading="eager" draggable="false" />
+    <Image slot="poster" src={me} alt={alt} width={420} height={336} loading="eager" draggable="false" />
   </model-viewer>
 </div>
 
@@ -62,54 +62,60 @@ const { alt } = Astro.props
 </style>
 
 <script>
-  const mv = document.querySelector<HTMLElement & { src?: string }>('[data-avatar]')
+  type ModelViewer = HTMLElement & { src: string | null; showPoster(): void }
+  const mv = document.querySelector<ModelViewer>('[data-avatar]')
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const probe = document.createElement('canvas')
+  const webgl = !!(probe.getContext('webgl2') || probe.getContext('webgl'))
 
-  if (mv) {
+  // Under reduced motion or without WebGL nothing loads: the poster keeps the alt it ships with
+  if (mv && !reduce && webgl) {
     const poster = mv.querySelector<HTMLImageElement>('img[slot="poster"]')
-    // The poster is decorative while model-viewer carries the alt; it takes the alt back when there is no model
-    const posterOnly = () => {
-      if (poster) poster.alt = mv.getAttribute('alt') ?? ''
-    }
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
-    const probe = document.createElement('canvas')
-    const webgl = !!(probe.getContext('webgl2') || probe.getContext('webgl'))
+    const alt = mv.getAttribute('alt') ?? ''
+    const hero = mv.closest<HTMLElement>('.tile') ?? mv
+    const stage = mv.closest<HTMLElement>('[data-stage]') ?? mv
 
-    if (reduce || !webgl) posterOnly()
-    else {
-      const hero = mv.closest<HTMLElement>('.tile') ?? mv
-      const stage = mv.closest<HTMLElement>('[data-stage]') ?? mv
-
-      const idle = new Promise<void>((resolve) =>
-        'requestIdleCallback' in window ? requestIdleCallback(() => resolve(), { timeout: 4000 }) : setTimeout(resolve, 1500),
-      )
-      const visible = new Promise<void>((resolve) => {
-        const io = new IntersectionObserver((entries) => {
-          if (entries.some((e) => e.isIntersecting)) {
-            io.disconnect()
-            resolve()
-          }
-        })
-        io.observe(hero)
+    // Idle, but no later than 4s: a busy page must not keep the model from ever loading
+    const idle = new Promise<void>((resolve) =>
+      'requestIdleCallback' in window ? requestIdleCallback(() => resolve(), { timeout: 4000 }) : setTimeout(resolve, 1500),
+    )
+    const visible = new Promise<void>((resolve) => {
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect()
+          resolve()
+        }
       })
+      io.observe(hero)
+    })
 
-      Promise.all([idle, visible])
-        .then(() => import('@google/model-viewer'))
-        .then(() => {
-          // A failed model falls back to the poster
-          mv.addEventListener('error', () => mv.removeAttribute('src'))
-          mv.src = mv.dataset.src
-        })
-        .catch(posterOnly)
-
-      // The camera turns toward the pointer: θ = x·38°, φ = 80° − y·14° (y up). The attribute works before the upgrade too.
-      const aim = (x: number, y: number) => mv.setAttribute('camera-orbit', `${x * 38}deg ${80 - y * 14}deg auto`)
-      const clamp = (v: number) => Math.max(-1, Math.min(1, v))
-      hero.addEventListener('pointermove', (e) => {
-        if (e.pointerType === 'touch') return
-        const r = stage.getBoundingClientRect()
-        aim(clamp((e.clientX - r.left - r.width / 2) / (r.width / 2)), clamp(-(e.clientY - r.top - r.height / 2) / (r.height / 2)))
-      })
-      hero.addEventListener('pointerleave', () => aim(0, 0))
+    // A failed model (first load or any later src) brings the poster and its alt back
+    const fallBack = () => {
+      mv.removeAttribute('src')
+      mv.src = null
+      mv.showPoster()
+      if (poster) poster.alt = alt
     }
+
+    Promise.all([idle, visible])
+      .then(() => import('@google/model-viewer'))
+      .then(() => {
+        // model-viewer now carries the alt; the poster becomes decorative duplication
+        if (poster) poster.alt = ''
+        mv.addEventListener('error', fallBack)
+        mv.setAttribute('src', mv.dataset.src ?? '')
+      })
+      // The import failed: model-viewer never upgrades and the poster keeps its alt
+      .catch(() => {})
+
+    // The camera turns toward the pointer: θ = x·38°, φ = 80° − y·14° (y up). The attribute works before the upgrade too.
+    const aim = (x: number, y: number) => mv.setAttribute('camera-orbit', `${x * 38}deg ${80 - y * 14}deg auto`)
+    const clamp = (v: number) => Math.max(-1, Math.min(1, v))
+    hero.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return
+      const r = stage.getBoundingClientRect()
+      aim(clamp((e.clientX - r.left - r.width / 2) / (r.width / 2)), clamp(-(e.clientY - r.top - r.height / 2) / (r.height / 2)))
+    })
+    hero.addEventListener('pointerleave', () => aim(0, 0))
   }
 </script>
