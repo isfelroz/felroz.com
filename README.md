@@ -50,7 +50,7 @@ src/
 
 ## Content
 
-The site is bilingual: French at `/` (`/a-propos`, `/projets`, `/cv`, `/contact`) and English under `/en` (`/en/about`, `/en/projects`, `/en/resume`, `/en/contact`). All copy lives in `src/i18n/fr.json` and `src/i18n/en.json`; socials and skills in `src/data/global.json`.
+The site is bilingual: French at `/` (`/a-propos`, `/projets`, `/parcours`, `/contact`) and English under `/en` (`/en/about`, `/en/projects`, `/en/journey`, `/en/contact`). The old `/cv`, `/resume` and `/en/resume` URLs redirect to the journey pages. All copy lives in `src/i18n/fr.json` and `src/i18n/en.json`; language-neutral data (socials, source code link, employer, stack, toolbelt, languages, featured tags) in `src/data/global.json`.
 
 ## Design
 

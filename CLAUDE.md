@@ -16,7 +16,7 @@ Personal portfolio (felroz.com) built with Astro 7 as a static site, with React 
 - Animations: import from `motion/react`, not `framer-motion`.
 - The active route comes from `Astro.url.pathname` normalized with `normalizePath` (`src/lib/path.js`); pass it to islands as a prop.
 - Images: put them in `src/assets/` and use `<Image>` from `astro:assets`. `public/` is only for files served unprocessed (fonts, favicon).
-- Language-neutral data (socials, skills) lives in `src/data/global.json`; do not hardcode copy in components.
+- Language-neutral data (socials, sourceCode, employer, stack, toolbelt, languages, featuredTags) lives in `src/data/global.json`; do not hardcode copy in components.
 - Import aliases (tsconfig): `@components/*`, `@layouts/*`, `@data/*`, `@assets/*`.
 - i18n: French at `/`, English under `/en`. Route keys and localized paths live in `src/i18n/index.js`; all copy lives in `src/i18n/fr.json` and `src/i18n/en.json` (keep both in sync). Pages in `src/pages` are thin wrappers around `src/views/*`.
 
