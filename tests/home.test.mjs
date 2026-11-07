@@ -7,12 +7,17 @@ const decode = (s) =>
 
 /** The slice of HTML from the tile with `area` up to the next tile (or the end of the bento). */
 const tileSlice = (html, area) => {
-  const starts = [...html.matchAll(/<div class="tile[^"]*"[^>]*grid-area:\s*(\w+)/g)]
+  const starts = [...html.matchAll(/<(?:div|section) class="tile[^"]*"[^>]*grid-area:\s*(\w+)/g)]
   const i = starts.findIndex((m) => m[1] === area)
   assert.ok(i >= 0, `tile ${area} not found`)
   const from = starts[i].index
   const to = starts[i + 1]?.index ?? html.indexOf('</main>', from)
   return { from, to, html: html.slice(from, to) }
+}
+
+const stackLabels = {
+  '/': 'Stack : TypeScript, Nuxt, Laravel, PostgreSQL, Docker, Python. En savoir plus sur moi',
+  '/en': 'Stack: TypeScript, Nuxt, Laravel, PostgreSQL, Docker, Python. More about me',
 }
 
 const paths = {
@@ -67,6 +72,26 @@ for (const route of ['/', '/en']) {
     assert.equal(stack.match(/<a[\s>]/g).length, 1)
     const label = decode(stack.match(/<a[^>]*aria-label="([^"]+)"/)[1])
     for (const name of ['TypeScript', 'Nuxt', 'Laravel', 'PostgreSQL', 'Docker', 'Python']) assert.ok(label.includes(name), name)
+  })
+
+  test(`${route}: skills card lists six items and the toolbelt`, () => {
+    const tile = tileSlice(html, 'skills').html
+    assert.equal((tile.match(/<li/g) || []).length, 6)
+    assert.match(tile, /Laravel · Nuxt · Vue · TypeScript · Docker/)
+  })
+
+  test(`${route}: stack card is one link whose name lists the stack`, () => {
+    const tile = tileSlice(html, 'stack').html
+    assert.equal((tile.match(/<a\b/g) || []).length, 1)
+    assert.equal(decode(tile.match(/<a[^>]*aria-label="([^"]+)"/)[1]), stackLabels[route])
+    assert.ok(!/tabindex="0"/.test(tile))
+  })
+
+  test(`${route}: tiles with a heading are labelled sections, others plain divs`, () => {
+    for (const m of html.matchAll(/<(div|section) class="tile[^"]*"[^>]*>/g)) {
+      const labelled = /aria-labelledby=/.test(m[0])
+      assert.equal(m[1], labelled ? 'section' : 'div', m[0])
+    }
   })
 
   test(`${route}: contact band has social pills and no email`, () => {

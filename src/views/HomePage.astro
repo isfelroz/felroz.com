@@ -7,8 +7,9 @@ import NowCard from '@components/home/NowCard.astro'
 import JourneyCard from '@components/home/JourneyCard.astro'
 import FeaturedCard from '@components/home/FeaturedCard.astro'
 import MeCard from '@components/home/MeCard.astro'
+import SkillsCard from '@components/home/SkillsCard.astro'
+import StackCard from '@components/home/StackCard.astro'
 import ContactBand from '@components/home/ContactBand.astro'
-import Icon from '@components/react/Icon.jsx'
 import { localizePath, useTranslations } from '../i18n/index.js'
 
 const { locale } = Astro.props
@@ -32,21 +33,16 @@ const stackLabel = home.stack.label.replace('{list}', globalData.stack.map((s) =
       <JourneyCard {...home.journey} />
     </Tile>
 
-    {/* Savoir-faire: placeholder until Task 4 */}
     <Tile size="2x1" area="skills" index={3} labelledby="skills-title">
-      <h2 id="skills-title" class="text-2xl font-bold tracking-[-0.02em]">{home.skills.title}</h2>
+      <SkillsCard {...home.skills} />
     </Tile>
 
     <Tile size="2x1" area="featured" index={4} href={localizePath('projects', locale)} label={home.featured.title}>
       <FeaturedCard {...home.featured} />
     </Tile>
 
-    {/* Stack: placeholder constellation until Task 4 */}
     <Tile size="1x1" area="stack" index={5} href={localizePath('about', locale)} label={stackLabel}>
-      <div class="flex h-full items-end justify-between gap-4">
-        <h2 class="text-2xl font-bold tracking-[-0.02em]">{home.stack.title}</h2>
-        <span class="shrink-0"><Icon type="arrow" /></span>
-      </div>
+      <StackCard title={home.stack.title} />
     </Tile>
 
     <Tile size="1x1" area="me" index={6} href={localizePath('about', locale)} label={home.me.title}>

@@ -3,10 +3,12 @@ import {
   SiGithub,
   SiLaravel,
   SiNuxt,
+  SiPostgresql,
   SiPython,
   SiTypescript,
 } from 'react-icons/si'
 import { FaLinkedin } from 'react-icons/fa'
+import { LuAppWindow, LuBraces, LuRocket, LuSmartphone, LuSparkles, LuWorkflow } from 'react-icons/lu'
 import { BsArrowUpRightCircle } from 'react-icons/bs'
 
 const icons = {
@@ -15,8 +17,16 @@ const icons = {
   laravel: SiLaravel,
   nuxt: SiNuxt,
   docker: SiDocker,
+  postgresql: SiPostgresql,
   github: SiGithub,
   linkedin: FaLinkedin,
+  // Neutral line glyphs for Savoir-faire (spec §6 call 5: no brand logos there)
+  api: LuBraces,
+  web: LuAppWindow,
+  mobile: LuSmartphone,
+  automation: LuWorkflow,
+  deploy: LuRocket,
+  agents: LuSparkles,
 }
 
 const hoverFill = {

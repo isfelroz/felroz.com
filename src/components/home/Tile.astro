@@ -16,9 +16,11 @@ interface Props {
 }
 
 const { size, area, index, href, label, labelledby } = Astro.props
+// A tile with its own heading is a labelled landmark; aria-labelledby is not allowed on a plain div
+const Tag = labelledby ? 'section' : 'div'
 ---
 
-<div
+<Tag
   class="tile"
   data-size={size}
   style={`grid-area:${area};--i:${index}`}
@@ -35,4 +37,4 @@ const { size, area, index, href, label, labelledby } = Astro.props
       </Card>
     )
   }
-</div>
+</Tag>
