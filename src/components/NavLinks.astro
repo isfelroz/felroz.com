@@ -1,0 +1,24 @@
+---
+import { normalizePath } from '../lib/path.js'
+
+const { links, classes = '' } = Astro.props
+const pathname = normalizePath(Astro.url.pathname)
+---
+
+{
+  links?.length > 0 && (
+    <div class:list={['flex items-center', classes]}>
+      {links.map((link) => (
+        <a
+          class:list={[
+            pathname === link.href ? 'border-primary' : 'border-transparent',
+            'text-white border-b-2 hover:text-primary hover:border-b-2 hover:border-primary',
+          ]}
+          href={link.href}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  )
+}

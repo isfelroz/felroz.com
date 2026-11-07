@@ -1,0 +1,25 @@
+---
+const { link, background } = Astro.props
+---
+
+{
+  link?.href ? (
+    <a {...link} class="group">
+      <div class="relative h-full isolate">
+        <div class="bg-primary-black p-8 rounded-3xl shadow-shadow1 h-full w-full z-10 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all">
+          <slot />
+        </div>
+        <div
+          class:list={[
+            background,
+            'radialBackground absolute rounded-3xl border border-primary-black z-[-1] top-0 left-0 w-full h-full group-hover:-translate-x-2 group-hover:translate-y-2 transition-all',
+          ]}
+        />
+      </div>
+    </a>
+  ) : (
+    <div class="bg-primary-black p-8 rounded-3xl shadow-shadow1 h-full">
+      <slot />
+    </div>
+  )
+}

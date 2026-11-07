@@ -1,0 +1,20 @@
+---
+import Icon from '@components/react/Icon.jsx'
+---
+
+<div class="flex flex-col h-full items-end w-full">
+  <div class="shrink grow grid w-full place-items-center">
+    <slot />
+  </div>
+  <div class="flex justify-between w-full items-end">
+    <div>
+      <h3 class="font-bold text-sm uppercase text-transparent bg-clip-text bg-linear-to-r from-primary-dark via-primary to-primary-ligth">
+        Welcome to my world
+      </h3>
+      <h2 class="text-2xl font-bold">My Resume</h2>
+    </div>
+    <div class="h-fit icon-svg">
+      <Icon type="arrow" />
+    </div>
+  </div>
+</div>

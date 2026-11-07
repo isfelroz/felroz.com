@@ -1,0 +1,29 @@
+---
+import ButtonLink from '@components/ButtonLink.astro'
+import Container from '@components/Container.astro'
+import NavLinks from '@components/NavLinks.astro'
+import Logo from '@components/react/Logo.jsx'
+import MenuResponsive from '@components/react/MenuResponsive.jsx'
+import { normalizePath } from '../lib/path.js'
+
+const { menu } = Astro.props
+---
+
+<section class="sticky top-0 bg-primary-black/50 z-10 backdrop-blur-md">
+  <Container>
+    <div class="w-full flex items-center gap-2">
+      <div class="flex justify-between py-5 shrink grow">
+        <Logo client:idle />
+        <div class="hidden lg:block m-auto">
+          <NavLinks links={menu} classes="gap-24" />
+        </div>
+        <ButtonLink to="/contact">Get in Touch</ButtonLink>
+      </div>
+      <MenuResponsive
+        client:media="(max-width: 1023px)"
+        links={menu}
+        pathname={normalizePath(Astro.url.pathname)}
+      />
+    </div>
+  </Container>
+</section>
