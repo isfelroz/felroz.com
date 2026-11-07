@@ -2,28 +2,52 @@
 import ButtonLink from '@components/ButtonLink.astro'
 import Container from '@components/Container.astro'
 import NavLinks from '@components/NavLinks.astro'
-import Logo from '@components/react/Logo.jsx'
+import Lockup from '@components/brand/Lockup.astro'
 import MenuResponsive from '@components/react/MenuResponsive.jsx'
+import { localizePath, otherLocale, useTranslations } from '../i18n/index.js'
 import { normalizePath } from '../lib/path.js'
 
-const { menu } = Astro.props
+const { locale, routeKey } = Astro.props
+const t = useTranslations(locale)
+const links = ['about', 'projects', 'resume'].map((key) => ({
+  label: t.nav[key],
+  href: localizePath(key, locale),
+}))
+const alt = otherLocale(locale)
+const language = {
+  href: localizePath(routeKey, alt),
+  hreflang: alt,
+  code: t.nav.switchLabel,
+  label: t.nav.switchLanguage,
+}
+const contact = { href: localizePath('contact', locale), label: t.nav.contact }
 ---
 
-<section class="sticky top-0 bg-primary-black/50 z-10 backdrop-blur-md">
+<header class="sticky top-0 z-10 bg-carbone/50 backdrop-blur-md">
   <Container>
-    <div class="w-full flex items-center gap-2">
-      <div class="flex justify-between py-5 shrink grow">
-        <Logo client:idle />
-        <div class="hidden lg:block m-auto">
-          <NavLinks links={menu} classes="gap-24" />
-        </div>
-        <ButtonLink to="/contact">Get in Touch</ButtonLink>
+    <div class="flex items-center justify-between gap-4 py-5">
+      <Lockup href={localizePath('home', locale)} label={`felroz — ${t.nav.home}`} />
+      <nav aria-label={t.nav.main} class="hidden lg:block">
+        <NavLinks links={links} classes="gap-16" />
+      </nav>
+      <div class="hidden items-center gap-6 lg:flex">
+        <a
+          href={language.href}
+          hreflang={language.hreflang}
+          lang={language.hreflang}
+          aria-label={language.label}
+          class="label-mono text-label-dark transition-colors hover:text-white">{language.code}</a
+        >
+        <ButtonLink href={contact.href}>{contact.label}</ButtonLink>
       </div>
       <MenuResponsive
         client:media="(max-width: 1023px)"
-        links={menu}
+        links={links}
         pathname={normalizePath(Astro.url.pathname)}
+        contact={contact}
+        language={language}
+        labels={{ open: t.nav.openMenu, close: t.nav.closeMenu, nav: t.nav.main }}
       />
     </div>
   </Container>
-</section>
+</header>

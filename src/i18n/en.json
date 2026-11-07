@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "siteName": "felroz",
+    "titles": {
+      "home": "felroz — AI Engineer",
+      "about": "About · felroz",
+      "projects": "Projects · felroz",
+      "resume": "Resume · felroz",
+      "contact": "Contact · felroz"
+    },
+    "description": "Felipe Alarcon (felroz), AI Engineer in Annecy, France. AI agents, LLMs and agentic development, shipped to production with guardrails."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "resume": "Resume",
+    "contact": "Contact",
+    "main": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLanguage": "Version française",
+    "switchLabel": "FR",
+    "skip": "Skip to content"
+  },
+  "pages": {
+    "about": "About me",
+    "projects": "Projects",
+    "resume": "Resume",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "before": "I put AI agents to work, ",
+      "signal": "with guardrails.",
+      "text": "Production-minded AI Engineer: business applications end to end, and AI agents that work like a team, with rules, tools and automated checks.",
+      "avatarAlt": "Felipe Alarcon's Memoji"
+    },
+    "projects": {
+      "title": "Projects",
+      "text": "A flight-operations platform, a group intranet and tooling to work with agents."
+    },
+    "agentic": {
+      "title": "Agentic development",
+      "text": "Per-repository rules, skills, specialised agents and parallel sessions. AI-written code is held in check by architecture tests."
+    },
+    "resume": {
+      "title": "Resume",
+      "text": "Aviation, a web agency, open source. Spanish, French, English."
+    },
+    "now": {
+      "title": "Today",
+      "text": "I build the flight-operations platform of a helicopter operator: flights, EASA logbook, scheduling, invoicing.",
+      "place": "Annecy · France"
+    },
+    "stack": {
+      "title": "TypeScript",
+      "skillLabel": "{name}: {value}%"
+    },
+    "contact": {
+      "title": "Let's work together.",
+      "text": "AI agents, LLMs or a business platform: tell me about your project."
+    },
+    "socialLabel": "Felipe Alarcon on {name}"
+  },
+  "footer": {
+    "credits": "Designed and built by Felipe Alarcon",
+    "source": "Source code"
+  }
+}

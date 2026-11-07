@@ -1,0 +1,101 @@
+---
+import globalData from '@data/global.json'
+import Layout from '@layouts/Layout.astro'
+import Grid from '@components/Grid.astro'
+import Card from '@components/Card.astro'
+import ProgressSkill from '@components/ProgressSkill.astro'
+import HeroCard from '@components/cards/HeroCard.astro'
+import IconCard from '@components/cards/IconCard.astro'
+import LinkCard from '@components/cards/LinkCard.astro'
+import NowCard from '@components/cards/NowCard.astro'
+import GridItem from '@components/react/GridItem.jsx'
+import Icon from '@components/react/Icon.jsx'
+import { localizePath, useTranslations } from '../i18n/index.js'
+
+const { locale } = Astro.props
+const t = useTranslations(locale)
+const home = t.home
+const { socials, skills } = globalData
+const skillLabel = (s) => home.stack.skillLabel.replace('{name}', s.name).replace('{value}', s.value)
+const socialAccent = { github: 'bg-github', linkedin: 'bg-linkedin' }
+---
+
+<Layout locale={locale} routeKey="home">
+  <Grid>
+    <GridItem client:load size="medium">
+      <Card href={localizePath('about', locale)}>
+        <HeroCard {...home.hero} />
+      </Card>
+    </GridItem>
+    <GridItem client:load>
+      <Card href={localizePath('projects', locale)}>
+        <LinkCard {...home.projects} />
+      </Card>
+    </GridItem>
+    <GridItem client:load>
+      <ul class="grid h-full grid-rows-2 gap-5 lg:gap-8">
+        {
+          socials.map((social) => (
+            <li class="min-h-0">
+              <Card
+                href={social.href}
+                accent={socialAccent[social.type]}
+                label={home.socialLabel.replace('{name}', social.name)}
+              >
+                <IconCard>
+                  <Icon type={social.type} size="56px" />
+                </IconCard>
+              </Card>
+            </li>
+          ))
+        }
+      </ul>
+    </GridItem>
+    <GridItem client:load>
+      <Card href={localizePath('projects', locale)}>
+        <LinkCard {...home.agentic} />
+      </Card>
+    </GridItem>
+    <GridItem client:load>
+      <Card href={localizePath('resume', locale)}>
+        <LinkCard {...home.resume} />
+      </Card>
+    </GridItem>
+    <GridItem client:load size="medium">
+      <Card>
+        <NowCard {...home.now} />
+      </Card>
+    </GridItem>
+    <GridItem client:load>
+      <Card href={localizePath('resume', locale)} accent="bg-typescript">
+        <LinkCard title={home.stack.title}>
+          <ProgressSkill percents={skills.main.value} size={150} label={skillLabel(skills.main)}>
+            <Icon type={skills.main.type} size="56px" />
+          </ProgressSkill>
+        </LinkCard>
+      </Card>
+    </GridItem>
+    <GridItem client:load>
+      <ul class="grid h-full grid-cols-2 grid-rows-2 gap-5 lg:gap-8">
+        {
+          skills.others.map((skill) => (
+            <li class="relative">
+              <Card>
+                <div class="absolute top-0 left-0 h-full w-full">
+                  <ProgressSkill percents={skill.value} size={100} label={skillLabel(skill)}>
+                    <Icon type={skill.type} size="40px" />
+                  </ProgressSkill>
+                </div>
+              </Card>
+            </li>
+          ))
+        }
+      </ul>
+    </GridItem>
+    <GridItem client:load size="medium">
+      <Card href={localizePath('contact', locale)}>
+        <LinkCard {...home.contact} size="large" />
+      </Card>
+    </GridItem>
+  </Grid>
+</Layout>

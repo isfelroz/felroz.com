@@ -12,11 +12,10 @@ colors:
   ink-soft: "#D4D5D9"
   label-on-dark: "#9A9CA3"
   label-on-light: "#5F6168"
+  dot-grid: "#3A3D43"
   brand-github: "#6E40C9"
-  brand-npm: "#CB0000"
   brand-linkedin: "#0A66C2"
-  brand-twitter: "#1D9BF0"
-  brand-javascript: "#FFF208"
+  brand-typescript: "#3178C6"
 typography:
   display-ghost:
     fontFamily: "DM Sans, sans-serif"
@@ -141,12 +140,13 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 - **Ink Soft** (`ink-soft`): secondary body text and inactive links on dark.
 - **Label on Dark** (`label-on-dark`): DM Mono labels and metadata on Carbone.
 - **Label on Light** (`label-on-light`): DM Mono labels and metadata on Craie or white.
+- **Dot Grid** (`dot-grid`): dots of the large background dot-grid field.
 
 ### Third-party brand colors
-`brand-github`, `brand-npm`, `brand-linkedin`, `brand-twitter`, `brand-javascript` exist only to fill the hover layer of the matching social or skill card. They never appear elsewhere.
+`brand-github`, `brand-linkedin` and `brand-typescript` exist only to fill the hover layer of the matching social or skill card. They never appear elsewhere.
 
 ### Named Rules
-**The One Signal Rule.** The gradient (left → right: Prune, Corail, Pêche) appears once per screen: on the symbol, one keyword, or one accent such as the primary button. If two things on a screen are gradient, one of them is wrong.
+**The One Signal Rule.** The gradient (left → right: Prune, Corail, Pêche) appears once per screen's content: one keyword or one accent. The persistent chrome (the symbol and the header's Contact button) does not count, as in the DA's own header. If two things in the page content are gradient, one of them is wrong.
 
 **The Plain Text Rule.** Running text is white on Carbone or Carbone on Craie. Never gradient, never Corail.
 
@@ -166,12 +166,12 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 - **Wordmark** (700, -1px tracking): *felroz* next to the symbol. Scale with the symbol; tracking stays tight.
 - **Body** (400, 1.125rem, 1.55): reading text, max 65–75ch.
 - **Body Strong** (500, 1rem): nav links, buttons.
-- **Label** (DM Mono 400, 0.8125rem, 2px tracking, uppercase): section numbers (`01 · SYMBOLE`), eyebrows, metadata, domain (`FELROZ.COM`).
+- **Label** (DM Mono 400, 0.8125rem, 2px tracking, uppercase): metadata such as place (`ANNECY · HAUTE-SAVOIE`), domain (`FELROZ.COM`), language switch (`EN` / `FR`). Section numbers (`01 · SYMBOLE`) only on brand boards, never on the site.
 
 ### Named Rules
 **The One Family Rule.** DM Sans and DM Mono only. No display or decorative faces.
 
-**The Machine Voice Rule.** DM Mono is always uppercase with 2px tracking, and only for labels, code and metadata. Never for sentences.
+**The Machine Voice Rule.** DM Mono is always uppercase with 2px tracking, and only for labels, code and metadata. Never for sentences, never as an eyebrow.
 
 ## Layout
 
@@ -187,7 +187,7 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 Depth is physical. Cards sit on Carbone with a soft dual shadow, a dark drop to the bottom-right and a faint light lift to the top-left, so they read as slightly raised tiles. On hover a linked card splits in two: the face moves up-right while a colored, dot-patterned underlayer moves down-left, which creates a 3D parallax.
 
 ### Shadow Vocabulary
-- **Card lift** (`box-shadow: rgba(0,0,0,0.25) 4px 4px 4px, rgba(247,244,244,0.02) -4px -4px 10px`; CSS var `--shadow1`): every card at rest.
+- **Card lift** (`box-shadow: rgba(0,0,0,0.25) 4px 4px 4px, rgba(247,244,244,0.02) -4px -4px 10px`; Tailwind `shadow-card`): every card at rest.
 
 ### Named Rules
 **The Split Card Rule.** Linked cards keep the offset hover: face `translate(8px, -8px)`, underlayer `translate(-8px, 8px)`, both with `transition-all`. Do not flatten it.
@@ -209,6 +209,7 @@ The mark. A gradient *f* without a crossbar, followed by a hollow Corail node an
 - **Clear space:** the height of the arrival dot on every side.
 - **Minimum size:** 24px. Below that, use the *f* alone in Corail (favicon).
 - **Lockup:** symbol + *felroz* in the Wordmark style.
+- **Hover:** when the lockup is a link, the node and the arrival dot drift up-right (2px and 4px, 300ms ease-out). No motion with reduced-motion.
 
 ```svg
 <svg viewBox="0 0 120 120" role="img" aria-label="felroz">
@@ -226,7 +227,7 @@ Favicon (*f* alone): same container, `<path d="M46 100 V50 Q46 28 70 28" stroke=
 
 ### Buttons
 - **Shape:** pill.
-- **Primary:** gradient background (Prune → Corail → Pêche, left to right), white Body Strong text, 8px 16px padding. It counts as the screen's one gradient signal. Used for *Contact*.
+- **Primary:** gradient background (Prune → Corail → Pêche, left to right), white Body Strong text, 8px 16px padding. Used only for *Contact* in the header and the mobile menu (persistent chrome).
 - **Hover / Focus:** visible focus ring in Pêche; no color shift needed.
 
 ### Cards
@@ -235,17 +236,18 @@ Favicon (*f* alone): same container, `<path d="M46 100 V50 Q46 28 70 28" stroke=
 - **Shadow Strategy:** Card lift at rest (see Elevation & Depth).
 - **Hover (linked cards):** the Split Card Rule. The underlayer takes the card's accent (Corail by default, or the third-party brand color for social and skill cards) overlaid with the dot grid (`radial-gradient(#26282C 3px, transparent 4px)`, 10px cell).
 - **Internal Padding:** 32px.
-- **Footer row:** title on the left, arrow-circle icon on the right (gray-400, rotates 45° → 0° and turns Corail on hover).
+- **Content:** title row with the arrow-circle icon on the right (Label on Dark, rotates 45° → 0° and turns Corail on hover or focus), then the text in Ink Soft at full card width. No label above the title.
 - **Entrance:** spring scale 0.8 → 1 with opacity 0 → 1.
 
 ### Navigation
+- **Header:** lockup on the left, links centred on `lg` (À propos / Projets / CV, or About / Projects / Resume), language switch (Label style, `EN` / `FR`) and the Contact button on the right.
 - **Style:** Body Strong, white.
 - **Hover:** Corail text with a 2px Corail underline.
-- **Active:** 2px Corail underline.
-- **Mobile:** full-height slide-in panel (90% width) over a blurred Carbone at 95% with the inverse dot grid; links in uppercase 2.25rem bold, centred.
+- **Active:** 2px Corail underline and `aria-current="page"`.
+- **Mobile:** full-height slide-in panel (90% width) over a blurred Carbone at 95% with the inverse dot grid; links in uppercase 2.25rem bold, centred; language switch and Contact at the bottom. Closes with Escape.
 
-### Label / Eyebrow
-DM Mono uppercase with 2px tracking, Label on Dark (or Label on Light on Craie). Section numbering uses the pattern `01 · NAME`.
+### Metadata Label
+DM Mono uppercase with 2px tracking, Label on Dark (or Label on Light on Craie). For metadata next to content (place, domain, language), never as an eyebrow above a heading.
 
 ### Skill Progress Ring
 Circular gauge: a 15%-opacity track and a vertical Prune → Corail → Pêche gradient arc with round caps. It animates on scroll into view (spring, stiffness 50, 0.5s delay). The skill icon sits centred.
@@ -263,6 +265,7 @@ Circular gauge: a 15%-opacity track and a vertical Prune → Corail → Pêche g
 - **Do** keep the card shadow and the split offset hover on every linked card.
 - **Do** use the symbol from 24px up and the lone Corail *f* below 24px.
 - **Do** size UI to the longer French copy.
+- **Do** let headings stand alone: no eyebrow label above them.
 
 ### Don't:
 - **Don't** draw the *f* with a crossbar. The decided mark has none.

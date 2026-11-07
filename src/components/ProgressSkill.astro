@@ -1,10 +1,10 @@
 ---
 import ProgressCircle from '@components/react/ProgressCircle.jsx'
 
-const { percents, size } = Astro.props
+const { percents, size, label } = Astro.props
 ---
 
-<div class="relative w-full h-full">
+<div class="relative h-full w-full" role="img" aria-label={label}>
   <ProgressCircle client:visible percents={percents} size={size} />
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
     <slot />

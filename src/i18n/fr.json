@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "siteName": "felroz",
+    "titles": {
+      "home": "felroz — AI Engineer",
+      "about": "À propos · felroz",
+      "projects": "Projets · felroz",
+      "resume": "CV · felroz",
+      "contact": "Contact · felroz"
+    },
+    "description": "Felipe Alarcon (felroz), AI Engineer à Annecy. Agents IA, LLM et développement agentique, mis en production avec des garde-fous."
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "resume": "CV",
+    "contact": "Contact",
+    "main": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "switchLanguage": "English version",
+    "switchLabel": "EN",
+    "skip": "Aller au contenu"
+  },
+  "pages": {
+    "about": "À propos",
+    "projects": "Projets",
+    "resume": "CV",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "before": "Je fais travailler des agents IA, ",
+      "signal": "avec des garde-fous.",
+      "text": "AI Engineer orienté production : des applications métier de bout en bout, et des agents IA qui travaillent comme une équipe, avec des règles, des outils et des contrôles automatiques.",
+      "avatarAlt": "Memoji de Felipe Alarcon"
+    },
+    "projects": {
+      "title": "Projets",
+      "text": "Une plateforme d'opérations aériennes, un intranet de groupe et des outils pour travailler avec des agents."
+    },
+    "agentic": {
+      "title": "Développement agentique",
+      "text": "Règles par dépôt, skills, agents spécialisés et sessions en parallèle. Le code écrit par l'IA passe par des tests d'architecture."
+    },
+    "resume": {
+      "title": "CV",
+      "text": "Aéronautique, agence web, logiciel libre. Espagnol, français, anglais."
+    },
+    "now": {
+      "title": "Aujourd'hui",
+      "text": "Je développe la plateforme d'opérations aériennes d'un opérateur d'hélicoptères : vols, logbook EASA, planning, facturation.",
+      "place": "Annecy · Haute-Savoie"
+    },
+    "stack": {
+      "title": "TypeScript",
+      "skillLabel": "{name} : {value} %"
+    },
+    "contact": {
+      "title": "Travaillons ensemble.",
+      "text": "Agents IA, LLM ou plateforme métier : parlons de votre projet."
+    },
+    "socialLabel": "{name} de Felipe Alarcon"
+  },
+  "footer": {
+    "credits": "Conçu et développé par Felipe Alarcon",
+    "source": "Code source"
+  }
+}

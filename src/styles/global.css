@@ -1,24 +1,69 @@
 @import 'tailwindcss';
+@import '@fontsource/dm-mono/400.css';
+@import '@fontsource/dm-mono/500.css';
 
+/* felroz design tokens. Source of truth: DESIGN.md */
 @theme {
-  --color-primary-black: #26282c;
+  /* Brand: gradient stops */
+  --color-prune: #9e4b88;
+  --color-corail: #ca6678;
+  --color-peche: #e98a77;
+
+  /* Neutrals */
+  --color-carbone: #26282c;
+  --color-carbone-raised: #2e3035;
+  --color-craie: #f4f1ee;
   --color-white: #fff;
-  --color-primary: #ca6678;
-  --color-primary-ligth: #e98a77;
-  --color-primary-dark: #9e4b88;
+  --color-ink-soft: #d4d5d9;
+  --color-label-dark: #9a9ca3;
+  --color-label-light: #5f6168;
+
+  /* Third-party brand colors: only for their own cards */
   --color-github: #6e40c9;
-  --color-npm: #cb0000;
   --color-linkedin: #0a66c2;
-  --color-twitter: #1d9bf0;
-  --color-javascript: #fff208;
+  --color-typescript: #3178c6;
 
   --text-12xl: 12rem;
-  --text-12xl--line-height: 12rem;
+  --text-12xl--line-height: 1.15;
 
-  --font-DMSans: 'DM Sans', sans-serif;
-  --font-Aclonica: 'Aclonica', sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
 
-  --shadow-shadow1: var(--shadow1);
+  --shadow-card: rgba(0, 0, 0, 0.25) 4px 4px 4px,
+    rgba(247, 244, 244, 0.02) -4px -4px 10px;
+}
+
+/* The one gradient signal (One Signal Rule) */
+@utility bg-signal {
+  background-image: linear-gradient(
+    to right,
+    var(--color-prune),
+    var(--color-corail),
+    var(--color-peche)
+  );
+}
+
+@utility text-signal {
+  background-image: linear-gradient(
+    to right,
+    var(--color-prune),
+    var(--color-corail),
+    var(--color-peche)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Machine voice: DM Mono, uppercase, 2px tracking */
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 @font-face {
@@ -26,76 +71,76 @@
   src: url('/fonts/DM_Sans/DMSans-Regular.ttf');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'DM Sans';
   src: url('/fonts/DM_Sans/DMSans-Medium.ttf');
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'DM Sans';
   src: url('/fonts/DM_Sans/DMSans-Bold.ttf');
   font-weight: 700;
   font-style: normal;
-}
-@font-face {
-  font-family: 'Aclonica';
-  src: url('/fonts/Aclonica/Aclonica-Regular.ttf');
-  font-weight: 400;
-  font-style: normal;
+  font-display: swap;
 }
 
-:root {
-  --shadow1: rgba(0, 0, 0, 0.25) 4px 4px 4px,
-    rgba(247, 244, 244, 0.02) -4px -4px 10px;
-}
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  color: white;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  overflow-y: visible;
-  scroll-behavior: smooth;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   html {
+    overflow-x: clip;
     color-scheme: dark;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--color-label-light) var(--color-carbone);
+  }
+
+  body {
+    background-color: var(--color-carbone);
+    color: var(--color-white);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background-color: var(--color-corail);
+    color: var(--color-white);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-peche);
+    outline-offset: 4px;
   }
 }
 
-.radialBackground {
-  background-image: radial-gradient(#26282c 3px, rgba(0, 0, 0, 0) 4px);
-  background-size: 10px 10px;
-  /* backdrop-filter: brightness(100%) blur(3px); */
-  background-position: 50% 50%;
-  /* transform: translate(20px, 20px); */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
-.radialBackground_alt {
-  background-image: radial-gradient(rgba(0, 0, 0, 0) 2px, #26282c 2px);
-  background-size: 7px 7px;
-  backdrop-filter: brightness(100%) blur(10px);
+/* Card underlayer: tight dot grid over the card's accent color */
+.radialBackground {
+  background-image: radial-gradient(var(--color-carbone) 3px, transparent 4px);
+  background-size: 10px 10px;
   background-position: 50% 50%;
+}
+
+/* Mobile menu: inverse dot grid */
+.radialBackground_alt {
+  background-image: radial-gradient(transparent 2px, var(--color-carbone) 2px);
+  background-size: 7px 7px;
+  backdrop-filter: blur(10px);
+  background-position: 50% 50%;
+}
+
+/* Large dot-grid field (DESIGN.md · Background Motifs) */
+.dot-field {
+  background-color: var(--color-carbone);
+  background-image: radial-gradient(#3a3d43 1.4px, transparent 1.6px);
+  background-size: 22px 22px;
 }

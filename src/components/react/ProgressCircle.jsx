@@ -35,7 +35,7 @@ export default function ProgressCircle({
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      <svg
+      <svg aria-hidden="true"
         viewBox="0 0 110 110"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ export default function ProgressCircle({
           fill="transparent"
         />
       </svg>
-      <svg
+      <svg aria-hidden="true"
         viewBox="0 0 110 110"
         width={size}
         height={size}

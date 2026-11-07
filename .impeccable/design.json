@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-07T09:09:16.275200+00:00",
+  "generatedAt": "2026-11-07T11:30:20.060410+00:00",
   "title": "Design System: felroz",
   "extensions": {
     "colorMeta": {
@@ -145,7 +145,7 @@
       {
         "name": "card-lift",
         "value": "rgba(0,0,0,0.25) 4px 4px 4px, rgba(247,244,244,0.02) -4px -4px 10px",
-        "purpose": "Every card at rest (CSS var --shadow1)."
+        "purpose": "Every card at rest (Tailwind shadow-card)."
       }
     ],
     "motion": [
@@ -190,7 +190,7 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Pill CTA in the brand gradient; the screen's one signal.",
+      "description": "Pill CTA in the brand gradient; persistent header chrome.",
       "html": "<a class=\"ds-btn-primary\" href=\"#\">Contact</a>",
       "css": ".ds-btn-primary{display:inline-block;padding:8px 16px;border-radius:999px;background:linear-gradient(to right, #9E4B88, #CA6678, #E98A77);color:#fff;font:500 1rem/1.5 'DM Sans',sans-serif;text-decoration:none} .ds-btn-primary:focus-visible{outline:2px solid #E98A77;outline-offset:3px}"
     },
@@ -199,8 +199,8 @@
       "kind": "card",
       "refersTo": "card",
       "description": "Linked card with soft lift and 3D split hover revealing a colored dot-grid underlayer.",
-      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-layer\"></span><span class=\"ds-card-face\"><span class=\"ds-label\">Welcome</span><span class=\"ds-card-row\"><span class=\"ds-card-title\">My Resume</span><svg class=\"ds-arrow\" viewBox=\"0 0 16 16\" width=\"30\" height=\"30\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z\"/></svg></span></span></a>",
-      "css": ".ds-card{position:relative;display:block;width:280px;height:220px;isolation:isolate;text-decoration:none;color:#fff;font-family:'DM Sans',sans-serif} .ds-card-face{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;height:100%;box-sizing:border-box;padding:32px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;transition:all .15s} .ds-card-layer{position:absolute;inset:0;z-index:-1;border-radius:24px;background-color:#CA6678;background-image:radial-gradient(#26282C 3px,transparent 4px);background-size:10px 10px;transition:all .15s} .ds-card:hover .ds-card-face{transform:translate(8px,-8px)} .ds-card:hover .ds-card-layer{transform:translate(-8px,8px)} .ds-card-row{display:flex;justify-content:space-between;align-items:flex-end} .ds-card-title{font-weight:700;font-size:1.5rem} .ds-label{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-arrow{fill:#9CA3AF;transform:rotate(45deg);transition:all .15s} .ds-card:hover .ds-arrow{fill:#CA6678;transform:rotate(0)} .ds-card:focus-visible{outline:2px solid #E98A77;outline-offset:6px;border-radius:24px}"
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-layer\"></span><span class=\"ds-card-face\"><span class=\"ds-card-row\"><span class=\"ds-card-title\">My Resume</span><svg class=\"ds-arrow\" viewBox=\"0 0 16 16\" width=\"30\" height=\"30\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z\"/></svg></span></span></a>",
+      "css": ".ds-card{position:relative;display:block;width:280px;height:220px;isolation:isolate;text-decoration:none;color:#fff;font-family:'DM Sans',sans-serif} .ds-card-face{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;height:100%;box-sizing:border-box;padding:32px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;transition:all .15s} .ds-card-layer{position:absolute;inset:0;z-index:-1;border-radius:24px;background-color:#CA6678;background-image:radial-gradient(#26282C 3px,transparent 4px);background-size:10px 10px;transition:all .15s} .ds-card:hover .ds-card-face{transform:translate(8px,-8px)} .ds-card:hover .ds-card-layer{transform:translate(-8px,8px)} .ds-card-row{display:flex;justify-content:space-between;align-items:flex-end} .ds-card-title{font-weight:700;font-size:1.5rem} .ds-label{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-arrow{fill:#9CA3AF;transform:rotate(45deg);transition:all .15s} .ds-card:hover .ds-arrow{fill:#CA6678;transform:rotate(0)} .ds-card:focus-visible{outline:2px solid #E98A77;outline-offset:6px;border-radius:24px}"
     },
     {
       "name": "Navigation",
@@ -211,11 +211,11 @@
       "css": ".ds-nav{display:flex;gap:48px;font:500 1rem/1.5 'DM Sans',sans-serif;background:#26282C;padding:16px} .ds-nav-link{color:#fff;text-decoration:none;border-bottom:2px solid transparent} .ds-nav-link:hover{color:#CA6678;border-color:#CA6678} .ds-nav-link.is-active{border-color:#CA6678} .ds-nav-link:focus-visible{outline:2px solid #E98A77;outline-offset:4px}"
     },
     {
-      "name": "Eyebrow Label",
+      "name": "Metadata Label",
       "kind": "chip",
       "refersTo": "label-eyebrow",
-      "description": "DM Mono machine voice for section numbers and metadata.",
-      "html": "<span class=\"ds-eyebrow\">01 · Symbole</span>",
+      "description": "DM Mono machine voice for metadata next to content; never above a heading.",
+      "html": "<span class=\"ds-eyebrow\">Annecy · Haute-Savoie</span>",
       "css": ".ds-eyebrow{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3}"
     },
     {
@@ -248,7 +248,7 @@
     "rules": [
       {
         "name": "The One Signal Rule",
-        "body": "The gradient (left → right: Prune, Corail, Pêche) appears once per screen: on the symbol, one keyword, or one accent such as the primary button. If two things on a screen are gradient, one of them is wrong.",
+        "body": "The gradient (left → right: Prune, Corail, Pêche) appears once per screen's content: one keyword or one accent. The persistent chrome (the symbol and the header's Contact button) does not count, as in the DA's own header. If two things in the page content are gradient, one of them is wrong.",
         "section": "colors"
       },
       {
@@ -263,7 +263,7 @@
       },
       {
         "name": "The Machine Voice Rule",
-        "body": "DM Mono is always uppercase with 2px tracking, and only for labels, code and metadata. Never for sentences.",
+        "body": "DM Mono is always uppercase with 2px tracking, and only for labels, code and metadata. Never for sentences, never as an eyebrow.",
         "section": "typography"
       },
       {
@@ -278,7 +278,8 @@
       "Do use DM Mono, uppercase with 2px tracking, for labels, metadata and code.",
       "Do keep the card shadow and the split offset hover on every linked card.",
       "Do use the symbol from 24px up and the lone Corail f below 24px.",
-      "Do size UI to the longer French copy."
+      "Do size UI to the longer French copy.",
+      "Do let headings stand alone: no eyebrow label above them."
     ],
     "donts": [
       "Don't draw the f with a crossbar. The decided mark has none.",

@@ -1,47 +1,58 @@
 ---
 import Container from '@components/Container.astro'
 import NavLinks from '@components/NavLinks.astro'
+import Lockup from '@components/brand/Lockup.astro'
 import Icon from '@components/react/Icon.jsx'
-import Logo from '@components/react/Logo.jsx'
+import globalData from '@data/global.json'
+import { localizePath, useTranslations } from '../i18n/index.js'
 
-const { menu, socials } = Astro.props
+const { locale } = Astro.props
+const t = useTranslations(locale)
+const links = ['about', 'projects', 'resume', 'contact'].map((key) => ({
+  label: t.nav[key],
+  href: localizePath(key, locale),
+}))
+const year = new Date().getFullYear()
 ---
 
-<Container>
-  <div class="grid gap-16 py-5">
-    <div class="flex lg:flex-row flex-col items-center lg:items-end gap-16 w-fit m-auto">
-      <Logo client:visible width={150} />
-      <NavLinks links={menu} classes="gap-10 lg:gap-16" />
-    </div>
-    {
-      socials?.length > 0 && (
-        <div class="flex gap-12 w-fit m-auto">
-          {socials.map((social) => (
-            <a href={social.href} aria-label={social.type}>
-              <Icon type={social.type} size="30px" hover={true} />
-            </a>
-          ))}
-        </div>
-      )
-    }
-    <div class="flex flex-col items-center lg:flex-row w-fit m-auto gap-10">
-      <div>© 2022 falroz</div>
-      <div>
-        <span class="mr-2 font-bold text-transparent bg-clip-text bg-linear-to-r from-[#9E4B88] via-[#CA6678] to-[#E98A77]">
-          Built by
-        </span>
-        <a href="#">Felipe Alarcon</a>
+<footer class="pt-10 pb-8">
+  <Container>
+    <div class="grid gap-12">
+      <div class="m-auto flex w-fit flex-col items-center gap-10 lg:flex-row lg:gap-16">
+        <Lockup href={localizePath('home', locale)} size={48} label={`felroz — ${t.nav.home}`} />
+        <nav aria-label={t.nav.main}>
+          <NavLinks links={links} classes="flex-wrap justify-center gap-x-10 gap-y-4 lg:gap-x-16" />
+        </nav>
       </div>
-      <div>
+      <ul class="m-auto flex w-fit gap-10">
+        {
+          globalData.socials.map((social) => (
+            <li>
+              <a
+                href={social.href}
+                rel="me noopener"
+                target="_blank"
+                aria-label={t.home.socialLabel.replace('{name}', social.name)}
+              >
+                <Icon type={social.type} size="28px" hover={true} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="m-auto flex w-fit flex-col items-center gap-4 text-sm text-ink-soft lg:flex-row lg:gap-10">
+        <p>© {year} felroz</p>
+        <p>{t.footer.credits}</p>
         <a
-          href="https://github.com/falroz/falroz"
+          href={globalData.sourceCode}
           rel="noopener"
           target="_blank"
-          class="flex gap-2 items-center"
+          class="flex items-center gap-2 transition-colors hover:text-white"
         >
-          <Icon type="github" size="16px" /> Code Source
+          <Icon type="github" size="16px" />
+          {t.footer.source}
         </a>
       </div>
     </div>
-  </div>
-</Container>
+  </Container>
+</footer>

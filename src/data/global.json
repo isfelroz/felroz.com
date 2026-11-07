@@ -1,40 +1,16 @@
 {
-  "navigation": {
-    "menu": [
-      {
-        "label": "Home",
-        "href": "/"
-      },
-      {
-        "label": "About",
-        "href": "/about"
-      },
-      {
-        "label": "Works",
-        "href": "/works"
-      },
-      {
-        "label": "Resume",
-        "href": "/resume"
-      }
-    ]
-  },
   "socials": [
-    {
-      "type": "github",
-      "href": "/"
-    },
-    {
-      "type": "npm",
-      "href": "/"
-    },
-    {
-      "type": "twitter",
-      "href": "/"
-    },
-    {
-      "type": "linkedin",
-      "href": "/"
-    }
-  ]
+    { "type": "github", "name": "GitHub", "href": "https://github.com/isfelroz" },
+    { "type": "linkedin", "name": "LinkedIn", "href": "https://www.linkedin.com/in/isfelroz" }
+  ],
+  "sourceCode": "https://github.com/isfelroz/felroz.com",
+  "skills": {
+    "main": { "type": "typescript", "name": "TypeScript", "value": 90 },
+    "others": [
+      { "type": "laravel", "name": "PHP · Laravel", "value": 80 },
+      { "type": "nuxt", "name": "Vue · Nuxt", "value": 85 },
+      { "type": "docker", "name": "Docker", "value": 75 },
+      { "type": "python", "name": "Python", "value": 50 }
+    ]
+  }
 }

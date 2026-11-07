@@ -1,24 +1,30 @@
 ---
-const { link, background } = Astro.props
+/**
+ * Bento card. Linked cards get the Split Card hover (DESIGN.md · Elevation & Depth).
+ * `accent` is the underlayer color class (bg-corail by default).
+ */
+const { href, accent = 'bg-corail', label } = Astro.props
+const face = 'h-full w-full rounded-3xl bg-carbone p-8 shadow-card'
 ---
 
 {
-  link?.href ? (
-    <a {...link} class="group">
-      <div class="relative h-full isolate">
-        <div class="bg-primary-black p-8 rounded-3xl shadow-shadow1 h-full w-full z-10 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all">
+  href ? (
+    <a href={href} aria-label={label} class="group block h-full rounded-3xl">
+      <div class="relative isolate h-full">
+        <div class:list={[face, 'transition-all group-hover:translate-x-2 group-hover:-translate-y-2 group-focus-visible:translate-x-2 group-focus-visible:-translate-y-2']}>
           <slot />
         </div>
         <div
+          aria-hidden="true"
           class:list={[
-            background,
-            'radialBackground absolute rounded-3xl border border-primary-black z-[-1] top-0 left-0 w-full h-full group-hover:-translate-x-2 group-hover:translate-y-2 transition-all',
+            accent,
+            'radialBackground absolute top-0 left-0 z-[-1] h-full w-full rounded-3xl border border-carbone transition-all group-hover:-translate-x-2 group-hover:translate-y-2 group-focus-visible:-translate-x-2 group-focus-visible:translate-y-2',
           ]}
         />
       </div>
     </a>
   ) : (
-    <div class="bg-primary-black p-8 rounded-3xl shadow-shadow1 h-full">
+    <div class={face}>
       <slot />
     </div>
   )

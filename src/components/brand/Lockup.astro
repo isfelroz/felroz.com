@@ -1,0 +1,20 @@
+---
+import Symbol from './Symbol.astro'
+
+interface Props {
+  href: string
+  size?: number
+  label: string
+}
+
+const { href, size = 36, label } = Astro.props
+---
+
+<a href={href} class="inline-flex items-center gap-2.5 rounded-lg" aria-label={label}>
+  <Symbol size={size} />
+  <span
+    class="font-bold tracking-[-0.03em] leading-none text-white"
+    style={`font-size: ${Math.round(size * 0.66)}px`}
+    aria-hidden="true">felroz</span
+  >
+</a>

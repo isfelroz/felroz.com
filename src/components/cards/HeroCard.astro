@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets'
+import Icon from '@components/react/Icon.jsx'
+import avatarImage from '@assets/me.png'
+
+const { before, signal, text, avatarAlt } = Astro.props
+---
+
+<div class="flex h-full flex-col justify-between gap-6">
+  <div class="flex flex-col-reverse items-center gap-5 md:flex-row md:items-end md:justify-between">
+    <h1 class="max-w-[16ch] text-3xl font-bold leading-[1.1] tracking-[-0.03em] text-balance lg:text-4xl">
+      {before}<span class="text-signal">{signal}</span>
+    </h1>
+    <Image src={avatarImage} width={150} densities={[1, 2]} alt={avatarAlt} loading="eager" class="h-auto w-[120px] lg:w-[150px]" />
+  </div>
+  <div class="flex items-end justify-between gap-6">
+    <p class="max-w-[60ch] text-ink-soft text-pretty">{text}</p>
+    <div class="h-fit shrink-0">
+      <Icon type="arrow" />
+    </div>
+  </div>
+</div>

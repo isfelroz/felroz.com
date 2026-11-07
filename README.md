@@ -36,18 +36,25 @@ public/              # static files served as-is (fonts, favicon)
 src/
 ├── assets/          # images optimized by astro:assets
 ├── components/      # .astro components (no client-side JS)
+│   ├── brand/       # felroz symbol and lockup
 │   ├── cards/       # grid card contents
 │   └── react/       # React islands (animations / state)
-├── data/            # JSON content (global.json, home.json)
-├── layouts/         # Layout.astro (head, GTM, header, footer)
+├── data/            # language-neutral data (socials, skills)
+├── i18n/            # routes + FR/EN copy (fr.json, en.json)
+├── layouts/         # Layout.astro (head, metadata, GTM, header, footer)
 ├── lib/             # utilities
-├── pages/           # routes: /, /about, /contact, /resume, /works
-└── styles/          # global.css (Tailwind + @theme + fonts)
+├── pages/           # FR routes at /, EN routes under /en
+├── styles/          # global.css (Tailwind + @theme + fonts)
+└── views/           # page views shared by both languages
 ```
 
 ## Content
 
-Home copy, socials and skills live in `src/data/home.json`; navigation and footer socials in `src/data/global.json`.
+The site is bilingual: French at `/` (`/a-propos`, `/projets`, `/cv`, `/contact`) and English under `/en` (`/en/about`, `/en/projects`, `/en/resume`, `/en/contact`). All copy lives in `src/i18n/fr.json` and `src/i18n/en.json`; socials and skills in `src/data/global.json`.
+
+## Design
+
+The visual system follows the felroz art direction documented in [`DESIGN.md`](DESIGN.md).
 
 ## Deploy
 

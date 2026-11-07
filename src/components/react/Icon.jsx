@@ -1,56 +1,47 @@
 import {
-  SiJavascript,
-  SiThreedotjs,
-  SiReact,
-  SiTailwindcss,
+  SiDocker,
   SiGithub,
+  SiLaravel,
+  SiNuxt,
+  SiPython,
+  SiTypescript,
 } from 'react-icons/si'
-import { TbBrandNextjs } from 'react-icons/tb'
-import { DiNpm } from 'react-icons/di'
-import { FaTwitter, FaLinkedin } from 'react-icons/fa'
+import { FaLinkedin } from 'react-icons/fa'
 import { BsArrowUpRightCircle } from 'react-icons/bs'
 
+const icons = {
+  typescript: SiTypescript,
+  python: SiPython,
+  laravel: SiLaravel,
+  nuxt: SiNuxt,
+  docker: SiDocker,
+  github: SiGithub,
+  linkedin: FaLinkedin,
+}
+
+const hoverFill = {
+  github: 'hover:fill-github',
+  linkedin: 'hover:fill-linkedin',
+}
+
 export default function Icon({ type, size, hover = false }) {
-  if (type === 'react') return <SiReact size={size} />
-  if (type === 'threejs')
-    return <SiThreedotjs className="translate-x-1" size={'40px'} />
-  if (type === 'nextjs') return <TbBrandNextjs size={size} />
-  if (type === 'tailwind') return <SiTailwindcss size={size} />
-  if (type === 'javascript') return <SiJavascript size={size} />
-  if (type === 'twitter')
-    return (
-      <FaTwitter
-        className={hover ? `hover:fill-twitter transition-all` : ''}
-        size={size}
-      />
-    )
-  if (type === 'linkedin')
-    return (
-      <FaLinkedin
-        className={hover ? 'hover:fill-linkedin transition-all' : ''}
-        size={size}
-      />
-    )
-  if (type === 'npm')
-    return (
-      <DiNpm
-        className={hover ? 'hover:fill-npm transition-all' : ''}
-        size={size}
-      />
-    )
-  if (type === 'github')
-    return (
-      <SiGithub
-        className={hover ? 'hover:fill-github transition-all' : ''}
-        size={size}
-      />
-    )
   if (type === 'arrow')
     return (
       <BsArrowUpRightCircle
-        size={'30px'}
-        className="fill-gray-400 rotate-45 transition-all group-hover:fill-primary  group-hover:rotate-0"
+        size="30px"
+        aria-hidden="true"
+        className="fill-label-dark rotate-45 transition-all group-hover:fill-corail group-hover:rotate-0 group-focus-visible:fill-corail group-focus-visible:rotate-0"
       />
     )
-  return null
+
+  const Component = icons[type]
+  if (!Component) return null
+
+  return (
+    <Component
+      size={size}
+      aria-hidden="true"
+      className={hover ? `${hoverFill[type] ?? ''} transition-colors` : ''}
+    />
+  )
 }

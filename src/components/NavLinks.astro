@@ -7,18 +7,24 @@ const pathname = normalizePath(Astro.url.pathname)
 
 {
   links?.length > 0 && (
-    <div class:list={['flex items-center', classes]}>
-      {links.map((link) => (
-        <a
-          class:list={[
-            pathname === link.href ? 'border-primary' : 'border-transparent',
-            'text-white border-b-2 hover:text-primary hover:border-b-2 hover:border-primary',
-          ]}
-          href={link.href}
-        >
-          {link.label}
-        </a>
-      ))}
-    </div>
+    <ul class:list={['flex items-center', classes]}>
+      {links.map((link) => {
+        const active = pathname === link.href
+        return (
+          <li>
+            <a
+              class:list={[
+                active ? 'border-corail' : 'border-transparent',
+                'border-b-2 font-medium text-white transition-colors hover:border-corail hover:text-corail',
+              ]}
+              aria-current={active ? 'page' : undefined}
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          </li>
+        )
+      })}
+    </ul>
   )
 }
