@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Personal portfolio (felroz.com) built with Astro 7 as a static site, with React 19 islands and Tailwind CSS 4. See `README.md` for stack, scripts and structure.
+Personal portfolio (felroz.com) built with Astro 7 as a static site, with React 19 islands and Tailwind CSS 4. See `README.md` for stack, scripts and structure, and **`DESIGN.md` for the art direction and visual system** (source of truth for colors, type, symbol, motifs and components; machine-readable sidecar in `.impeccable/design.json`).
 
 ## Project rules
 
@@ -21,6 +21,7 @@ Personal portfolio (felroz.com) built with Astro 7 as a static site, with React 
 
 ## Styles (Tailwind 4)
 
+- Any visual change must follow `DESIGN.md` (One Signal Rule, Plain Text Rule, Split Card Rule, symbol without crossbar). Update `DESIGN.md` when the system intentionally changes.
 - There is no `tailwind.config.js`: colors, fonts, sizes and shadows are defined in `@theme` inside `src/styles/global.css`.
 - Use v4 syntax: `bg-linear-to-r` (not `bg-gradient-to-r`), `drop-shadow-sm`/`shadow-sm`/`rounded-sm` for the old defaults, `shrink`/`grow`.
 - Theme colors: `primary-black`, `primary`, `primary-dark`, `primary-ligth` (sic), `github`, `npm`, `linkedin`, `twitter`, `javascript`.

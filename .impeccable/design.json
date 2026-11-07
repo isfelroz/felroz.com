@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T09:09:16.275200+00:00",
+  "title": "Design System: felroz",
+  "extensions": {
+    "colorMeta": {
+      "prune": {
+        "role": "primary",
+        "displayName": "Prune",
+        "purpose": "Gradient start, first route node, link hover.",
+        "tonalRamp": [
+          "#3F1E36",
+          "#5F2D52",
+          "#7E3C6D",
+          "#9E4B88",
+          "#B678A6",
+          "#CEA5C4",
+          "#E2C9DB",
+          "#F3E9F1"
+        ]
+      },
+      "corail": {
+        "role": "primary",
+        "displayName": "Corail",
+        "purpose": "Gradient centre, nodes, active nav, favicon f.",
+        "tonalRamp": [
+          "#512930",
+          "#793D48",
+          "#A25260",
+          "#CA6678",
+          "#D78C9A",
+          "#E4B2BC",
+          "#EFD1D6",
+          "#F9EDEF"
+        ]
+      },
+      "peche": {
+        "role": "primary",
+        "displayName": "Pêche",
+        "purpose": "Gradient end, arrival dot, mono accent labels.",
+        "tonalRamp": [
+          "#5D3730",
+          "#8C5347",
+          "#BA6E5F",
+          "#E98A77",
+          "#EEA799",
+          "#F4C4BB",
+          "#F8DCD6",
+          "#FCF1EF"
+        ]
+      },
+      "carbone": {
+        "role": "neutral",
+        "displayName": "Carbone",
+        "purpose": "Main ground, symbol container, card face.",
+        "tonalRamp": [
+          "#0F1012",
+          "#17181A",
+          "#1E2023",
+          "#26282C",
+          "#5C5E61",
+          "#929496",
+          "#BEBEC0",
+          "#E5E5E6"
+        ]
+      },
+      "carbone-raised": {
+        "role": "neutral",
+        "displayName": "Carbone Raised",
+        "purpose": "One tonal step above Carbone.",
+        "tonalRamp": [
+          "#121315",
+          "#1C1D20",
+          "#25262A",
+          "#2E3035",
+          "#626468",
+          "#96989A",
+          "#C0C1C2",
+          "#E6E6E7"
+        ]
+      },
+      "craie": {
+        "role": "neutral",
+        "displayName": "Craie",
+        "purpose": "Light ground for print and light contexts.",
+        "tonalRamp": [
+          "#62605F",
+          "#92918F",
+          "#C3C1BE",
+          "#F4F1EE",
+          "#F7F4F2",
+          "#FAF8F6",
+          "#FCFBFA",
+          "#FEFDFD"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display-ghost": {
+        "displayName": "Display Ghost",
+        "purpose": "Giant 10%-opacity titles on inner pages."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero statements."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page and section leads."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card titles."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "felroz next to the symbol."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text, 65–75ch."
+      },
+      "body-strong": {
+        "displayName": "Body Strong",
+        "purpose": "Nav and buttons."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "DM Mono labels, metadata, code."
+      }
+    },
+    "gradients": [
+      {
+        "name": "signal",
+        "value": "linear-gradient(to right, #9E4B88, #CA6678, #E98A77)",
+        "purpose": "The one gradient accent per screen."
+      },
+      {
+        "name": "symbol",
+        "value": "linear-gradient(to top right, #9E4B88, #E98A77)",
+        "purpose": "The f stroke in the symbol."
+      }
+    ],
+    "shadows": [
+      {
+        "name": "card-lift",
+        "value": "rgba(0,0,0,0.25) 4px 4px 4px, rgba(247,244,244,0.02) -4px -4px 10px",
+        "purpose": "Every card at rest (CSS var --shadow1)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "card-split",
+        "value": "translate(8px,-8px) face / translate(-8px,8px) underlayer, transition-all 150ms",
+        "purpose": "3D hover on linked cards."
+      },
+      {
+        "name": "tile-entrance",
+        "value": "spring stiffness 100, scale 0.8→1, opacity 0→1",
+        "purpose": "Bento tiles on load."
+      },
+      {
+        "name": "ghost-title",
+        "value": "y 100%→0, 0.5s",
+        "purpose": "Display Ghost reveal."
+      },
+      {
+        "name": "progress-ring",
+        "value": "spring stiffness 50, delay 0.5s",
+        "purpose": "Skill ring fill on view."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Pill CTA in the brand gradient; the screen's one signal.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Contact</a>",
+      "css": ".ds-btn-primary{display:inline-block;padding:8px 16px;border-radius:999px;background:linear-gradient(to right, #9E4B88, #CA6678, #E98A77);color:#fff;font:500 1rem/1.5 'DM Sans',sans-serif;text-decoration:none} .ds-btn-primary:focus-visible{outline:2px solid #E98A77;outline-offset:3px}"
+    },
+    {
+      "name": "Split Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Linked card with soft lift and 3D split hover revealing a colored dot-grid underlayer.",
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-layer\"></span><span class=\"ds-card-face\"><span class=\"ds-label\">Welcome</span><span class=\"ds-card-row\"><span class=\"ds-card-title\">My Resume</span><svg class=\"ds-arrow\" viewBox=\"0 0 16 16\" width=\"30\" height=\"30\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z\"/></svg></span></span></a>",
+      "css": ".ds-card{position:relative;display:block;width:280px;height:220px;isolation:isolate;text-decoration:none;color:#fff;font-family:'DM Sans',sans-serif} .ds-card-face{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;height:100%;box-sizing:border-box;padding:32px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;transition:all .15s} .ds-card-layer{position:absolute;inset:0;z-index:-1;border-radius:24px;background-color:#CA6678;background-image:radial-gradient(#26282C 3px,transparent 4px);background-size:10px 10px;transition:all .15s} .ds-card:hover .ds-card-face{transform:translate(8px,-8px)} .ds-card:hover .ds-card-layer{transform:translate(-8px,8px)} .ds-card-row{display:flex;justify-content:space-between;align-items:flex-end} .ds-card-title{font-weight:700;font-size:1.5rem} .ds-label{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-arrow{fill:#9CA3AF;transform:rotate(45deg);transition:all .15s} .ds-card:hover .ds-arrow{fill:#CA6678;transform:rotate(0)} .ds-card:focus-visible{outline:2px solid #E98A77;outline-offset:6px;border-radius:24px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Header nav: white links, Corail underline on hover and active.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link is-active\" href=\"#\">Projets</a><a class=\"ds-nav-link\" href=\"#\">Articles</a></nav>",
+      "css": ".ds-nav{display:flex;gap:48px;font:500 1rem/1.5 'DM Sans',sans-serif;background:#26282C;padding:16px} .ds-nav-link{color:#fff;text-decoration:none;border-bottom:2px solid transparent} .ds-nav-link:hover{color:#CA6678;border-color:#CA6678} .ds-nav-link.is-active{border-color:#CA6678} .ds-nav-link:focus-visible{outline:2px solid #E98A77;outline-offset:4px}"
+    },
+    {
+      "name": "Eyebrow Label",
+      "kind": "chip",
+      "refersTo": "label-eyebrow",
+      "description": "DM Mono machine voice for section numbers and metadata.",
+      "html": "<span class=\"ds-eyebrow\">01 · Symbole</span>",
+      "css": ".ds-eyebrow{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3}"
+    },
+    {
+      "name": "Lockup",
+      "kind": "custom",
+      "refersTo": "symbol",
+      "description": "Symbol (f without crossbar, node, arrival dot) plus felroz wordmark.",
+      "html": "<span class=\"ds-lockup\"><svg class=\"ds-symbol\" viewBox=\"0 0 120 120\" role=\"img\" aria-label=\"felroz\"><defs><linearGradient id=\"ds-g\" x1=\"0\" y1=\"1\" x2=\"1\" y2=\"0\"><stop offset=\"0\" stop-color=\"#9E4B88\"/><stop offset=\"1\" stop-color=\"#E98A77\"/></linearGradient></defs><rect width=\"120\" height=\"120\" rx=\"28\" fill=\"#26282C\"/><path d=\"M40 98 V50 Q40 28 62 28 H66\" fill=\"none\" stroke=\"url(#ds-g)\" stroke-width=\"14\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"76\" cy=\"52\" r=\"6\" fill=\"#26282C\" stroke=\"#CA6678\" stroke-width=\"4\"/><circle cx=\"96\" cy=\"36\" r=\"9\" fill=\"#E98A77\"/></svg><span class=\"ds-wordmark\">felroz</span></span>",
+      "css": ".ds-lockup{display:inline-flex;align-items:center;gap:14px;background:#26282C;padding:16px;border-radius:16px} .ds-symbol{width:52px;height:52px} .ds-wordmark{font:700 2.5rem/1 'DM Sans',sans-serif;letter-spacing:-1px;color:#fff}"
+    },
+    {
+      "name": "Gradient Keyword",
+      "kind": "custom",
+      "refersTo": "display",
+      "description": "Headline with one gradient keyword (One Signal Rule).",
+      "html": "<p class=\"ds-display\">L'IA agentique, <span class=\"ds-signal\">en production.</span></p>",
+      "css": ".ds-display{margin:0;font:700 3.5rem/1.05 'DM Sans',sans-serif;letter-spacing:-1.5px;color:#fff;background:#26282C;padding:24px} .ds-signal{background:linear-gradient(to right, #9E4B88, #CA6678, #E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Agent Control Room",
+    "overview": "felroz is a network of agents seen from a control room at night. The dot grid is the infrastructure, every node is an agent, and the Prune → Corail → Pêche gradient is the signal travelling between them toward an arrival point. Nothing moves unsupervised: routes are deliberate, the signal is rare, and the room stays dark and calm so the signal reads instantly.",
+    "keyCharacteristics": [
+      "Dark Carbone ground, white text, warm gradient used as a single signal.",
+      "Symbol: a gradient f followed by a hollow node and a Pêche arrival dot.",
+      "Motifs: dot grid plus dotted routes linking nodes, always in the background.",
+      "Cards with soft shadows and an offset hover that reveals a colored dot-grid layer.",
+      "DM Sans for everything human; DM Mono in spaced uppercase for everything machine."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "The gradient (left → right: Prune, Corail, Pêche) appears once per screen: on the symbol, one keyword, or one accent such as the primary button. If two things on a screen are gradient, one of them is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Plain Text Rule",
+        "body": "Running text is white on Carbone or Carbone on Craie. Never gradient, never Corail.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "DM Sans and DM Mono only. No display or decorative faces.",
+        "section": "typography"
+      },
+      {
+        "name": "The Machine Voice Rule",
+        "body": "DM Mono is always uppercase with 2px tracking, and only for labels, code and metadata. Never for sentences.",
+        "section": "typography"
+      },
+      {
+        "name": "The Split Card Rule",
+        "body": "Linked cards keep the offset hover: face translate(8px, -8px), underlayer translate(-8px, 8px), both with transition-all. Do not flatten it.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the gradient to one signal per screen (the One Signal Rule).",
+      "Do set running text white on Carbone, or Carbone on Craie.",
+      "Do use DM Mono, uppercase with 2px tracking, for labels, metadata and code.",
+      "Do keep the card shadow and the split offset hover on every linked card.",
+      "Do use the symbol from 24px up and the lone Corail f below 24px.",
+      "Do size UI to the longer French copy."
+    ],
+    "donts": [
+      "Don't draw the f with a crossbar. The decided mark has none.",
+      "Don't use the retired falroz wordmark or name.",
+      "Don't place routes or dotted lines behind text, or use dashed lines anywhere outside the route motif.",
+      "Don't add a second type family (Aclonica is retired).",
+      "Don't set body copy, paragraphs or long labels in gradient.",
+      "Don't use the third-party brand colors outside their own cards.",
+      "Don't replace the 3D card treatment with flat cards."
+    ]
+  }
+}
