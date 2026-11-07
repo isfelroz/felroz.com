@@ -37,9 +37,9 @@ src/
 ├── assets/          # images optimized by astro:assets
 ├── components/      # .astro components (no client-side JS)
 │   ├── brand/       # felroz symbol and lockup
-│   ├── cards/       # grid card contents
+│   ├── home/        # bento tiles of the home
 │   └── react/       # React islands (animations / state)
-├── data/            # language-neutral data (socials, skills)
+├── data/            # language-neutral data (socials, employer, stack, toolbelt, languages)
 ├── i18n/            # routes + FR/EN copy (fr.json, en.json)
 ├── layouts/         # Layout.astro (head, metadata, GTM, header, footer)
 ├── lib/             # utilities

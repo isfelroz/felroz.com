@@ -93,6 +93,36 @@
           "#FCFBFA",
           "#FEFDFD"
         ]
+      },
+      "carbone-deep": {
+        "role": "neutral",
+        "displayName": "Carbone Deep",
+        "purpose": "One step below Carbone: hero photo panel, lanyard slot, symbol panel.",
+        "tonalRamp": [
+          "#0B0C0D",
+          "#131415",
+          "#191B1D",
+          "#1F2124",
+          "#585A5C",
+          "#8E9092",
+          "#BBBCBD",
+          "#E4E4E5"
+        ]
+      },
+      "dot": {
+        "role": "neutral",
+        "displayName": "Dot",
+        "purpose": "Resting color of the background dot field and fine panel dots.",
+        "tonalRamp": [
+          "#14151A",
+          "#1F2125",
+          "#2B2E33",
+          "#3A3D43",
+          "#686A6F",
+          "#97999C",
+          "#C3C4C6",
+          "#E7E7E8"
+        ]
       }
     },
     "typographyMeta": {
@@ -155,9 +185,9 @@
         "purpose": "3D hover on linked cards."
       },
       {
-        "name": "tile-entrance",
-        "value": "spring stiffness 100, scale 0.8→1, opacity 0→1",
-        "purpose": "Bento tiles on load."
+        "name": "tile-in",
+        "value": "opacity 0→1, translate 0 12px→0, 0.45s ease-out, 70ms stagger, once",
+        "purpose": "Bento tiles on load (CSS, replaces the spring)."
       },
       {
         "name": "ghost-title",
@@ -165,12 +195,37 @@
         "purpose": "Display Ghost reveal."
       },
       {
-        "name": "progress-ring",
-        "value": "spring stiffness 50, delay 0.5s",
-        "purpose": "Skill ring fill on view."
+        "name": "greeting",
+        "value": "Hola → Hello → Bonjour, 1.3s per word, slide-up 0.7s, plays once",
+        "purpose": "Hero greeting; rests on the page language."
+      },
+      {
+        "name": "avatar-orbit",
+        "value": "camera-orbit θ = x·38°, φ = 80° ± 14°, returns to front on leave",
+        "purpose": "Memoji follows the pointer over the hero."
+      },
+      {
+        "name": "rotor-spin",
+        "value": "rotate 360deg, 1.2s linear infinite, on tile hover only",
+        "purpose": "Helicopter rotor."
+      },
+      {
+        "name": "dot-field",
+        "value": "22px grid, 150px radius, #3A3D43 → #CA6678, redraw on pointer/scroll only",
+        "purpose": "Pointer-reactive background; static on touch and reduced motion."
       }
     ],
     "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "1100px",
+        "purpose": "Bento goes 4 → 2 columns."
+      },
+      {
+        "name": "mobile",
+        "value": "640px",
+        "purpose": "Bento goes to 1 column."
+      },
       {
         "name": "md",
         "value": "768px"
@@ -183,7 +238,25 @@
         "name": "xl",
         "value": "1280px"
       }
-    ]
+    ],
+    "layout": {
+      "container": "max 1240px, 16px gutter",
+      "bento": {
+        "desktop": "4 columns, gap 28px, squares (≥1101px)",
+        "tablet": "2 columns (≤1100px)",
+        "mobile": "1 column, gap 20px (≤640px)",
+        "order": [
+          "Hero 2x2",
+          "En ce moment",
+          "Parcours",
+          "Savoir-faire 2x1",
+          "Projet phare 2x1",
+          "Stack",
+          "Moi",
+          "Contact band"
+        ]
+      }
+    }
   },
   "components": [
     {
@@ -233,6 +306,30 @@
       "description": "Headline with one gradient keyword (One Signal Rule).",
       "html": "<p class=\"ds-display\">L'IA agentique, <span class=\"ds-signal\">en production.</span></p>",
       "css": ".ds-display{margin:0;font:700 3.5rem/1.05 'DM Sans',sans-serif;letter-spacing:-1.5px;color:#fff;background:#26282C;padding:24px} .ds-signal{background:linear-gradient(to right, #9E4B88, #CA6678, #E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
+    },
+    {
+      "name": "Hero Badge",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Conference-badge hero: lanyard slot, Carbone Deep photo panel with the 3D avatar and a Pêche dot, greeting, lead with one gradient part.",
+      "html": "<div class=\"ds-badge\"><span class=\"ds-slot\"></span><div class=\"ds-stage\"><span class=\"ds-pdot\"></span></div><h1 class=\"ds-greet\">Bonjour,<br>je suis Felipe.</h1><p class=\"ds-lead\">Développeur full-stack. <span class=\"ds-signal\">de l'API à l'interface.</span></p></div>",
+      "css": ".ds-badge{position:relative;display:flex;flex-direction:column;gap:18px;width:360px;height:360px;box-sizing:border-box;padding:32px;border-radius:24px;background:#26282C;color:#fff;font-family:'DM Sans',sans-serif;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px} .ds-slot{position:absolute;top:9px;left:50%;width:52px;height:6px;margin-left:-26px;border-radius:3px;background:#1F2124;box-shadow:inset 0 1px 2px rgba(0,0,0,.6)} .ds-stage{position:relative;flex:1;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.4px);background-size:14px 14px} .ds-pdot{position:absolute;top:16px;right:16px;width:14px;height:14px;border-radius:50%;background:#E98A77} .ds-greet{margin:0;font-weight:700;font-size:2.4rem;line-height:1.02;letter-spacing:-.035em} .ds-lead{margin:0;font-weight:700;font-size:1.25rem;line-height:1.2} .ds-signal{background:linear-gradient(to right,#9E4B88,#CA6678,#E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
+    },
+    {
+      "name": "Helicopter Illustration",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Top-down H135-inspired card illustration; rotor spins on hover only.",
+      "html": "<div class=\"ds-heli\"><svg viewBox=\"0 0 160 160\" width=\"160\" height=\"160\" aria-hidden=\"true\"><circle cx=\"80\" cy=\"66\" r=\"62\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"2\" stroke-dasharray=\"1 8\" stroke-linecap=\"round\"/><path d=\"M80 34 C92 34 97 48 97 66 C97 84 90 96 84 100 L82.5 136 H77.5 L76 100 C70 96 63 84 63 66 C63 48 68 34 80 34 Z\" fill=\"#3A3D43\" stroke=\"#D4D5D9\" stroke-width=\"1.5\"/><g class=\"ds-rotor\" fill=\"#D4D5D9\" opacity=\".85\"><rect x=\"78\" y=\"4\" width=\"4\" height=\"124\" rx=\"2\"/><rect x=\"18\" y=\"64\" width=\"124\" height=\"4\" rx=\"2\"/></g><circle cx=\"80\" cy=\"66\" r=\"6\" fill=\"#E98A77\"/></svg></div>",
+      "css": ".ds-heli{display:inline-block;background:#26282C;padding:24px;border-radius:24px} .ds-rotor{transform-origin:80px 66px;transform-box:view-box} @media (prefers-reduced-motion:no-preference){.ds-heli:hover .ds-rotor{animation:ds-spin 1.2s linear infinite}} @keyframes ds-spin{to{rotate:360deg}}"
+    },
+    {
+      "name": "3D Avatar",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Memoji model in a Carbone Deep panel. Poster image first and as fallback; camera orbit follows the pointer (θ = x·38°, φ = 80° ± 14°).",
+      "html": "<div class=\"ds-avatar\"><span class=\"ds-poster\">poster</span></div>",
+      "css": ".ds-avatar{display:grid;place-items:center;width:240px;height:240px;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.4px);background-size:14px 14px} .ds-poster{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3}"
     }
   ],
   "narrative": {
@@ -241,9 +338,10 @@
     "keyCharacteristics": [
       "Dark Carbone ground, white text, warm gradient used as a single signal.",
       "Symbol: a gradient f followed by a hollow node and a Pêche arrival dot.",
-      "Motifs: dot grid plus dotted routes linking nodes, always in the background.",
+      "Motifs: a pointer-reactive dot field plus dotted routes linking nodes, in the background or as single-colour card illustrations.",
       "Cards with soft shadows and an offset hover that reveals a colored dot-grid layer.",
-      "DM Sans for everything human; DM Mono in spaced uppercase for everything machine."
+      "DM Sans for everything human; DM Mono in spaced uppercase for everything machine.",
+      "Home is a bento of square tiles; motion is limited to the dot field and the greeting on load, everything else on interaction."
     ],
     "rules": [
       {
@@ -270,6 +368,11 @@
         "name": "The Split Card Rule",
         "body": "Linked cards keep the offset hover: face translate(8px, -8px), underlayer translate(-8px, 8px), both with transition-all. Do not flatten it.",
         "section": "elevation"
+      },
+      {
+        "name": "The Motion Budget",
+        "body": "Two protagonists on load: the dot field and the hero greeting (once). Everything else moves only on interaction. Card entrance is one short CSS stagger; under reduced motion nothing animates.",
+        "section": "motion"
       }
     ],
     "dos": [
@@ -279,9 +382,11 @@
       "Do keep the card shadow and the split offset hover on every linked card.",
       "Do use the symbol from 24px up and the lone Corail f below 24px.",
       "Do size UI to the longer French copy.",
-      "Do let headings stand alone: no eyebrow label above them."
+      "Do let headings stand alone: no eyebrow label above them.",
+      "Do keep home tiles square or whole-square, and keep the poster as the 3D avatar's fallback."
     ],
     "donts": [
+      "Don't make an animation run at rest on the home (besides the dot field's pointer response and the greeting, once).",
       "Don't draw the f with a crossbar. The decided mark has none.",
       "Don't use the retired falroz wordmark or name.",
       "Don't place routes or dotted lines behind text, or use dashed lines anywhere outside the route motif.",
