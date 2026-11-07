@@ -75,5 +75,4 @@ for (const route of ['/', '/en']) {
       assert.match(contact, new RegExp(`<a[^>]*href="${url}"[^>]*target="_blank"[^>]*rel="me noopener"[^>]*aria-label="[^"]+"`))
     assert.ok(!/mailto:|@felroz\.com/.test(contact))
   })
-
 }

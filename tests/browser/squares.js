@@ -1,6 +1,6 @@
 // Run in the page (agent-browser eval). Returns JSON { ok, bad: [...] }.
 // Desktop (>=1101px): 1x1 tiles and the 2x2 hero are square, 2x1 tiles are one row tall (±1px).
-// Every width: no card face overflows vertically or outgrows its tile, no horizontal page scroll.
+// Every width: no card face overflows (either axis) or outgrows its tile, no horizontal page scroll.
 ;(() => {
   const bad = []
   const desktop = innerWidth >= 1101
@@ -16,6 +16,8 @@
     for (const face of tile.querySelectorAll('[data-card-face]')) {
       if (face.scrollHeight > face.clientHeight + 1)
         bad.push({ area, size, scrollHeight: face.scrollHeight, clientHeight: face.clientHeight, why: 'overflow' })
+      if (face.scrollWidth > face.clientWidth + 1)
+        bad.push({ area, size, scrollWidth: face.scrollWidth, clientWidth: face.clientWidth, why: 'horizontal overflow' })
       const fh = face.offsetHeight
       if (fh > h + 1) bad.push({ area, size, face: fh, tile: Math.round(h), why: 'face taller than tile' })
     }

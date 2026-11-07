@@ -22,7 +22,6 @@ const { size, area, index, href, label, labelledby } = Astro.props
   class="tile"
   data-size={size}
   style={`grid-area:${area};--i:${index}`}
-  role={labelledby ? 'region' : undefined}
   aria-labelledby={labelledby}
 >
   {

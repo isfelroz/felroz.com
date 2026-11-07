@@ -28,7 +28,7 @@ const stackLabel = home.stack.label.replace('{list}', globalData.stack.map((s) =
       <NowCard {...home.now} />
     </Tile>
 
-    <Tile size="1x1" area="journey" index={2} href={localizePath('resume', locale)}>
+    <Tile size="1x1" area="journey" index={2} href={localizePath('resume', locale)} label={home.journey.title}>
       <JourneyCard {...home.journey} />
     </Tile>
 
@@ -37,7 +37,7 @@ const stackLabel = home.stack.label.replace('{list}', globalData.stack.map((s) =
       <h2 id="skills-title" class="text-2xl font-bold tracking-[-0.02em]">{home.skills.title}</h2>
     </Tile>
 
-    <Tile size="2x1" area="featured" index={4} href={localizePath('projects', locale)}>
+    <Tile size="2x1" area="featured" index={4} href={localizePath('projects', locale)} label={home.featured.title}>
       <FeaturedCard {...home.featured} />
     </Tile>
 
@@ -49,7 +49,7 @@ const stackLabel = home.stack.label.replace('{list}', globalData.stack.map((s) =
       </div>
     </Tile>
 
-    <Tile size="1x1" area="me" index={6} href={localizePath('about', locale)}>
+    <Tile size="1x1" area="me" index={6} href={localizePath('about', locale)} label={home.me.title}>
       <MeCard {...home.me} />
     </Tile>
 
