@@ -1,1 +1,0 @@
-export { BigTitle } from './BigTitle'

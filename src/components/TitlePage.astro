@@ -1,0 +1,10 @@
+---
+import Layout from '@layouts/Layout.astro'
+import BigTitle from '@components/react/BigTitle.jsx'
+
+const { title } = Astro.props
+---
+
+<Layout>
+  <BigTitle client:load>{title}</BigTitle>
+</Layout>

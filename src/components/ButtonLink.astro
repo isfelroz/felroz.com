@@ -1,0 +1,10 @@
+---
+const { to } = Astro.props
+---
+
+<a
+  class="px-4 py-2 h-fit w-fit font-medium rounded-3xl bg-linear-to-r from-[#9E4B88] via-[#CA6678] to-[#E98A77] text-white"
+  href={to}
+>
+  <slot />
+</a>

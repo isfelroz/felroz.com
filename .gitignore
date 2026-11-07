@@ -8,8 +8,9 @@
 # testing
 /coverage
 
-# next.js
-/.next/
+# astro
+/dist/
+/.astro/
 /out/
 
 # production
@@ -33,7 +34,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # prittier
 .prettierignore
@@ -46,4 +46,3 @@ next-env.d.ts
 .vscode
 /.vscode
 
-pnpm-lock.yaml
