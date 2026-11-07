@@ -97,12 +97,23 @@ const { alt } = Astro.props
       if (poster) poster.alt = alt
     }
 
+    // No camera controls: the model is not interactive, so keep it (and its inner .userInput) out of the tab order.
+    // The inner element keeps role="img" and the aria-label, so the alt stays available.
+    const skipTab = () => {
+      // Only write when it differs: setting the same value still queues a mutation record and would loop the observer
+      for (const el of [mv, mv.shadowRoot?.querySelector('.userInput')]) if (el && el.getAttribute('tabindex') !== '-1') el.setAttribute('tabindex', '-1')
+    }
+
     Promise.all([idle, visible])
       .then(() => import('@google/model-viewer'))
       .then(() => {
         // model-viewer now carries the alt; the poster becomes decorative duplication
         if (poster) poster.alt = ''
         mv.addEventListener('error', fallBack)
+        skipTab()
+        mv.addEventListener('load', skipTab)
+        // model-viewer may reapply tabindex when its attributes change
+        new MutationObserver(skipTab).observe(mv.shadowRoot ?? mv, { subtree: true, attributes: true, attributeFilter: ['tabindex'] })
         mv.setAttribute('src', mv.dataset.src ?? '')
       })
       // The import failed: model-viewer never upgrades and the poster keeps its alt
