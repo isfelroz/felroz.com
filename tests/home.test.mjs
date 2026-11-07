@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { statSync } from 'node:fs'
+import { readFileSync, statSync } from 'node:fs'
 import { page } from './helpers.mjs'
 
 const decode = (s) =>
@@ -123,3 +123,10 @@ test('hero h1 reads the final greeting', () => {
 })
 
 test('glb under 3 MB', () => assert.ok(statSync('public/models/memoji.glb').size < 3 * 1024 ** 2))
+
+test('global.json has no skills key and no skill percentages', () => {
+  const raw = readFileSync('src/data/global.json', 'utf8')
+  const data = JSON.parse(raw)
+  assert.ok(!('skills' in data))
+  assert.ok(!/"value"\s*:\s*\d/.test(JSON.stringify(data.stack)))
+})
