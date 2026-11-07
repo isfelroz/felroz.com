@@ -4,14 +4,14 @@
  * `accent` is the underlayer color class (bg-corail by default).
  */
 const { href, accent = 'bg-corail', label } = Astro.props
-const face = 'h-full w-full rounded-3xl bg-carbone p-8 shadow-card'
+const face = 'h-full w-full rounded-3xl bg-carbone p-7 max-[640px]:p-6 shadow-card'
 ---
 
 {
   href ? (
     <a href={href} aria-label={label} class="group block h-full rounded-3xl">
       <div class="relative isolate h-full">
-        <div class:list={[face, 'transition-all group-hover:translate-x-2 group-hover:-translate-y-2 group-focus-visible:translate-x-2 group-focus-visible:-translate-y-2']}>
+        <div data-card-face class:list={[face, 'transition-all group-hover:translate-x-2 group-hover:-translate-y-2 group-focus-visible:translate-x-2 group-focus-visible:-translate-y-2']}>
           <slot />
         </div>
         <div
@@ -24,7 +24,7 @@ const face = 'h-full w-full rounded-3xl bg-carbone p-8 shadow-card'
       </div>
     </a>
   ) : (
-    <div class={face}>
+    <div data-card-face class={face}>
       <slot />
     </div>
   )

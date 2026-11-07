@@ -1,0 +1,39 @@
+---
+/**
+ * One bento tile. `size` drives the desktop squares (1x1 and 2x2 get aspect-ratio 1 at >=1101px),
+ * `area` its grid area, `index` its place in the entrance stagger.
+ * Linked tiles (`href`) get the Split Card hover and must not contain other links.
+ */
+import Card from '@components/Card.astro'
+
+interface Props {
+  size: '1x1' | '2x1' | '2x2' | 'band'
+  area: string
+  index: number
+  href?: string
+  label?: string
+  labelledby?: string
+}
+
+const { size, area, index, href, label, labelledby } = Astro.props
+---
+
+<div
+  class="tile"
+  data-size={size}
+  style={`grid-area:${area};--i:${index}`}
+  role={labelledby ? 'region' : undefined}
+  aria-labelledby={labelledby}
+>
+  {
+    href ? (
+      <Card href={href} label={label}>
+        <slot />
+      </Card>
+    ) : (
+      <Card>
+        <slot />
+      </Card>
+    )
+  }
+</div>

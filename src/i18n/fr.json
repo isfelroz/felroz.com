@@ -31,35 +31,73 @@
   },
   "home": {
     "hero": {
-      "before": "Je fais travailler des agents IA, ",
-      "signal": "avec des garde-fous.",
-      "text": "AI Engineer orienté production : des applications métier de bout en bout, et des agents IA qui travaillent comme une équipe, avec des règles, des outils et des contrôles automatiques.",
-      "avatarAlt": "Memoji de Felipe Alarcon"
-    },
-    "projects": {
-      "title": "Projets",
-      "text": "Une plateforme d'opérations aériennes, un intranet de groupe et des outils pour travailler avec des agents."
-    },
-    "agentic": {
-      "title": "Développement agentique",
-      "text": "Règles par dépôt, skills, agents spécialisés et sessions en parallèle. Le code écrit par l'IA passe par des tests d'architecture."
-    },
-    "resume": {
-      "title": "CV",
-      "text": "Aéronautique, agence web, logiciel libre. Espagnol, français, anglais."
+      "greetings": [
+        "Hola,",
+        "Hello,",
+        "Bonjour,"
+      ],
+      "name": "je suis Felipe.",
+      "lead": "Développeur full-stack. Je conçois et livre des apps web, ",
+      "signal": "de l'API à l'interface.",
+      "avatarAlt": "Avatar 3D de Felipe, assis en méditation"
     },
     "now": {
-      "title": "Aujourd'hui",
-      "text": "Je développe la plateforme d'opérations aériennes d'un opérateur d'hélicoptères : vols, logbook EASA, planning, facturation.",
-      "place": "Annecy · Haute-Savoie"
+      "title": "En ce moment",
+      "role": "Ingénieur IA chez",
+      "newTab": "(nouvel onglet)"
+    },
+    "journey": {
+      "title": "Parcours",
+      "roles": [
+        "Ingénieur",
+        "Développeur",
+        "AI Engineer"
+      ],
+      "text": "D'ingénieur industriel à AI engineer, de Bogotá à Annecy."
+    },
+    "skills": {
+      "title": "Savoir-faire",
+      "items": [
+        {
+          "icon": "api",
+          "label": "APIs"
+        },
+        {
+          "icon": "web",
+          "label": "Interfaces web"
+        },
+        {
+          "icon": "mobile",
+          "label": "Apps mobiles"
+        },
+        {
+          "icon": "automation",
+          "label": "Automatisations"
+        },
+        {
+          "icon": "deploy",
+          "label": "Mise en prod"
+        },
+        {
+          "icon": "agents",
+          "label": "Agents IA"
+        }
+      ]
+    },
+    "featured": {
+      "title": "Projet phare",
+      "text": "Ce site : direction artistique, design system documenté et build Astro bilingue."
     },
     "stack": {
-      "title": "TypeScript",
-      "skillLabel": "{name} : {value} %"
+      "title": "Stack",
+      "label": "Stack : {list}. En savoir plus sur moi"
+    },
+    "me": {
+      "title": "Colombien à Annecy",
+      "text": "Photo, culture urbaine et pizza au pepperoni."
     },
     "contact": {
-      "title": "Travaillons ensemble.",
-      "text": "Agents IA, LLM ou plateforme métier : parlons de votre projet."
+      "title": "Parlons-en."
     },
     "socialLabel": "{name} de Felipe Alarcon"
   },

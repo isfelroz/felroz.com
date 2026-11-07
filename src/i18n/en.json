@@ -31,35 +31,73 @@
   },
   "home": {
     "hero": {
-      "before": "I put AI agents to work, ",
-      "signal": "with guardrails.",
-      "text": "Production-minded AI Engineer: business applications end to end, and AI agents that work like a team, with rules, tools and automated checks.",
-      "avatarAlt": "Felipe Alarcon's Memoji"
-    },
-    "projects": {
-      "title": "Projects",
-      "text": "A flight-operations platform, a group intranet and tooling to work with agents."
-    },
-    "agentic": {
-      "title": "Agentic development",
-      "text": "Per-repository rules, skills, specialised agents and parallel sessions. AI-written code is held in check by architecture tests."
-    },
-    "resume": {
-      "title": "Resume",
-      "text": "Aviation, a web agency, open source. Spanish, French, English."
+      "greetings": [
+        "Hola,",
+        "Bonjour,",
+        "Hello,"
+      ],
+      "name": "I'm Felipe.",
+      "lead": "Full-stack developer. I design and ship web apps, ",
+      "signal": "from the API to the interface.",
+      "avatarAlt": "3D avatar of Felipe, sitting in meditation"
     },
     "now": {
-      "title": "Today",
-      "text": "I build the flight-operations platform of a helicopter operator: flights, EASA logbook, scheduling, invoicing.",
-      "place": "Annecy · France"
+      "title": "Right now",
+      "role": "AI engineer at",
+      "newTab": "(new tab)"
+    },
+    "journey": {
+      "title": "Journey",
+      "roles": [
+        "Engineer",
+        "Developer",
+        "AI Engineer"
+      ],
+      "text": "From industrial engineer to AI engineer, from Bogotá to Annecy."
+    },
+    "skills": {
+      "title": "Know-how",
+      "items": [
+        {
+          "icon": "api",
+          "label": "APIs"
+        },
+        {
+          "icon": "web",
+          "label": "Web interfaces"
+        },
+        {
+          "icon": "mobile",
+          "label": "Mobile apps"
+        },
+        {
+          "icon": "automation",
+          "label": "Automations"
+        },
+        {
+          "icon": "deploy",
+          "label": "Shipping to prod"
+        },
+        {
+          "icon": "agents",
+          "label": "AI agents"
+        }
+      ]
+    },
+    "featured": {
+      "title": "Featured project",
+      "text": "This site: art direction, a documented design system and a bilingual Astro build."
     },
     "stack": {
-      "title": "TypeScript",
-      "skillLabel": "{name}: {value}%"
+      "title": "Stack",
+      "label": "Stack: {list}. More about me"
+    },
+    "me": {
+      "title": "Colombian in Annecy",
+      "text": "Photography, street culture and pepperoni pizza."
     },
     "contact": {
-      "title": "Let's work together.",
-      "text": "AI agents, LLMs or a business platform: tell me about your project."
+      "title": "Let's talk."
     },
     "socialLabel": "Felipe Alarcon on {name}"
   },

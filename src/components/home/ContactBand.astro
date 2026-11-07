@@ -1,0 +1,31 @@
+---
+/** "Parlons-en." band: big title and one pill link per social profile. No email until Felipe provides one. */
+import globalData from '@data/global.json'
+import Icon from '@components/react/Icon.jsx'
+
+const { title, socialLabel } = Astro.props
+---
+
+<div class="flex flex-wrap items-center justify-between gap-6 max-[640px]:flex-col max-[640px]:items-start">
+  <h2 id="contact-title" class="text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.05] font-bold tracking-[-0.035em]">
+    {title}
+  </h2>
+  <ul class="flex flex-wrap gap-4">
+    {
+      globalData.socials.map((social) => (
+        <li>
+          <a
+            href={social.href}
+            target="_blank"
+            rel="me noopener"
+            aria-label={socialLabel.replace('{name}', social.name)}
+            class="inline-flex items-center gap-2.5 rounded-full border border-dot px-5.5 py-3 font-medium transition-colors hover:border-corail hover:text-corail"
+          >
+            <Icon type={social.type} size="20px" />
+            {social.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

@@ -1,101 +1,60 @@
 ---
 import globalData from '@data/global.json'
 import Layout from '@layouts/Layout.astro'
-import Grid from '@components/Grid.astro'
-import Card from '@components/Card.astro'
-import ProgressSkill from '@components/ProgressSkill.astro'
-import HeroCard from '@components/cards/HeroCard.astro'
-import IconCard from '@components/cards/IconCard.astro'
-import LinkCard from '@components/cards/LinkCard.astro'
-import NowCard from '@components/cards/NowCard.astro'
-import GridItem from '@components/react/GridItem.jsx'
+import Bento from '@components/home/Bento.astro'
+import Tile from '@components/home/Tile.astro'
+import NowCard from '@components/home/NowCard.astro'
+import JourneyCard from '@components/home/JourneyCard.astro'
+import FeaturedCard from '@components/home/FeaturedCard.astro'
+import MeCard from '@components/home/MeCard.astro'
+import ContactBand from '@components/home/ContactBand.astro'
 import Icon from '@components/react/Icon.jsx'
 import { localizePath, useTranslations } from '../i18n/index.js'
 
 const { locale } = Astro.props
 const t = useTranslations(locale)
 const home = t.home
-const { socials, skills } = globalData
-const skillLabel = (s) => home.stack.skillLabel.replace('{name}', s.name).replace('{value}', s.value)
-const socialAccent = { github: 'bg-github', linkedin: 'bg-linkedin' }
+const stackLabel = home.stack.label.replace('{list}', globalData.stack.map((s) => s.name).join(', '))
 ---
 
 <Layout locale={locale} routeKey="home">
-  <Grid>
-    <GridItem client:load size="medium">
-      <Card href={localizePath('about', locale)}>
-        <HeroCard {...home.hero} />
-      </Card>
-    </GridItem>
-    <GridItem client:load>
-      <Card href={localizePath('projects', locale)}>
-        <LinkCard {...home.projects} />
-      </Card>
-    </GridItem>
-    <GridItem client:load>
-      <ul class="grid h-full grid-rows-2 gap-5 lg:gap-8">
-        {
-          socials.map((social) => (
-            <li class="min-h-0">
-              <Card
-                href={social.href}
-                accent={socialAccent[social.type]}
-                label={home.socialLabel.replace('{name}', social.name)}
-              >
-                <IconCard>
-                  <Icon type={social.type} size="56px" />
-                </IconCard>
-              </Card>
-            </li>
-          ))
-        }
-      </ul>
-    </GridItem>
-    <GridItem client:load>
-      <Card href={localizePath('projects', locale)}>
-        <LinkCard {...home.agentic} />
-      </Card>
-    </GridItem>
-    <GridItem client:load>
-      <Card href={localizePath('resume', locale)}>
-        <LinkCard {...home.resume} />
-      </Card>
-    </GridItem>
-    <GridItem client:load size="medium">
-      <Card>
-        <NowCard {...home.now} />
-      </Card>
-    </GridItem>
-    <GridItem client:load>
-      <Card href={localizePath('resume', locale)} accent="bg-typescript">
-        <LinkCard title={home.stack.title}>
-          <ProgressSkill percents={skills.main.value} size={150} label={skillLabel(skills.main)}>
-            <Icon type={skills.main.type} size="56px" />
-          </ProgressSkill>
-        </LinkCard>
-      </Card>
-    </GridItem>
-    <GridItem client:load>
-      <ul class="grid h-full grid-cols-2 grid-rows-2 gap-5 lg:gap-8">
-        {
-          skills.others.map((skill) => (
-            <li class="relative">
-              <Card>
-                <div class="absolute top-0 left-0 h-full w-full">
-                  <ProgressSkill percents={skill.value} size={100} label={skillLabel(skill)}>
-                    <Icon type={skill.type} size="40px" />
-                  </ProgressSkill>
-                </div>
-              </Card>
-            </li>
-          ))
-        }
-      </ul>
-    </GridItem>
-    <GridItem client:load size="medium">
-      <Card href={localizePath('contact', locale)}>
-        <LinkCard {...home.contact} size="large" />
-      </Card>
-    </GridItem>
-  </Grid>
+  <Bento>
+    {/* Hero: placeholder until the badge lands (Task 5) */}
+    <Tile size="2x2" area="hero" index={0} labelledby="hero-title">
+      <h1 id="hero-title" class="text-4xl font-bold tracking-[-0.035em]">{home.hero.name}</h1>
+    </Tile>
+
+    <Tile size="1x1" area="now" index={1} labelledby="now-title">
+      <NowCard {...home.now} />
+    </Tile>
+
+    <Tile size="1x1" area="journey" index={2} href={localizePath('resume', locale)}>
+      <JourneyCard {...home.journey} />
+    </Tile>
+
+    {/* Savoir-faire: placeholder until Task 4 */}
+    <Tile size="2x1" area="skills" index={3} labelledby="skills-title">
+      <h2 id="skills-title" class="text-2xl font-bold tracking-[-0.02em]">{home.skills.title}</h2>
+    </Tile>
+
+    <Tile size="2x1" area="featured" index={4} href={localizePath('projects', locale)}>
+      <FeaturedCard {...home.featured} />
+    </Tile>
+
+    {/* Stack: placeholder constellation until Task 4 */}
+    <Tile size="1x1" area="stack" index={5} href={localizePath('about', locale)} label={stackLabel}>
+      <div class="flex h-full items-end justify-between gap-4">
+        <h2 class="text-2xl font-bold tracking-[-0.02em]">{home.stack.title}</h2>
+        <span class="shrink-0"><Icon type="arrow" /></span>
+      </div>
+    </Tile>
+
+    <Tile size="1x1" area="me" index={6} href={localizePath('about', locale)}>
+      <MeCard {...home.me} />
+    </Tile>
+
+    <Tile size="band" area="contact" index={7} labelledby="contact-title">
+      <ContactBand title={home.contact.title} socialLabel={home.socialLabel} />
+    </Tile>
+  </Bento>
 </Layout>

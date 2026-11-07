@@ -4,13 +4,16 @@
     { "type": "linkedin", "name": "LinkedIn", "href": "https://www.linkedin.com/in/isfelroz" }
   ],
   "sourceCode": "https://github.com/isfelroz/felroz.com",
-  "skills": {
-    "main": { "type": "typescript", "name": "TypeScript", "value": 90 },
-    "others": [
-      { "type": "laravel", "name": "PHP · Laravel", "value": 80 },
-      { "type": "nuxt", "name": "Vue · Nuxt", "value": 85 },
-      { "type": "docker", "name": "Docker", "value": 75 },
-      { "type": "python", "name": "Python", "value": 50 }
-    ]
-  }
+  "employer": { "name": "HBG Helicopters", "href": "https://www.hbg-helicopteres.aero/" },
+  "toolbelt": ["Laravel", "Nuxt", "Vue", "TypeScript", "Docker"],
+  "featuredTags": ["Astro", "React", "Tailwind 4"],
+  "languages": ["ES", "FR", "EN"],
+  "stack": [
+    { "type": "typescript", "name": "TypeScript" },
+    { "type": "nuxt", "name": "Nuxt" },
+    { "type": "laravel", "name": "Laravel" },
+    { "type": "postgresql", "name": "PostgreSQL" },
+    { "type": "docker", "name": "Docker" },
+    { "type": "python", "name": "Python" }
+  ]
 }

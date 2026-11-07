@@ -12,6 +12,8 @@
   /* Neutrals */
   --color-carbone: #26282c;
   --color-carbone-raised: #2e3035;
+  --color-carbone-deep: #1f2124;
+  --color-dot: #3a3d43;
   --color-craie: #f4f1ee;
   --color-white: #fff;
   --color-ink-soft: #d4d5d9;
@@ -136,4 +138,75 @@
   background-size: 7px 7px;
   backdrop-filter: blur(10px);
   background-position: 50% 50%;
+}
+
+/* Home bento: square grid (DESIGN.md · Layout). Tiles place themselves with grid-area. */
+.bento {
+  display: grid;
+  gap: 28px;
+  padding-block: 40px 80px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(3, 1fr) auto;
+  grid-template-areas:
+    'hero hero now journey'
+    'hero hero skills skills'
+    'featured featured stack me'
+    'contact contact contact contact';
+}
+
+.tile {
+  display: grid;
+  min-width: 0;
+  animation: tile-in 0.45s ease-out both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+
+/* The card inside a tile takes the tile's size, never its content's */
+.tile > * {
+  min-height: 0;
+}
+
+@keyframes tile-in {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+}
+
+/* Desktop squares: 1x1 tiles and the 2x2 hero; 2x1 tiles stretch to the row */
+@media (min-width: 1101px) {
+  .tile[data-size='1x1'],
+  .tile[data-size='2x2'] {
+    aspect-ratio: 1;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-template-areas:
+      'hero hero'
+      'now journey'
+      'skills skills'
+      'featured featured'
+      'stack me'
+      'contact contact';
+  }
+}
+
+@media (max-width: 640px) {
+  .bento {
+    gap: 20px;
+    padding-top: 24px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'hero' 'now' 'journey' 'skills' 'featured' 'stack' 'me' 'contact';
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile {
+    animation: none;
+  }
 }
