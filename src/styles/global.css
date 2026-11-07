@@ -163,6 +163,7 @@
 
 /* The card inside a tile takes the tile's size, never its content's */
 .tile > * {
+  min-width: 0;
   min-height: 0;
 }
 

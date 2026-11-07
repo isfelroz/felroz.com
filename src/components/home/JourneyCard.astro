@@ -5,7 +5,7 @@ import Icon from '@components/react/Icon.jsx'
 const { title, roles, text } = Astro.props
 ---
 
-<div class="journey flex h-full flex-col justify-end gap-2.5">
+<div class="journey @container flex h-full flex-col justify-end gap-2.5">
   <svg class="h-auto min-h-0 w-full shrink overflow-visible" viewBox="0 0 240 64" aria-hidden="true">
     <path
       d="M16 52 C 50 52, 76 40, 112 40 S 180 30, 222 20"
@@ -18,8 +18,9 @@ const { title, roles, text } = Astro.props
     <circle cx="112" cy="40" r="6" fill="#26282C" stroke="#CA6678" stroke-width="3"></circle>
     <circle class="arrival" cx="222" cy="20" r="9" fill="#E98A77"></circle>
   </svg>
-  <p class="flex justify-between gap-1.5 text-[.8125rem] whitespace-nowrap text-label-dark">
-    {roles.map((r) => <span>{r}</span>)}
+  <!-- Labels scale with the tile (6cqi, capped at 13px) so the row fits from 1101px up; wrap is a fallback -->
+  <p class="flex flex-wrap justify-between gap-x-1.5 text-[min(.8125rem,6cqi)] text-label-dark">
+    {roles.map((r) => <span class="whitespace-nowrap">{r}</span>)}
   </p>
   <div class="flex items-center justify-between gap-4">
     <h2 class="text-2xl font-bold tracking-[-0.02em]">{title}</h2>
