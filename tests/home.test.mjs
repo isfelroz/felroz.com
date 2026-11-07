@@ -58,7 +58,7 @@ for (const route of ['/', '/en']) {
     for (const s of ['à compléter', 'TODO', 'Travaillons ensemble', 'INTERNAL_NAME', '%</']) assert.ok(!html.includes(s), s)
   })
 
-  test(`${route}: no client:load islands on home`, () => assert.ok(!/<astro-island[^>]*GridItem/.test(html)))
+  test(`${route}: no client:load islands on home`, () => assert.ok(!/<astro-island[^>]*\sclient="load"/.test(html)))
 
   test(`${route}: linked tiles point to their pages`, () => {
     const p = paths[route]
