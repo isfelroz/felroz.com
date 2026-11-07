@@ -137,10 +137,3 @@
   backdrop-filter: blur(10px);
   background-position: 50% 50%;
 }
-
-/* Large dot-grid field (DESIGN.md · Background Motifs) */
-.dot-field {
-  background-color: var(--color-carbone);
-  background-image: radial-gradient(#3a3d43 1.4px, transparent 1.6px);
-  background-size: 22px 22px;
-}
