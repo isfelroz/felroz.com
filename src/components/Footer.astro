@@ -8,7 +8,7 @@ import { localizePath, useTranslations } from '../i18n/index.js'
 
 const { locale } = Astro.props
 const t = useTranslations(locale)
-const links = ['about', 'projects', 'resume', 'contact'].map((key) => ({
+const links = ['projects', 'resume', 'about', 'contact'].map((key) => ({
   label: t.nav[key],
   href: localizePath(key, locale),
 }))

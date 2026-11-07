@@ -2,19 +2,19 @@
   "meta": {
     "siteName": "felroz",
     "titles": {
-      "home": "felroz — AI Engineer",
+      "home": "felroz — Full-stack developer & AI engineer",
       "about": "About · felroz",
       "projects": "Projects · felroz",
-      "resume": "Resume · felroz",
+      "resume": "Journey · felroz",
       "contact": "Contact · felroz"
     },
-    "description": "Felipe Alarcon (felroz), AI Engineer in Annecy, France. AI agents, LLMs and agentic development, shipped to production with guardrails."
+    "description": "Felipe Alarcon (felroz), full-stack developer and AI engineer in Annecy. Web apps from the API to the interface."
   },
   "nav": {
     "home": "Home",
     "about": "About",
     "projects": "Projects",
-    "resume": "Resume",
+    "resume": "Journey",
     "contact": "Contact",
     "main": "Main navigation",
     "openMenu": "Open menu",
@@ -26,7 +26,7 @@
   "pages": {
     "about": "About me",
     "projects": "Projects",
-    "resume": "Resume",
+    "resume": "Journey",
     "contact": "Contact"
   },
   "home": {

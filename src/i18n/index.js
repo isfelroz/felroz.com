@@ -9,7 +9,7 @@ export const routes = {
   home: { fr: '/', en: '/en' },
   about: { fr: '/a-propos', en: '/en/about' },
   projects: { fr: '/projets', en: '/en/projects' },
-  resume: { fr: '/cv', en: '/en/resume' },
+  resume: { fr: '/parcours', en: '/en/journey' },
   contact: { fr: '/contact', en: '/en/contact' },
 }
 

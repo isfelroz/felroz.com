@@ -9,7 +9,7 @@ import { normalizePath } from '../lib/path.js'
 
 const { locale, routeKey } = Astro.props
 const t = useTranslations(locale)
-const links = ['about', 'projects', 'resume'].map((key) => ({
+const links = ['projects', 'resume', 'about'].map((key) => ({
   label: t.nav[key],
   href: localizePath(key, locale),
 }))

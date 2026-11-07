@@ -13,7 +13,9 @@ export default defineConfig({
   redirects: {
     '/about': '/a-propos',
     '/works': '/projets',
-    '/resume': '/cv',
+    '/resume': '/parcours',
+    '/cv': '/parcours',
+    '/en/resume': '/en/journey',
   },
   integrations: [react()],
   vite: {
