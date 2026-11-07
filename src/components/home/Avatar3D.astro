@@ -1,0 +1,115 @@
+---
+/**
+ * 3D Memoji (spec §4.4). The HTML only carries the poster: model-viewer and the .glb load after first paint,
+ * once the browser is idle and the hero is visible, and never under reduced motion or without WebGL.
+ * The camera orbit follows the pointer over the hero tile.
+ */
+import { Image } from 'astro:assets'
+import me from '@assets/me.png'
+
+interface Props {
+  alt: string
+}
+
+const { alt } = Astro.props
+---
+
+<div class="memo">
+  <model-viewer
+    data-avatar
+    data-src="/models/memoji.glb"
+    alt={alt}
+    camera-orbit="0deg 80deg auto"
+    min-camera-orbit="auto auto auto"
+    max-camera-orbit="auto auto auto"
+    field-of-view="28deg"
+    interpolation-decay="120"
+    environment-image="neutral"
+    exposure="1.05"
+    shadow-intensity="0"
+    interaction-prompt="none"
+    disable-zoom
+    disable-pan
+    disable-tap
+    loading="eager"
+  >
+    <Image slot="poster" src={me} alt="" width={420} height={336} loading="eager" draggable="false" />
+  </model-viewer>
+</div>
+
+<style>
+  /* Same box before and after the upgrade: the unknown element is a block, the poster fills it */
+  .memo {
+    height: 100%;
+    max-width: 100%;
+    aspect-ratio: 1;
+  }
+  model-viewer {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    background: transparent;
+    --poster-color: transparent;
+  }
+  img[slot='poster'] {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    user-select: none;
+  }
+</style>
+
+<script>
+  const mv = document.querySelector<HTMLElement & { src?: string }>('[data-avatar]')
+
+  if (mv) {
+    const poster = mv.querySelector<HTMLImageElement>('img[slot="poster"]')
+    // The poster is decorative while model-viewer carries the alt; it takes the alt back when there is no model
+    const posterOnly = () => {
+      if (poster) poster.alt = mv.getAttribute('alt') ?? ''
+    }
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+    const probe = document.createElement('canvas')
+    const webgl = !!(probe.getContext('webgl2') || probe.getContext('webgl'))
+
+    if (reduce || !webgl) posterOnly()
+    else {
+      const hero = mv.closest<HTMLElement>('.tile') ?? mv
+      const stage = mv.closest<HTMLElement>('[data-stage]') ?? mv
+
+      const idle = new Promise<void>((resolve) =>
+        'requestIdleCallback' in window ? requestIdleCallback(() => resolve(), { timeout: 4000 }) : setTimeout(resolve, 1500),
+      )
+      const visible = new Promise<void>((resolve) => {
+        const io = new IntersectionObserver((entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            io.disconnect()
+            resolve()
+          }
+        })
+        io.observe(hero)
+      })
+
+      Promise.all([idle, visible])
+        .then(() => import('@google/model-viewer'))
+        .then(() => {
+          // A failed model falls back to the poster
+          mv.addEventListener('error', () => mv.removeAttribute('src'))
+          mv.src = mv.dataset.src
+        })
+        .catch(posterOnly)
+
+      // The camera turns toward the pointer: θ = x·38°, φ = 80° − y·14° (y up). The attribute works before the upgrade too.
+      const aim = (x: number, y: number) => mv.setAttribute('camera-orbit', `${x * 38}deg ${80 - y * 14}deg auto`)
+      const clamp = (v: number) => Math.max(-1, Math.min(1, v))
+      hero.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch') return
+        const r = stage.getBoundingClientRect()
+        aim(clamp((e.clientX - r.left - r.width / 2) / (r.width / 2)), clamp(-(e.clientY - r.top - r.height / 2) / (r.height / 2)))
+      })
+      hero.addEventListener('pointerleave', () => aim(0, 0))
+    }
+  }
+</script>

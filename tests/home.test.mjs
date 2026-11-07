@@ -1,5 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
+import { statSync } from 'node:fs'
 import { page } from './helpers.mjs'
 
 const decode = (s) =>
@@ -19,6 +20,8 @@ const stackLabels = {
   '/': 'Stack : TypeScript, Nuxt, Laravel, PostgreSQL, Docker, Python. En savoir plus sur moi',
   '/en': 'Stack: TypeScript, Nuxt, Laravel, PostgreSQL, Docker, Python. More about me',
 }
+
+const signals = { '/': "de l'API à l'interface.", '/en': 'from the API to the interface.' }
 
 const paths = {
   '/': { resume: '/parcours', projects: '/projets', about: '/a-propos' },
@@ -100,4 +103,23 @@ for (const route of ['/', '/en']) {
       assert.match(contact, new RegExp(`<a[^>]*href="${url}"[^>]*target="_blank"[^>]*rel="me noopener"[^>]*aria-label="[^"]+"`))
     assert.ok(!/mailto:|@felroz\.com/.test(contact))
   })
+
+  // DESIGN.md · One Signal Rule: the header's Contact button is chrome and does not count, so count inside <main>
+  test(`${route}: one signal on the home, on the hero lead`, () => {
+    assert.equal((main.match(/text-signal|bg-signal/g) || []).length, 1)
+    assert.ok(decode(tileSlice(html, 'hero').html).includes(`class="text-signal">${signals[route]}`))
+  })
+
+  test(`${route}: model is not requested by the HTML`, () => {
+    assert.match(html, /<model-viewer[^>]*data-src="\/models\/memoji\.glb"/)
+    assert.ok(!/<model-viewer[^>]*\ssrc=/.test(html))
+    assert.match(html, /<img[^>]*slot="poster"/)
+  })
 }
+
+test('hero h1 reads the final greeting', () => {
+  assert.match(decode(page('/')), /<h1[^>]*>[\s\S]*Bonjour, je suis Felipe\.[\s\S]*<\/h1>/)
+  assert.match(decode(page('/en')), /<h1[^>]*>[\s\S]*Hello, I'm Felipe\.[\s\S]*<\/h1>/)
+})
+
+test('glb under 3 MB', () => assert.ok(statSync('public/models/memoji.glb').size < 3 * 1024 ** 2))

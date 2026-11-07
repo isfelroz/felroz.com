@@ -3,6 +3,7 @@ import globalData from '@data/global.json'
 import Layout from '@layouts/Layout.astro'
 import Bento from '@components/home/Bento.astro'
 import Tile from '@components/home/Tile.astro'
+import HeroBadge from '@components/home/HeroBadge.astro'
 import NowCard from '@components/home/NowCard.astro'
 import JourneyCard from '@components/home/JourneyCard.astro'
 import FeaturedCard from '@components/home/FeaturedCard.astro'
@@ -20,9 +21,8 @@ const stackLabel = home.stack.label.replace('{list}', globalData.stack.map((s) =
 
 <Layout locale={locale} routeKey="home">
   <Bento>
-    {/* Hero: placeholder until the badge lands (Task 5) */}
     <Tile size="2x2" area="hero" index={0} labelledby="hero-title">
-      <h1 id="hero-title" class="text-4xl font-bold tracking-[-0.035em]">{home.hero.name}</h1>
+      <HeroBadge {...home.hero} />
     </Tile>
 
     <Tile size="1x1" area="now" index={1} labelledby="now-title">
