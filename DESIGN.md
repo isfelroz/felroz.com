@@ -72,7 +72,8 @@ spacing:
   gutter: "16px"
   grid-gap: "20px"
   grid-gap-lg: "32px"
-  card-padding: "32px"
+  card-padding: "28px"
+  card-padding-sm: "24px"
   section-y: "40px"
   section-y-lg: "80px"
 components:
@@ -177,8 +178,7 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 
 ## Layout
 
-- **Container:** centered, 16px side gutter (`spacing.gutter`).
-- **Container:** max content width 1240px (was narrower), so square tiles stay roomy between 1101px and 1440px.
+- **Container:** centered, max content width 1240px with a 16px side gutter (`spacing.gutter`), so square tiles stay roomy between 1101px and 1440px.
 - **Bento grid (home):** every tile is square or spans whole squares. Tiles place themselves with `grid-area`.
   - **Desktop (≥1101px):** 4 columns, gap 28px. 1×1 tiles use `aspect-ratio: 1`; the Hero is 2×2 and square; wide tiles (2×1) take exactly one row height; Contact is a full-width band of natural height.
   - **Order:** `Hero Hero En-ce-moment Parcours` / `Hero Hero Savoir-faire Savoir-faire` / `Projet-phare Projet-phare Stack Moi` / `Contact ×4`.
@@ -206,7 +206,7 @@ Depth is physical. Cards sit on Carbone with a soft dual shadow, a dark drop to 
 - **Symbol container:** rounded square, radius 28/120 of its side (~23%). Circular on avatars.
 - **Panels and swatches:** 16px and 12px.
 - **Strokes:** round caps and joins everywhere: the *f*, the routes, the illustrations.
-- **Dashed lines** exist only in the route motif (`stroke-dasharray: 1 12`, round caps), which renders as dotted.
+- **Dashed lines** exist only in the route motif and the helicopter's rotor ring: `stroke-dasharray: 1 N` with N from 8 to 12 (rotor ring `1 8`, Parcours mini-route `1 9`), always with round caps, so they render as dotted.
 
 ## Components
 
@@ -242,7 +242,7 @@ Favicon (*f* alone): same container, `<path d="M46 100 V50 Q46 28 70 28" stroke=
 - **Background:** Carbone face.
 - **Shadow Strategy:** Card lift at rest (see Elevation & Depth).
 - **Hover (linked cards):** the Split Card Rule. The underlayer takes the card's accent (Corail by default, or the third-party brand color for social cards) overlaid with the dot grid (`radial-gradient(#26282C 3px, transparent 4px)`, 10px cell).
-- **Internal Padding:** 32px.
+- **Internal Padding:** 28px (`p-7`), 24px at ≤640px (`p-6`).
 - **Content:** title row with the arrow-circle icon on the right (Label on Dark, rotates 45° → 0° and turns Corail on hover or focus), then the text in Ink Soft at full card width. No label above the title.
 - **Entrance:** the CSS stagger described in Motion.
 - **Square tiles:** on the home, tiles stay square (see Layout).
@@ -287,8 +287,6 @@ Two protagonists on load: the dot field (pointer-driven) and the hero greeting (
 - **Card entrance:** one short CSS stagger (`tile-in`: opacity 0 → 1, 12px rise, 0.45s ease-out, 70ms between tiles), played once. It replaces the per-card spring.
 - **Reduced motion:** nothing animates and everything is in its final state; the poster replaces the 3D model.
 - **Ghost titles** on inner pages keep their slide-up (y 100% → 0, 0.5s).
-
-
 
 ## Do's and Don'ts
 

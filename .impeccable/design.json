@@ -228,15 +228,18 @@
       },
       {
         "name": "md",
-        "value": "768px"
+        "value": "768px",
+        "purpose": "Page chrome (header, nav) only, never the bento; currently unused."
       },
       {
         "name": "lg",
-        "value": "1024px"
+        "value": "1024px",
+        "purpose": "Page chrome only, never the bento: header links and nav panel, footer row, section rhythm."
       },
       {
         "name": "xl",
-        "value": "1280px"
+        "value": "1280px",
+        "purpose": "Page chrome only, never the bento: inner-page ghost title size."
       }
     ],
     "layout": {
