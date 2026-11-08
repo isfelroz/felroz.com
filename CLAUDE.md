@@ -25,7 +25,7 @@ Personal portfolio (felroz.com) built with Astro 7 as a static site, with React 
 - Any visual change must follow `DESIGN.md` (One Signal Rule, Plain Text Rule, Split Card Rule, symbol without crossbar). Update `DESIGN.md` when the system intentionally changes.
 - There is no `tailwind.config.js`: colors, fonts, sizes and shadows are defined in `@theme` inside `src/styles/global.css`.
 - Use v4 syntax: `bg-linear-to-r` (not `bg-gradient-to-r`), `drop-shadow-sm`/`shadow-sm`/`rounded-sm` for the old defaults, `shrink`/`grow`.
-- Theme colors use the brand names: `prune`, `corail`, `peche`, `carbone`, `carbone-raised`, `craie`, `ink-soft`, `label-dark`, `label-light`, plus `github`, `linkedin`, `typescript` (card accents only). Utilities: `bg-signal`, `text-signal`, `label-mono`, `shadow-card`.
+- Theme colors use the brand names: `prune`, `corail`, `peche`, `carbone`, `carbone-raised`, `craie`, `ink-soft`, `label-dark`, `label-light`, plus `github`, `linkedin` (hover fill of their own icons only). Utilities: `bg-signal`, `text-signal`, `label-mono`, `shadow-card`.
 
 ## Verification
 

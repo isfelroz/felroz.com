@@ -1,6 +1,6 @@
 ---
 name: felroz
-description: Personal site of Felipe Alarcon (isfelroz), AI Engineer. Agentic AI, in production.
+description: Personal site of Felipe Alarcon (felroz), full-stack developer and AI engineer. Web apps from the API to the interface.
 colors:
   prune: "#9E4B88"
   corail: "#CA6678"
@@ -16,7 +16,6 @@ colors:
   dot: "#3A3D43"
   brand-github: "#6E40C9"
   brand-linkedin: "#0A66C2"
-  brand-typescript: "#3178C6"
 typography:
   display-ghost:
     fontFamily: "DM Sans, sans-serif"
@@ -71,7 +70,7 @@ rounded:
 spacing:
   gutter: "16px"
   grid-gap: "20px"
-  grid-gap-lg: "32px"
+  grid-gap-lg: "28px"
   card-padding: "28px"
   card-padding-sm: "24px"
   section-y: "40px"
@@ -97,7 +96,7 @@ components:
   nav-link-active:
     textColor: "{colors.white}"
     typography: "{typography.body-strong}"
-  label-eyebrow:
+  label-metadata:
     textColor: "{colors.label-on-dark}"
     typography: "{typography.label}"
   symbol:
@@ -110,18 +109,22 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Agent Control Room"**
+**Creative North Star: "The Calling Card"** (*la carta de presentación*)
 
-felroz is a network of agents seen from a control room at night. The dot grid is the infrastructure, every node is an agent, and the Prune → Corail → Pêche gradient is the signal travelling between them toward an arrival point. Nothing moves unsupervised: routes are deliberate, the signal is rare, and the room stays dark and calm so the signal reads instantly. The line on the banner says it: *L'IA agentique, en production.*
+felroz is Felipe introducing himself. The site is his calling card, for the day he looks for a job or for anyone who wants to know who he is: not a sales pitch, not a showcase of AI. It opens like a conference badge, with his face (a calm 3D Memoji), a greeting in his three languages and his name. Then come square cards on a dark table. Each card states one fact about him in a single look, with a small drawing in place of a paragraph: the helicopter for his current job, a route for his path, a constellation for his stack, a pizza for the person behind it. It closes with an invitation to talk, *Parlons-en.*
 
-The surface is dark by default: Carbone with white text. Color is warm and scarce: one gradient accent per screen, on the word or object that matters. Cards keep a tactile, almost physical presence through soft shadows and an offset hover that splits the card from its colored, dot-patterned underlayer. The result reads as 3D. Type is a single family, DM Sans, set tight and bold for headlines. DM Mono speaks for the machine: labels, code, metadata.
+Every rule follows from that idea. Name and face come first. A card says one thing, briefly, and links to the page that says more. The warm gradient marks only the one thing that matters most on the screen. The room listens without speaking first: the dots warm up where the visitor moves the pointer, and nothing moves on its own. He reads as a developer first; AI is one of his skills, never the hero.
+
+The surface is dark by default: Carbone with white text. Cards keep a tactile, almost physical presence through soft shadows and an offset hover that splits the card from its colored, dot-patterned underlayer. The result reads as 3D. Type is a single family, DM Sans, set tight and bold for headlines. DM Mono speaks for the machine: tags, code, metadata.
 
 The site is bilingual (French and English). Copy lengths differ between the two, so layouts must hold both.
 
 **Key Characteristics:**
+- A badge first: face, greeting and name before anything else.
+- Square cards, one fact each, illustrated rather than written.
 - Dark Carbone ground, white text, warm gradient used as a single signal.
 - Symbol: a gradient *f* followed by a hollow node and a Pêche arrival dot.
-- Motifs: dot grid plus dotted routes linking nodes, always in the background.
+- A pointer-reactive dot field that answers the visitor and never animates on its own.
 - Cards with soft shadows and an offset hover that reveals a colored dot-grid layer.
 - DM Sans for everything human; DM Mono in spaced uppercase for everything machine.
 
@@ -146,7 +149,7 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 - **Dot** (`dot`, `#3A3D43`): resting color of the background dot field, and of the fine dots inside Carbone Deep panels.
 
 ### Third-party brand colors
-`brand-github`, `brand-linkedin` and `brand-typescript` exist only to fill the hover layer of the matching social card. They never appear elsewhere.
+`brand-github` and `brand-linkedin` exist only as the hover fill of their own icons (the footer's social links). They never appear elsewhere.
 
 ### Named Rules
 **The One Signal Rule.** The gradient (left → right: Prune, Corail, Pêche) appears once per screen's content: one keyword or one accent. The persistent chrome (the symbol and the header's Contact button) does not count, as in the DA's own header. If two things in the page content are gradient, one of them is wrong.
@@ -163,13 +166,13 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 
 ### Hierarchy
 - **Display Ghost** (700, 12rem; 9xl on lg, 7xl on mobile; line-height 1; 10% opacity): giant section titles on inner pages, revealed by a slide-up.
-- **Display** (700, 3.5rem, 1.05, -1.5px): hero statements, e.g. *L'IA agentique, en production.*
-- **Headline** (700, 1.875rem, 1.15, -0.8px): page and section leads, e.g. *Je fais travailler des agents IA, avec des garde-fous.*
-- **Title** (700, 1.5rem): card titles.
+- **Display** (700, 3.5rem, 1.05, -1.5px): hero and closing statements, e.g. *Bonjour, je suis Felipe.* and *Parlons-en.* Fluid on the home (`clamp()`), set tighter (about -0.035em).
+- **Headline** (700, 1.875rem, 1.15, -0.8px): page and section leads, e.g. the hero lead *Développeur full-stack. Je conçois et livre des apps web, de l'API à l'interface.*
+- **Title** (700, 1.5rem): card titles (*En ce moment*, *Parcours*, *Savoir-faire*).
 - **Wordmark** (700, -1px tracking): *felroz* next to the symbol. Scale with the symbol; tracking stays tight.
 - **Body** (400, 1.125rem, 1.55): reading text, max 65–75ch.
 - **Body Strong** (500, 1rem): nav links, buttons.
-- **Label** (DM Mono 400, 0.8125rem, 2px tracking, uppercase): metadata such as place (`ANNECY · HAUTE-SAVOIE`), domain (`FELROZ.COM`), language switch (`EN` / `FR`). Section numbers (`01 · SYMBOLE`) only on brand boards, never on the site.
+- **Label** (DM Mono 400, 0.8125rem, 2px tracking, uppercase): metadata such as tags (`ASTRO`, `REACT`, `TAILWIND 4`), the toolbelt line (`LARAVEL · NUXT · VUE · TYPESCRIPT · DOCKER`), language chips (`ES FR EN`) and the language switch (`EN` / `FR`). Section numbers (`01 · SYMBOLE`) only on brand boards, never on the site.
 
 ### Named Rules
 **The One Family Rule.** DM Sans and DM Mono only. No display or decorative faces.
@@ -241,7 +244,7 @@ Favicon (*f* alone): same container, `<path d="M46 100 V50 Q46 28 70 28" stroke=
 - **Corner Style:** 24px.
 - **Background:** Carbone face.
 - **Shadow Strategy:** Card lift at rest (see Elevation & Depth).
-- **Hover (linked cards):** the Split Card Rule. The underlayer takes the card's accent (Corail by default, or the third-party brand color for social cards) overlaid with the dot grid (`radial-gradient(#26282C 3px, transparent 4px)`, 10px cell).
+- **Hover (linked cards):** the Split Card Rule. The underlayer is Corail, overlaid with the dot grid (`radial-gradient(#26282C 3px, transparent 4px)`, 10px cell).
 - **Internal Padding:** 28px (`p-7`), 24px at ≤640px (`p-6`).
 - **Content:** title row with the arrow-circle icon on the right (Label on Dark, rotates 45° → 0° and turns Corail on hover or focus), then the text in Ink Soft at full card width. No label above the title.
 - **Entrance:** the CSS stagger described in Motion.
@@ -256,7 +259,7 @@ Favicon (*f* alone): same container, `<path d="M46 100 V50 Q46 28 70 28" stroke=
 - **Mobile:** full-height slide-in panel (90% width) over a blurred Carbone at 95% with the inverse dot grid; links in uppercase 2.25rem bold, centred; language switch and Contact at the bottom. Closes with Escape.
 
 ### Metadata Label
-DM Mono uppercase with 2px tracking, Label on Dark (or Label on Light on Craie). For metadata next to content (place, domain, language), never as an eyebrow above a heading.
+DM Mono uppercase with 2px tracking, Label on Dark (or Label on Light on Craie). For metadata next to content (tags, the toolbelt line, language chips), never as an eyebrow above a heading.
 
 ### Hero Badge
 The home's 2×2 tile, styled like a conference badge (a nod, not a copy). A small lanyard slot (52×6px, Carbone Deep, inset shadow) hangs at the top centre of the card face. Below it, a photo panel (Carbone Deep, 18px radius, fine 14px dot grid in Dot at 70%) holds the 3D avatar, with a small Pêche dot in its top-right corner. Bottom: the greeting and name, then the lead; the lead's last part (*de l'API à l'interface.*) carries the page's one signal. No meta line and no link on this tile.
@@ -307,5 +310,7 @@ Two protagonists on load: the dot field (pointer-driven) and the hero greeting (
 - **Don't** place routes or dotted lines behind text, or use dashed lines anywhere outside the route motif.
 - **Don't** add a second type family (Aclonica is retired).
 - **Don't** set body copy, paragraphs or long labels in gradient.
-- **Don't** use the third-party brand colors outside their own cards.
+- **Don't** use the third-party brand colors outside their own icons.
+- **Don't** make AI the hero: no agent diagrams, no fake logs, no "AI Engineer" as the loudest element.
+- **Don't** pitch: no "let's work together" sales copy, no invented metrics or placeholder text in production.
 - **Don't** replace the 3D card treatment with flat cards.
