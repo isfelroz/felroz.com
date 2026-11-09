@@ -154,6 +154,8 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 ### Named Rules
 **The One Signal Rule.** The gradient (left → right: Prune, Corail, Pêche) appears once per screen's content: one keyword or one accent. The persistent chrome (the symbol and the header's Contact button) does not count, as in the DA's own header. If two things in the page content are gradient, one of them is wrong.
 
+**Text exception.** As text (`text-signal`), the gradient starts at a lighter stop, `color-mix(in srgb, Prune 30%, Corail)` (#BD5E7D), because pure Prune is only 2.68:1 on Carbone; the text gradient is then 3.56:1 on Carbone and 3.18:1 on Carbone Raised at its darkest point (large bold text, 3:1). Backgrounds (`bg-signal`, the header button) keep the pure Prune start.
+
 **The Plain Text Rule.** Running text is white on Carbone or Carbone on Craie. Never gradient, never Corail.
 
 ## Typography
@@ -279,7 +281,7 @@ Top-down, H135-inspired drawing for the *En ce moment* tile: fuselage, skids, ta
 Card illustration on the *Parcours* tile: a dotted Corail path, a hollow Corail node, a second hollow node and a solid Pêche arrival dot. The three role labels (`Ingénieur · Développeur · AI Engineer`) are all Label on Dark: no accent on any role, the arrival dot carries the direction. On hover or focus the arrival dot nudges up-right (4px, 0.4s).
 
 ### Method Card
-The home's 2×1 tile *Comment je travaille* (it replaced the featured-project card). A Carbone Deep panel holds a miniature U line: hollow Prune node at the start, two small Corail rings, a Pêche arrival dot, a 1 9 dotted Corail path in between, and the four station words in Label on Dark. Title row with the arrow-circle icon and one line of Ink Soft text on the right. Links to `#method` on À propos. On hover or focus the node and the arrival dot drift (300ms ease-out).
+The home's 2×1 tile *Comment je travaille* (it replaced the featured-project card). A Carbone Deep panel holds a miniature U line: hollow Prune node at the start, two small Corail rings, a Pêche arrival dot, a 1 8 dotted Corail path in between, and the four station words in Label on Dark. Title row with the arrow-circle icon and one line of Ink Soft text on the right. Links to `#method` on À propos. On hover or focus the node and the arrival dot drift (300ms ease-out).
 
 ### Project Card
 Projets gallery card, landscape. A square illustration panel (Carbone Deep, 18px radius, fine 14px dot grid) on the left, then the title (Title scale, fluid up to 2rem), the year in Label on Dark, one sentence of Ink Soft and the stack as chips (1px Dot border, pill, Label type; they wrap). One card per row, data-driven from `global.json` (`projects`: id, year, stack, illustration key), so adding a project is data, not markup. Stacks to one column at ≤760px. The card links nowhere, so it gets no Split Card hover; only the drawings answer the pointer.

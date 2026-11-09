@@ -20,7 +20,7 @@ All four audiences matter. The site is written for all of them at once, never fo
 felroz.com is Felipe Alarcon's personal site and calling card (*la carta de presentación*). It shows who he is, his brand and what he knows, for the day he looks for a job or for anyone who wants to know about him. Freelance work is possible but is not the current goal.
 
 Success, for any visitor:
-- **understands who he is in seconds**: a full-stack developer who builds web apps from the API to the interface, today an AI engineer at HBG Helicopters, from Bogotá to Annecy;
+- **understands who he is in seconds**: a full-stack developer who builds web apps from the API to the interface, today a developer & AI engineer at HBG Helicopters, from Bogotá to Annecy;
 - **remembers him**: the site has its own personality and does not read like a CV or a generic portfolio;
 - **gets in touch**: through LinkedIn, GitHub or by email at hello@felroz.com.
 

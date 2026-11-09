@@ -163,7 +163,7 @@
       {
         "name": "signal",
         "value": "linear-gradient(to right, #9E4B88, #CA6678, #E98A77)",
-        "purpose": "The one gradient accent per screen."
+        "purpose": "The one gradient accent per screen. As text, the first stop is lightened to #BD5E7D for 3:1 contrast on Carbone."
       },
       {
         "name": "symbol",
@@ -308,7 +308,7 @@
       "refersTo": "display",
       "description": "Headline with one gradient keyword (One Signal Rule).",
       "html": "<p class=\"ds-display\">Développeur full-stack. Je conçois et livre des apps web, <span class=\"ds-signal\">de l'API à l'interface.</span></p>",
-      "css": ".ds-display{margin:0;font:700 3.5rem/1.05 'DM Sans',sans-serif;letter-spacing:-1.5px;color:#fff;background:#26282C;padding:24px} .ds-signal{background:linear-gradient(to right, #9E4B88, #CA6678, #E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
+      "css": ".ds-display{margin:0;font:700 3.5rem/1.05 'DM Sans',sans-serif;letter-spacing:-1.5px;color:#fff;background:#26282C;padding:24px} .ds-signal{background:linear-gradient(to right,#BD5E7D, #CA6678, #E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
     },
     {
       "name": "Hero Badge",
@@ -316,7 +316,7 @@
       "refersTo": "card",
       "description": "Conference-badge hero: lanyard slot, Carbone Deep photo panel with the 3D avatar and a Pêche dot, greeting, lead with one gradient part.",
       "html": "<div class=\"ds-badge\"><span class=\"ds-slot\"></span><div class=\"ds-stage\"><span class=\"ds-pdot\"></span></div><h1 class=\"ds-greet\">Bonjour,<br>je suis Felipe.</h1><p class=\"ds-lead\">Développeur full-stack. <span class=\"ds-signal\">de l'API à l'interface.</span></p></div>",
-      "css": ".ds-badge{position:relative;display:flex;flex-direction:column;gap:18px;width:360px;height:360px;box-sizing:border-box;padding:28px;border-radius:24px;background:#26282C;color:#fff;font-family:'DM Sans',sans-serif;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px} .ds-slot{position:absolute;top:9px;left:50%;width:52px;height:6px;margin-left:-26px;border-radius:3px;background:#1F2124;box-shadow:inset 0 1px 2px rgba(0,0,0,.6)} .ds-stage{position:relative;flex:1;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.4px);background-size:14px 14px} .ds-pdot{position:absolute;top:16px;right:16px;width:14px;height:14px;border-radius:50%;background:#E98A77} .ds-greet{margin:0;font-weight:700;font-size:2.4rem;line-height:1.02;letter-spacing:-.035em} .ds-lead{margin:0;font-weight:700;font-size:1.25rem;line-height:1.2} .ds-signal{background:linear-gradient(to right,#9E4B88,#CA6678,#E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
+      "css": ".ds-badge{position:relative;display:flex;flex-direction:column;gap:18px;width:360px;height:360px;box-sizing:border-box;padding:28px;border-radius:24px;background:#26282C;color:#fff;font-family:'DM Sans',sans-serif;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px} .ds-slot{position:absolute;top:9px;left:50%;width:52px;height:6px;margin-left:-26px;border-radius:3px;background:#1F2124;box-shadow:inset 0 1px 2px rgba(0,0,0,.6)} .ds-stage{position:relative;flex:1;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.4px);background-size:14px 14px} .ds-pdot{position:absolute;top:16px;right:16px;width:14px;height:14px;border-radius:50%;background:#E98A77} .ds-greet{margin:0;font-weight:700;font-size:2.4rem;line-height:1.02;letter-spacing:-.035em} .ds-lead{margin:0;font-weight:700;font-size:1.25rem;line-height:1.2} .ds-signal{background:linear-gradient(to right,#BD5E7D,#CA6678,#E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
     },
     {
       "name": "Helicopter Illustration",
@@ -348,7 +348,7 @@
       "refersTo": "card",
       "description": "Projets gallery card: square illustration panel on Carbone Deep, title, year, one sentence and stack chips. Not linked, no split hover.",
       "html": "<article class=\"ds-proj\"><div class=\"ds-ppanel\"></div><div><h3 class=\"ds-ptitle\">Outil interne</h3><p class=\"ds-label\">2026</p><p class=\"ds-ptext\">Une phrase qui dit ce que c'est.</p><ul class=\"ds-chips\"><li class=\"ds-chip\">Nuxt</li><li class=\"ds-chip\">Laravel</li><li class=\"ds-chip\">Docker</li></ul></div></article>",
-      "css": ".ds-proj{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center;width:560px;padding:24px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-ppanel{aspect-ratio:1;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.4px);background-size:14px 14px} .ds-ptitle{margin:0 0 8px;font-weight:700;font-size:1.75rem;letter-spacing:-.025em} .ds-label{margin:0;font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-ptext{color:#D4D5D9;font-size:1.125rem} .ds-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none} .ds-chip{padding:3px 10px;border:1px solid #3A3D43;border-radius:999px;font:400 .75rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#D4D5D9}"
+      "css": ".ds-proj{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center;width:560px;padding:24px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-ppanel{aspect-ratio:1;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.6px);background-size:14px 14px} .ds-ptitle{margin:0 0 8px;font-weight:700;font-size:1.75rem;letter-spacing:-.025em} .ds-label{margin:0;font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-ptext{color:#D4D5D9;font-size:1.125rem} .ds-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none} .ds-chip{padding:3px 10px;border:1px solid #3A3D43;border-radius:999px;font:400 .75rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#D4D5D9}"
     },
     {
       "name": "Default Project Illustration",
