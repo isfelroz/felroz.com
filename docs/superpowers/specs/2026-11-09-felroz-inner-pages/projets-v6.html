@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>felroz · Projets · v6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* felroz tokens (src/styles/global.css) */
+:root{
+  --prune:#9e4b88;--corail:#ca6678;--peche:#e98a77;
+  --carbone:#26282c;--raised:#2e3035;--deep:#1f2124;--dot:#3a3d43;
+  --craie:#f4f1ee;--white:#fff;--ink:#d4d5d9;--label:#9a9ca3;--label-light:#5f6168;
+  --signal:linear-gradient(to right,var(--prune),var(--corail),var(--peche));
+  --shadow-card:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --gutter:16px;--gap:28px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{color-scheme:dark;overflow-x:clip;scrollbar-color:var(--label-light) var(--carbone);scroll-behavior:smooth}
+body{margin:0;background:var(--carbone);color:var(--white);font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif;font-size:1.125rem;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+::selection{background:var(--corail);color:var(--white)}
+:focus-visible{outline:2px solid var(--peche);outline-offset:4px;border-radius:6px}
+img{display:block;max-width:100%}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Machine voice */
+.mono{font-family:'DM Mono',ui-monospace,monospace;font-size:.8125rem;line-height:1.4;letter-spacing:2px;text-transform:uppercase;color:var(--label)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--ink);border:1px solid var(--dot);border-radius:999px;padding:3px 10px;line-height:1.4}
+.signal{background:var(--signal);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.soft{color:var(--ink)}
+
+/* Dot field (DotField.astro) */
+#dots{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.shell{position:relative;z-index:1}
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+
+/* Header (Header.astro) */
+.site-header{position:sticky;top:0;z-index:30;background:rgba(38,40,44,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:80px}
+.lockup{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.6rem;letter-spacing:-1px}
+.lockup svg{width:28px;height:28px}
+.nav{display:flex;gap:64px;font-weight:500;font-size:1rem}
+.nav a{padding:4px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover{color:var(--corail);border-color:var(--corail)}
+.nav a[aria-current=page]{border-color:var(--corail)}
+.hd-right{display:flex;align-items:center;gap:24px}
+.lang{font-family:'DM Mono',monospace;font-size:.8125rem;letter-spacing:2px;color:var(--label)}
+.btn-contact{background:var(--signal);color:#fff;font-weight:700;font-size:1rem;border-radius:999px;padding:8px 16px}
+.burger{display:none;width:28px;height:28px}
+@media (max-width:1023px){.nav,.hd-right .lang,.hd-right .btn-contact{display:none}.burger{display:block}}
+
+/* Ghost title (BigTitle.jsx) */
+.ghost{overflow:hidden;text-align:center;padding-top:8px}
+.ghost h1{font-weight:700;font-size:clamp(4.5rem,13vw,12rem);line-height:1.15;letter-spacing:-.02em;opacity:.1;white-space:nowrap;animation:ghost-in .5s var(--ease-out) both}
+@keyframes ghost-in{from{transform:translateY(100%)}}
+
+/* Card + split hover (Card.astro / Tile.astro) */
+.card{position:relative;isolation:isolate;border-radius:24px}
+.card>.face{position:relative;height:100%;background:var(--carbone);border-radius:24px;box-shadow:var(--shadow-card);padding:28px}
+a.card::before,.card.linked::before{content:"";position:absolute;inset:0;border-radius:24px;background-color:var(--corail);background-image:radial-gradient(var(--carbone) 3px,transparent 4px);background-size:10px 10px;background-position:50% 50%;z-index:-1;transition:transform .3s var(--ease-out)}
+a.card>.face,.card.linked>.face{transition:transform .3s var(--ease-out)}
+a.card:hover>.face,a.card:focus-visible>.face,.card.linked:hover>.face,.card.linked:focus-within>.face{transform:translate(8px,-8px)}
+a.card:hover::before,a.card:focus-visible::before,.card.linked:hover::before,.card.linked:focus-within::before{transform:translate(-8px,8px)}
+a.card:focus-visible{outline:none}
+.arrow{width:32px;height:32px;flex:none;color:var(--label);transition:transform .3s var(--ease-out),color .3s}
+a.card:hover .arrow,a.card:focus-visible .arrow,.card.linked:hover .arrow,.card.linked:focus-within .arrow{transform:rotate(-45deg);color:var(--corail)}
+.panel{background-color:var(--deep);background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.6px);background-size:14px 14px;border-radius:18px}
+@media (max-width:640px){.card>.face{padding:24px}}
+
+/* Type scale */
+.t-display{font-weight:700;font-size:clamp(2.5rem,5vw,3.5rem);line-height:1.05;letter-spacing:-.035em;text-wrap:balance}
+.t-headline{font-weight:700;font-size:clamp(1.5rem,2.6vw,1.875rem);line-height:1.15;letter-spacing:-.025em;text-wrap:balance}
+.t-title{font-weight:700;font-size:1.5rem;line-height:1.25;letter-spacing:-.02em;text-wrap:balance}
+.t-body{font-size:1.125rem;line-height:1.55;color:var(--ink);text-wrap:pretty}
+.t-small{font-size:1rem;line-height:1.5;color:var(--ink);text-wrap:pretty}
+
+/* Footer */
+.site-footer{padding:96px 0 120px}
+.site-footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:1px solid var(--dot);padding-top:28px;font-size:.95rem;color:var(--ink)}
+.site-footer .lockup{font-size:1.25rem}
+.site-footer .lockup svg{width:22px;height:22px}
+
+/* Pages */
+.page[hidden]{display:none}
+
+/* Mockup switcher: not part of the design */
+.mock-bar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(18,19,21,.92);border:1px solid #44474e;box-shadow:0 10px 30px rgba(0,0,0,.45);max-width:calc(100vw - 16px);overflow-x:auto}
+.mock-bar span{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--label);padding:0 8px;white-space:nowrap}
+.mock-bar a{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;padding:7px 12px;border-radius:999px;color:var(--ink);white-space:nowrap}
+.mock-bar a[aria-current=page]{background:var(--craie);color:var(--carbone)}
+@media (max-width:640px){.mock-bar span{display:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ===== Projets v6 · landscape cards, two per row ===== */
+.page .wrap{padding-bottom:24px}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);margin-top:16px}
+.gallery>li{min-width:0;display:grid}
+.proj>.face{display:grid;grid-template-columns:clamp(200px,42%,248px) minmax(0,1fr);gap:28px;align-items:center;padding:24px;height:100%}
+.proj-art{display:grid;place-items:center;aspect-ratio:1;padding:18px;overflow:hidden;margin:0}
+.proj-art svg{width:100%;height:100%}
+.proj-intra .proj-art svg{width:88%}
+.proj-body{display:flex;flex-direction:column;gap:14px;min-width:0}
+.proj-head{display:grid;gap:8px}
+.proj-head .t-title{font-size:clamp(1.625rem,2.2vw,2rem);line-height:1.08;letter-spacing:-.025em;text-wrap:balance}
+.proj .t-body{max-width:34ch}
+.proj .chips{flex-wrap:nowrap;padding-top:6px}
+/* the drawings answer the pointer, nothing moves at rest */
+.crm-ring .trade circle{transition:stroke .25s,fill .25s}
+.proj-crm:hover .crm-ring .trade circle{stroke:var(--corail)}
+.crm-ring .trade:hover circle{fill:var(--corail)}
+@media (prefers-reduced-motion:no-preference){.proj-crm:hover .rotor{animation:rotor 1.2s linear infinite}}
+@keyframes rotor{to{rotate:360deg}}
+.people circle{fill:var(--dot);transition:fill .3s calc(var(--d)*1) var(--ease-out)}
+.proj-intra:hover .people circle{fill:var(--corail)}
+
+/* mockup: skeleton cards for the 12-project preview */
+.sk .proj-art{background-color:var(--deep)}
+.sk .bar{display:block;height:12px;border-radius:6px;background:var(--raised)}
+.sk .bar.t{height:26px;width:60%}
+.sk .bar.w{width:85%}
+
+/* under ~1100: one per row, still landscape */
+@media (max-width:1100px){
+  .gallery{grid-template-columns:1fr}
+  .proj>.face{grid-template-columns:260px minmax(0,1fr);gap:40px;padding:28px}
+}
+@media (max-width:760px){
+  .proj>.face{grid-template-columns:1fr;gap:20px;padding:20px}
+  .proj-art{padding:24px}
+  .proj .chips{flex-wrap:wrap}
+  .proj-head{gap:6px}
+  .proj-head .t-title{font-size:1.5rem}
+}
+
+.mock-toggle{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;padding:7px 12px;border-radius:999px;color:var(--ink);border:1px dashed #5f6168;white-space:nowrap}
+.mock-toggle[aria-pressed=true]{background:var(--craie);color:var(--carbone);border-style:solid}
+</style>
+</head>
+<body>
+<canvas id="dots" aria-hidden="true"></canvas>
+<nav class="mock-bar" aria-label="Maquette"><span>Projets · v6</span><a href="#projets" data-to="projets">Projets</a><button class="mock-toggle" data-sim aria-pressed="false">Aperçu à 12 projets</button></nav>
+<div class="shell">
+<header class="site-header"><div class="wrap">
+  <a class="lockup" href="#projets"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="fgh" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#9E4B88"/><stop offset="1" stop-color="#E98A77"/></linearGradient></defs><rect width="120" height="120" rx="28" fill="#26282C"/><path d="M40 98 V50 Q40 28 62 28 H66" fill="none" stroke="url(#fgh)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/><circle cx="76" cy="52" r="6" fill="#26282C" stroke="#CA6678" stroke-width="4"/><circle cx="96" cy="36" r="9" fill="#E98A77"/></svg><span>felroz</span></a>
+  <nav class="nav" aria-label="Navigation principale"><a href="#projets" data-to="projets">Projets</a><a href="#parcours" data-to="parcours">Parcours</a><a href="#a-propos" data-to="a-propos">À propos</a></nav>
+  <div class="hd-right"><a class="lang" href="#" lang="en">EN</a><a class="btn-contact" href="#contact" data-to="contact">Contact</a>
+  <button class="burger" aria-label="Ouvrir le menu"><svg viewBox="0 0 28 28"><path d="M4 8h20M4 14h20M4 20h20" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></button></div>
+</div></header>
+<main id="main">
+<!-- ============ PROJETS ============ -->
+<section class="page" data-page="projets" data-title="Projets · felroz">
+  <div class="ghost"><h1>Projets</h1></div>
+  <div class="wrap">
+    <ol class="gallery">
+      <li>
+        <article class="card proj proj-crm" aria-labelledby="pj1">
+          <div class="face">
+            <figure class="panel proj-art"><svg class="crm-ring mini" viewBox="0 0 520 520" role="img" aria-labelledby="mini-t"><title id="mini-t">Neuf métiers autour d’un même outil : Ops, Chefs de base, Pilotes, Exploitation, CAMO, Comptabilité, Commercial, Mécaniciens, RH.</title>
+<circle cx="260.0" cy="260.0" r="197.6" fill="none" stroke="#CA6678" stroke-width="4" stroke-dasharray="1 16" stroke-linecap="round"/>
+<g transform="translate(92.0 115.4) scale(2.1)">
+  <g stroke="#5F6168" stroke-width="3" stroke-linecap="round" fill="none" opacity=".9"><path d="M60 50 V96 M100 50 V96 M60 62 H70 M60 86 H70 M100 62 H90 M100 86 H90"/></g>
+  <path d="M80 34 C 92 34, 97 48, 97 66 C 97 84, 90 96, 84 100 L 82.5 136 H 77.5 L 76 100 C 70 96, 63 84, 63 66 C 63 48, 68 34, 80 34 Z" fill="#3A3D43" stroke="#D4D5D9" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M72 44 C 75 39, 85 39, 88 44 L 86 54 H 74 Z" fill="#26282C" opacity=".9"/>
+  <rect x="64" y="122" width="32" height="5" rx="2.5" fill="#3A3D43" stroke="#D4D5D9" stroke-width="1.2"/>
+  <rect x="62" y="118" width="4" height="13" rx="2" fill="#D4D5D9"/><rect x="94" y="118" width="4" height="13" rx="2" fill="#D4D5D9"/>
+  <circle cx="80" cy="142" r="7" fill="#26282C" stroke="#D4D5D9" stroke-width="2"/>
+  <g class="rotor" style="transform-origin:80px 66px;transform-box:view-box"><g fill="#D4D5D9" opacity=".85"><rect x="78" y="4" width="4" height="124" rx="2"/><rect x="18" y="64" width="124" height="4" rx="2"/></g></g>
+  <circle cx="80" cy="66" r="6" fill="#E98A77"/>
+</g>
+<g class="trade"><circle cx="260.0" cy="62.4" r="15" fill="#1F2124" stroke="#9A9CA3" stroke-width="4"/></g>
+<g class="trade"><circle cx="387.0" cy="108.6" r="15" fill="#1F2124" stroke="#9A9CA3" stroke-width="4"/></g>
+<g class="trade"><circle cx="454.6" cy="225.7" r="15" fill="#1F2124" stroke="#9A9CA3" stroke-width="4"/></g>
+<g class="trade"><circle cx="431.1" cy="358.8" r="15" fill="#1F2124" stroke="#9A9CA3" stroke-width="4"/></g>
+<g class="trade"><circle cx="327.6" cy="445.7" r="15" fill="#1F2124" stroke="#9A9CA3" stroke-width="4"/></g>
+<g class="trade"><circle cx="192.4" cy="445.7" r="15" fill="#1F2124" stroke="#9A9CA3" stroke-width="4"/></g>
+<g class="trade"><circle cx="88.9" cy="358.8" r="15" fill="#1F2124" stroke="#9A9CA3" stroke-width="4"/></g>
+<g class="trade"><circle cx="65.4" cy="225.7" r="15" fill="#1F2124" stroke="#9A9CA3" stroke-width="4"/></g>
+<g class="trade"><circle cx="133.0" cy="108.6" r="15" fill="#1F2124" stroke="#9A9CA3" stroke-width="4"/></g>
+</svg></figure>
+            <div class="proj-body">
+              <div class="proj-head">
+                <h2 id="pj1" class="t-title">CRM de vols</h2>
+                <p class="mono">2026</p>
+              </div>
+              <p class="t-body">Il remplace l’app de 2022 : API et front séparés.</p>
+              <ul class="chips" aria-label="Stack"><li class="chip">Nuxt</li><li class="chip">Laravel</li><li class="chip">Docker</li></ul>
+            </div>
+          </div>
+        </article>
+      </li>
+      <li>
+        <article class="card proj proj-intra" aria-labelledby="pj2">
+          <div class="face">
+            <figure class="panel proj-art"><svg class="people" viewBox="0 0 264 198" role="img" aria-label="Plus de 100 collaborateurs"><g><circle cx="11.0" cy="11.0" r="5" style="--d:0ms"/><circle cx="33.0" cy="11.0" r="5" style="--d:18ms"/><circle cx="55.0" cy="11.0" r="5" style="--d:36ms"/><circle cx="77.0" cy="11.0" r="5" style="--d:54ms"/><circle cx="99.0" cy="11.0" r="5" style="--d:72ms"/><circle cx="121.0" cy="11.0" r="5" style="--d:90ms"/><circle cx="143.0" cy="11.0" r="5" style="--d:108ms"/><circle cx="165.0" cy="11.0" r="5" style="--d:126ms"/><circle cx="187.0" cy="11.0" r="5" style="--d:144ms"/><circle cx="209.0" cy="11.0" r="5" style="--d:162ms"/><circle cx="231.0" cy="11.0" r="5" style="--d:180ms"/><circle cx="253.0" cy="11.0" r="5" style="--d:198ms"/><circle cx="11.0" cy="33.0" r="5" style="--d:18ms"/><circle cx="33.0" cy="33.0" r="5" style="--d:36ms"/><circle cx="55.0" cy="33.0" r="5" style="--d:54ms"/><circle cx="77.0" cy="33.0" r="5" style="--d:72ms"/><circle cx="99.0" cy="33.0" r="5" style="--d:90ms"/><circle cx="121.0" cy="33.0" r="5" style="--d:108ms"/><circle cx="143.0" cy="33.0" r="5" style="--d:126ms"/><circle cx="165.0" cy="33.0" r="5" style="--d:144ms"/><circle cx="187.0" cy="33.0" r="5" style="--d:162ms"/><circle cx="209.0" cy="33.0" r="5" style="--d:180ms"/><circle cx="231.0" cy="33.0" r="5" style="--d:198ms"/><circle cx="253.0" cy="33.0" r="5" style="--d:216ms"/><circle cx="11.0" cy="55.0" r="5" style="--d:36ms"/><circle cx="33.0" cy="55.0" r="5" style="--d:54ms"/><circle cx="55.0" cy="55.0" r="5" style="--d:72ms"/><circle cx="77.0" cy="55.0" r="5" style="--d:90ms"/><circle cx="99.0" cy="55.0" r="5" style="--d:108ms"/><circle cx="121.0" cy="55.0" r="5" style="--d:126ms"/><circle cx="143.0" cy="55.0" r="5" style="--d:144ms"/><circle cx="165.0" cy="55.0" r="5" style="--d:162ms"/><circle cx="187.0" cy="55.0" r="5" style="--d:180ms"/><circle cx="209.0" cy="55.0" r="5" style="--d:198ms"/><circle cx="231.0" cy="55.0" r="5" style="--d:216ms"/><circle cx="253.0" cy="55.0" r="5" style="--d:234ms"/><circle cx="11.0" cy="77.0" r="5" style="--d:54ms"/><circle cx="33.0" cy="77.0" r="5" style="--d:72ms"/><circle cx="55.0" cy="77.0" r="5" style="--d:90ms"/><circle cx="77.0" cy="77.0" r="5" style="--d:108ms"/><circle cx="99.0" cy="77.0" r="5" style="--d:126ms"/><circle cx="121.0" cy="77.0" r="5" style="--d:144ms"/><circle cx="143.0" cy="77.0" r="5" style="--d:162ms"/><circle cx="165.0" cy="77.0" r="5" style="--d:180ms"/><circle cx="187.0" cy="77.0" r="5" style="--d:198ms"/><circle cx="209.0" cy="77.0" r="5" style="--d:216ms"/><circle cx="231.0" cy="77.0" r="5" style="--d:234ms"/><circle cx="253.0" cy="77.0" r="5" style="--d:252ms"/><circle cx="11.0" cy="99.0" r="5" style="--d:72ms"/><circle cx="33.0" cy="99.0" r="5" style="--d:90ms"/><circle cx="55.0" cy="99.0" r="5" style="--d:108ms"/><circle cx="77.0" cy="99.0" r="5" style="--d:126ms"/><circle cx="99.0" cy="99.0" r="5" style="--d:144ms"/><circle cx="121.0" cy="99.0" r="5" style="--d:162ms"/><circle cx="143.0" cy="99.0" r="5" style="--d:180ms"/><circle cx="165.0" cy="99.0" r="5" style="--d:198ms"/><circle cx="187.0" cy="99.0" r="5" style="--d:216ms"/><circle cx="209.0" cy="99.0" r="5" style="--d:234ms"/><circle cx="231.0" cy="99.0" r="5" style="--d:252ms"/><circle cx="253.0" cy="99.0" r="5" style="--d:270ms"/><circle cx="11.0" cy="121.0" r="5" style="--d:90ms"/><circle cx="33.0" cy="121.0" r="5" style="--d:108ms"/><circle cx="55.0" cy="121.0" r="5" style="--d:126ms"/><circle cx="77.0" cy="121.0" r="5" style="--d:144ms"/><circle cx="99.0" cy="121.0" r="5" style="--d:162ms"/><circle cx="121.0" cy="121.0" r="5" style="--d:180ms"/><circle cx="143.0" cy="121.0" r="5" style="--d:198ms"/><circle cx="165.0" cy="121.0" r="5" style="--d:216ms"/><circle cx="187.0" cy="121.0" r="5" style="--d:234ms"/><circle cx="209.0" cy="121.0" r="5" style="--d:252ms"/><circle cx="231.0" cy="121.0" r="5" style="--d:270ms"/><circle cx="253.0" cy="121.0" r="5" style="--d:288ms"/><circle cx="11.0" cy="143.0" r="5" style="--d:108ms"/><circle cx="33.0" cy="143.0" r="5" style="--d:126ms"/><circle cx="55.0" cy="143.0" r="5" style="--d:144ms"/><circle cx="77.0" cy="143.0" r="5" style="--d:162ms"/><circle cx="99.0" cy="143.0" r="5" style="--d:180ms"/><circle cx="121.0" cy="143.0" r="5" style="--d:198ms"/><circle cx="143.0" cy="143.0" r="5" style="--d:216ms"/><circle cx="165.0" cy="143.0" r="5" style="--d:234ms"/><circle cx="187.0" cy="143.0" r="5" style="--d:252ms"/><circle cx="209.0" cy="143.0" r="5" style="--d:270ms"/><circle cx="231.0" cy="143.0" r="5" style="--d:288ms"/><circle cx="253.0" cy="143.0" r="5" style="--d:306ms"/><circle cx="11.0" cy="165.0" r="5" style="--d:126ms"/><circle cx="33.0" cy="165.0" r="5" style="--d:144ms"/><circle cx="55.0" cy="165.0" r="5" style="--d:162ms"/><circle cx="77.0" cy="165.0" r="5" style="--d:180ms"/><circle cx="99.0" cy="165.0" r="5" style="--d:198ms"/><circle cx="121.0" cy="165.0" r="5" style="--d:216ms"/><circle cx="143.0" cy="165.0" r="5" style="--d:234ms"/><circle cx="165.0" cy="165.0" r="5" style="--d:252ms"/><circle cx="187.0" cy="165.0" r="5" style="--d:270ms"/><circle cx="209.0" cy="165.0" r="5" style="--d:288ms"/><circle cx="231.0" cy="165.0" r="5" style="--d:306ms"/><circle cx="253.0" cy="165.0" r="5" style="--d:324ms"/><circle cx="11.0" cy="187.0" r="5" style="--d:144ms"/><circle cx="33.0" cy="187.0" r="5" style="--d:162ms"/><circle cx="55.0" cy="187.0" r="5" style="--d:180ms"/><circle cx="77.0" cy="187.0" r="5" style="--d:198ms"/><circle cx="99.0" cy="187.0" r="5" style="--d:216ms"/><circle cx="121.0" cy="187.0" r="5" style="--d:234ms"/><circle cx="143.0" cy="187.0" r="5" style="--d:252ms"/><circle cx="165.0" cy="187.0" r="5" style="--d:270ms"/><circle cx="187.0" cy="187.0" r="5" style="--d:288ms"/><circle cx="209.0" cy="187.0" r="5" style="--d:306ms"/><circle cx="231.0" cy="187.0" r="5" style="--d:324ms"/><circle cx="253.0" cy="187.0" r="5" style="--d:342ms"/></g></svg></figure>
+            <div class="proj-body">
+              <div class="proj-head">
+                <h2 id="pj2" class="t-title">Intranet de groupe</h2>
+                <p class="mono">2025</p>
+              </div>
+              <p class="t-body">Elle remplace un Drupal pour plus de 100 collaborateurs.</p>
+              <ul class="chips" aria-label="Stack"><li class="chip">Nuxt</li><li class="chip">PostgreSQL</li><li class="chip">MS Graph</li></ul>
+            </div>
+          </div>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer"><div class="wrap">
+  <a class="lockup" href="#projets"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="fgf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#9E4B88"/><stop offset="1" stop-color="#E98A77"/></linearGradient></defs><rect width="120" height="120" rx="28" fill="#26282C"/><path d="M40 98 V50 Q40 28 62 28 H66" fill="none" stroke="url(#fgf)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/><circle cx="76" cy="52" r="6" fill="#26282C" stroke="#CA6678" stroke-width="4"/><circle cx="96" cy="36" r="9" fill="#E98A77"/></svg><span>felroz</span></a>
+  <span>© 2026 felroz · Conçu et développé par Felipe Alarcon</span>
+  <a href="https://github.com/isfelroz" class="soft">Code source</a>
+</div></footer>
+</div>
+<script>
+/* Dot field: 22px grid, warms to Corail within 150px of the pointer, redraws only on input */
+(() => {
+  const c = document.getElementById('dots'); const ctx = c.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const coarse = matchMedia('(pointer: coarse)').matches;
+  let px = -9999, py = -9999, raf = 0;
+  const base = [58, 61, 67], hot = [202, 102, 120];
+  function draw() {
+    raf = 0; const dpr = devicePixelRatio || 1; const w = innerWidth, h = innerHeight;
+    if (c.width !== w * dpr) { c.width = w * dpr; c.height = h * dpr; }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+    const g = 22, off = -(scrollY % g);
+    for (let y = off + 11; y < h + g; y += g) for (let x = 11; x < w; x += g) {
+      const d = Math.hypot(x - px, y - py); let t = d < 150 ? 1 - d / 150 : 0; t *= t;
+      const col = base.map((b, i) => Math.round(b + (hot[i] - b) * t));
+      ctx.fillStyle = `rgb(${col})`; ctx.beginPath(); ctx.arc(x, y, 1.3 + 1.4 * t, 0, 7); ctx.fill();
+    }
+  }
+  const req = () => { if (!raf) raf = requestAnimationFrame(draw); };
+  if (!reduce && !coarse) addEventListener('pointermove', e => { px = e.clientX; py = e.clientY; req(); }, { passive: true });
+  addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); req();
+})();
+
+/* Hash router between the 4 inner pages */
+(() => {
+  const pages = [...document.querySelectorAll('.page')];
+  const links = [...document.querySelectorAll('[data-to]')];
+  function show() {
+    const id = (location.hash || '#projets').slice(1);
+    const target = pages.find(p => p.dataset.page === id) || pages[0];
+    pages.forEach(p => p.hidden = p !== target);
+    links.forEach(l => l.dataset.to === target.dataset.page ? l.setAttribute('aria-current', 'page') : l.removeAttribute('aria-current'));
+    document.title = target.dataset.title;
+    scrollTo({ top: 0, behavior: 'instant' });
+    const h = target.querySelector('.ghost h1'); if (h) { h.style.animation = 'none'; h.offsetHeight; h.style.animation = ''; }
+    dispatchEvent(new CustomEvent('pagechange', { detail: target.dataset.page }));
+  }
+  addEventListener('hashchange', show); show();
+})();
+
+/* Copy email */
+document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) {}
+  const label = b.querySelector('.copy-label'); const old = label.textContent;
+  label.textContent = b.dataset.done; setTimeout(() => label.textContent = old, 1800);
+}));
+
+/* Mockup-only: show the gallery at 12 projects with empty skeleton cards (no invented content) */
+(() => {
+  const g = document.querySelector('.gallery'); const sim = document.querySelector('[data-sim]');
+  if (!g || !sim) return;
+  sim.addEventListener('click', () => {
+    const on = sim.getAttribute('aria-pressed') !== 'true'; sim.setAttribute('aria-pressed', String(on));
+    g.querySelectorAll('.sk').forEach(n => n.remove());
+    if (on) for (let i = 0; i < 10; i++) {
+      const li = document.createElement('li'); li.className = 'sk'; li.setAttribute('aria-hidden', 'true');
+      li.innerHTML = `<div class="card proj"><div class="face"><div class="panel proj-art"></div><div class="proj-body"><span class="bar t" style="width:${45 + (i * 17) % 35}%"></span><span class="bar w"></span><span class="bar w" style="width:40%"></span></div></div></div>`;
+      g.appendChild(li);
+    }
+  });
+})();
+
+</script>
+</body>
+</html>
