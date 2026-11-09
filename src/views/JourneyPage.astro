@@ -112,16 +112,12 @@ const journey = globalData.journey.map((stage) => ({ ...stage, ...stages[stage.i
   }
 
   /* Live (JS, ≥1101 px, motion allowed): the chapter being read lights up, the others dim, all AA */
-  .journey [data-stage] :is(.year, .chapter-title, .hinge-title, .text, .diploma) {
+  .journey [data-stage] :is(.year, .chapter-title, .hinge-title, .text, .diploma .title) {
     transition:
-      color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .journey[data-live] [data-stage]:not([data-active]) :is(.year, .chapter-title, .hinge-title, .text) {
+  .journey[data-live] [data-stage]:not([data-active]) :is(.year, .chapter-title, .hinge-title, .text, .diploma .title) {
     color: var(--color-label-dark);
-  }
-  .journey[data-live] [data-stage]:not([data-active]) .diploma {
-    opacity: 0.75;
   }
   .journey [data-stage][data-kind='diploma'][data-active] .year {
     color: var(--color-white);

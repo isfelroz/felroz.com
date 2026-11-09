@@ -1,10 +1,10 @@
 /**
  * Parcours scrollytelling. Marks the chapter crossing the middle of the viewport, and its node on the
  * route panel, with `data-active`; `data-live` on the root turns on the dimming of the other chapters.
- * Driven only by the visitor's scroll. Runs only at ≥1101 px without reduced motion; otherwise every
+ * Driven only by the visitor's scroll. Runs only above 1100 px (matching the CSS `max-width: 1100px` switch) without reduced motion; otherwise every
  * chapter stays as rendered (full).
  */
-const QUERY = '(min-width: 1101px) and (prefers-reduced-motion: no-preference)'
+const QUERY = '(width > 1100px) and (prefers-reduced-motion: no-preference)'
 
 export function initJourney(root) {
   if (!root) return
