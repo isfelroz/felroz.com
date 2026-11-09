@@ -12,7 +12,7 @@ const { id, kind, label, title, meta, text, chip, link } = Astro.props
 const headingId = `stage-${id}`
 ---
 
-<section data-stage={id} data-kind={kind} aria-labelledby={headingId} class="chapter">
+<article data-stage={id} data-kind={kind} aria-labelledby={headingId} class="chapter">
   <p class="year">{label}</p>
   {
     kind === 'diploma' ? (
@@ -39,4 +39,4 @@ const headingId = `stage-${id}`
       </div>
     )
   }
-</section>
+</article>

@@ -40,25 +40,35 @@ const { name } = Astro.props
 </div>
 
 <style>
+  /* How far the front may shift left of the desk: keeps its rotated corner >= 8px inside the viewport (26px allows for the rotation, 48px for the steeper hover tilt). Zero on narrow screens, where the front is scaled down instead so its rotated corners stay inside. */
+  .badge-desk {
+    --badge-room: max(0px, calc(max(1rem, (100vw - 780px) / 2) - 26px));
+    --badge-room-hover: max(0px, calc(max(1rem, (100vw - 780px) / 2) - 48px));
+  }
   .badge-front {
-    transform: rotate(-6deg) translate(-120px, 28px);
+    transform: rotate(-6deg) translate(calc(-1 * min(120px, var(--badge-room))), 28px);
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .badge-desk:hover .badge-front {
-    transform: rotate(-9deg) translate(-150px, 40px);
+    transform: rotate(-9deg) translate(calc(-1 * min(150px, var(--badge-room-hover))), 40px);
   }
   @media (max-width: 1100px) {
     .badge-front {
-      transform: rotate(-4deg) translate(-80px, 20px);
+      transform: rotate(-4deg) translate(calc(-1 * min(80px, var(--badge-room))), 20px);
     }
     .badge-desk:hover .badge-front {
-      transform: rotate(-5deg) translate(-96px, 24px);
+      transform: rotate(-5deg) translate(calc(-1 * min(96px, var(--badge-room-hover))), 24px);
+    }
+  }
+  @media (max-width: 840px) {
+    .badge-front {
+      scale: 0.94;
     }
   }
   @media (max-width: 640px) {
     .badge-front,
     .badge-desk:hover .badge-front {
-      transform: rotate(-3deg) translate(-8px, 14px);
+      transform: rotate(-3deg) translate(calc(-1 * min(8px, var(--badge-room-hover))), 14px);
     }
   }
   @media (prefers-reduced-motion: reduce) {

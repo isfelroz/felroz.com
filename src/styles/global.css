@@ -45,9 +45,10 @@
 }
 
 @utility text-signal {
+  /* Lighter first stop than bg-signal: Prune alone is 2.68:1 on Carbone, this is >= 3:1 on Carbone and Carbone Raised */
   background-image: linear-gradient(
     to right,
-    var(--color-prune),
+    color-mix(in srgb, var(--color-prune) 30%, var(--color-corail)),
     var(--color-corail),
     var(--color-peche)
   );

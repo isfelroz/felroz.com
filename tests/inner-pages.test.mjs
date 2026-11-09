@@ -1,7 +1,7 @@
 import { describe, test } from 'node:test'
 import assert from 'node:assert/strict'
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
-import { page, main } from './helpers.mjs'
+import { page, main, reducedMotionBlocks } from './helpers.mjs'
 
 const MAIL = 'hello@felroz.com'
 
@@ -126,7 +126,7 @@ describe('journey page', () => {
   }
   for (const [route, copy] of Object.entries(routes)) {
     const m = main(page(route))
-    const chapters = [...m.matchAll(/<section([^>]*\sdata-stage="([\w-]+)"[^>]*)>([\s\S]*?)<\/section>/g)]
+    const chapters = [...m.matchAll(/<article([^>]*\sdata-stage="([\w-]+)"[^>]*)>([\s\S]*?)<\/article>/g)]
     const byId = Object.fromEntries(chapters.map((c) => [c[2], { attrs: c[1], body: c[3] }]))
     const nodeTag = (id) => m.match(new RegExp(`<[^>]*\\sdata-node="${id}"[^>]*>`))?.[0]
 
@@ -166,8 +166,7 @@ describe('journey page', () => {
       ...readdirSync(dir).filter((f) => f.endsWith('.css')).map((f) => readFileSync(new URL(f, dir), 'utf8')),
       ...[...page('/parcours').matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((s) => s[1]),
     ].join('\n')
-    const blocks = css.split(/@media/).filter((b) => /^\s*\(prefers-reduced-motion:\s*reduce\)/.test(b))
-    assert.ok(blocks.some((b) => /\[data-stage|\.route-panel/.test(b)))
+    assert.ok(reducedMotionBlocks(css).some((b) => /\[data-stage|\.route-panel/.test(b)))
   })
 })
 
@@ -245,16 +244,7 @@ describe('about page', () => {
       ...readdirSync(dir).filter((f) => f.endsWith('.css')).map((f) => readFileSync(new URL(f, dir), 'utf8')),
       ...[...page('/a-propos').matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((s) => s[1]),
     ].join('\n')
-    // Body of every @media (prefers-reduced-motion: reduce) block, braces matched
-    const blocks = []
-    const re = /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{/g
-    for (let hit; (hit = re.exec(css)); ) {
-      let depth = 1
-      let i = re.lastIndex
-      while (depth && i < css.length) depth += css[i] === '{' ? 1 : css[i] === '}' ? -1 : 0, i++
-      blocks.push(css.slice(re.lastIndex, i))
-    }
-    assert.ok(blocks.some((b) => /\.about-badge|\.offcode/.test(b)))
+    assert.ok(reducedMotionBlocks(css).some((b) => /\.about-badge|\.offcode/.test(b)))
   })
 
   test('TitlePage gone', () => {
