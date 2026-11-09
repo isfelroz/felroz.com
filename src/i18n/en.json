@@ -29,6 +29,13 @@
     "resume": "Journey",
     "contact": "Contact"
   },
+  "contact": {
+    "lead": "A question, an idea, a project? Write to me.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyFailed": "Copy failed",
+    "languages": "I answer in Spanish, French or English."
+  },
   "home": {
     "hero": {
       "greetings": [

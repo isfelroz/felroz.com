@@ -29,6 +29,13 @@
     "resume": "Parcours",
     "contact": "Contact"
   },
+  "contact": {
+    "lead": "Une question, une idée, un projet ? Écrivez-moi.",
+    "copy": "Copier",
+    "copied": "Copié",
+    "copyFailed": "Copie impossible",
+    "languages": "Je réponds en espagnol, en français ou en anglais."
+  },
   "home": {
     "hero": {
       "greetings": [
