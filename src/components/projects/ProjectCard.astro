@@ -1,0 +1,67 @@
+---
+/**
+ * One gallery card (spec · Projets). Landscape: square illustration panel, then title, year, one sentence, three chips.
+ * Not linked, so no Split Card hover; only the drawings answer the pointer.
+ */
+import Crm from './illustrations/Crm.astro'
+import Intranet from './illustrations/Intranet.astro'
+import Default from './illustrations/Default.astro'
+
+const { id, year, stack, title, text, illustrationLabel, illustration } = Astro.props
+const Illustration = { crm: Crm, intranet: Intranet, default: Default }[illustration]
+---
+
+<article data-project={id} aria-labelledby={`project-${id}`} class="proj h-full rounded-3xl bg-carbone shadow-card">
+  <div class="face grid items-center gap-7 p-6">
+    <figure class="panel grid aspect-square place-items-center overflow-hidden rounded-[18px] bg-carbone-deep p-[18px]">
+      <Illustration label={illustrationLabel} />
+    </figure>
+    <div class="flex min-w-0 flex-col gap-3.5">
+      <div class="grid gap-2">
+        <h2 id={`project-${id}`} class="title">{title}</h2>
+        <p class="label-mono text-label-dark">{year}</p>
+      </div>
+      <p class="max-w-[34ch] text-lg text-ink-soft text-pretty">{text}</p>
+      <ul class="flex flex-wrap gap-1.5 pt-1.5 min-[761px]:flex-nowrap" aria-label="Stack">
+        {stack.map((s) => <li class="label-mono rounded-full border border-dot px-2.5 py-[3px] text-xs text-ink-soft">{s}</li>)}
+      </ul>
+    </div>
+  </div>
+</article>
+
+<style>
+  .face {
+    grid-template-columns: clamp(200px, 42%, 248px) minmax(0, 1fr);
+  }
+  .panel {
+    background-image: radial-gradient(rgba(58, 61, 67, 0.7) 1.2px, transparent 1.6px);
+    background-size: 14px 14px;
+  }
+  .title {
+    font-size: clamp(1.625rem, 2.2vw, 2rem);
+    line-height: 1.08;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  @media (max-width: 1100px) {
+    .face {
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 40px;
+      padding: 28px;
+    }
+  }
+  @media (max-width: 760px) {
+    .face {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+    .panel {
+      padding: 24px;
+    }
+    .title {
+      font-size: 1.5rem;
+    }
+  }
+</style>

@@ -36,6 +36,20 @@
     "copyFailed": "Copy failed",
     "languages": "I answer in Spanish, French or English."
   },
+  "projects": {
+    "items": {
+      "crm": {
+        "title": "Flight CRM",
+        "text": "It replaces the 2022 app: separate API and front end.",
+        "illustrationLabel": "Nine trades around one tool: ops, base managers, pilots, operations managers, CAMO, accounting, sales, mechanics, HR."
+      },
+      "intranet": {
+        "title": "Group intranet",
+        "text": "It replaces a Drupal site for more than 100 colleagues.",
+        "illustrationLabel": "More than 100 colleagues"
+      }
+    }
+  },
   "home": {
     "hero": {
       "greetings": [

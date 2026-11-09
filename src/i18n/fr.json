@@ -36,6 +36,20 @@
     "copyFailed": "Copie impossible",
     "languages": "Je réponds en espagnol, en français ou en anglais."
   },
+  "projects": {
+    "items": {
+      "crm": {
+        "title": "CRM de vols",
+        "text": "Il remplace l'app de 2022 : API et front séparés.",
+        "illustrationLabel": "Neuf métiers autour d'un même outil : ops, chefs de base, pilotes, responsables d'exploitation, CAMO, comptabilité, commercial, mécaniciens, RH."
+      },
+      "intranet": {
+        "title": "Intranet de groupe",
+        "text": "Elle remplace un Drupal pour plus de 100 collaborateurs.",
+        "illustrationLabel": "Plus de 100 collaborateurs"
+      }
+    }
+  },
   "home": {
     "hero": {
       "greetings": [
