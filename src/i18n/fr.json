@@ -37,6 +37,7 @@
     "languages": "Je réponds en espagnol, en français ou en anglais."
   },
   "projects": {
+    "stack": "Stack technique",
     "items": {
       "crm": {
         "title": "CRM de vols",

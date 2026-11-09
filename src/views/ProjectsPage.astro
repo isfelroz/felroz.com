@@ -21,6 +21,7 @@ const t = useTranslations(locale)
             id={project.id}
             year={project.year}
             stack={project.stack}
+            stackLabel={t.projects.stack}
             illustration={illustrationKey(project)}
             {...t.projects.items[project.id]}
           />

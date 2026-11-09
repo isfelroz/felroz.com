@@ -37,6 +37,7 @@
     "languages": "I answer in Spanish, French or English."
   },
   "projects": {
+    "stack": "Tech stack",
     "items": {
       "crm": {
         "title": "Flight CRM",

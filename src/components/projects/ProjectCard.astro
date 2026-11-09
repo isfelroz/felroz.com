@@ -7,8 +7,8 @@ import Crm from './illustrations/Crm.astro'
 import Intranet from './illustrations/Intranet.astro'
 import Default from './illustrations/Default.astro'
 
-const { id, year, stack, title, text, illustrationLabel, illustration } = Astro.props
-const Illustration = { crm: Crm, intranet: Intranet, default: Default }[illustration]
+const { id, year, stack, stackLabel, title, text, illustrationLabel, illustration } = Astro.props
+const Illustration = { crm: Crm, intranet: Intranet, default: Default }[illustration] ?? Default
 ---
 
 <article data-project={id} aria-labelledby={`project-${id}`} class="proj h-full rounded-3xl bg-carbone shadow-card">
@@ -22,7 +22,7 @@ const Illustration = { crm: Crm, intranet: Intranet, default: Default }[illustra
         <p class="label-mono text-label-dark">{year}</p>
       </div>
       <p class="max-w-[34ch] text-lg text-ink-soft text-pretty">{text}</p>
-      <ul class="flex flex-wrap gap-1.5 pt-1.5 min-[761px]:flex-nowrap" aria-label="Stack">
+      <ul class="flex flex-wrap gap-1.5 pt-1.5" aria-label={stackLabel}>
         {stack.map((s) => <li class="label-mono rounded-full border border-dot px-2.5 py-[3px] text-xs text-ink-soft">{s}</li>)}
       </ul>
     </div>
