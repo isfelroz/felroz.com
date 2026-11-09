@@ -1,5 +1,5 @@
 ---
-/** "Parlons-en." band: big title and one pill link per social profile. No email until Felipe provides one. */
+/** "Parlons-en." band: big title and the public email pill, then one pill link per social profile. */
 import globalData from '@data/global.json'
 import Icon from '@components/react/Icon.jsx'
 
@@ -11,6 +11,14 @@ const { title, socialLabel } = Astro.props
     {title}
   </h2>
   <ul class="flex flex-wrap gap-4">
+    <li>
+      <a
+        href={`mailto:${globalData.email}`}
+        class="inline-flex items-center gap-2.5 rounded-full border border-dot px-5.5 py-3 font-medium transition-colors hover:border-corail hover:text-corail"
+      >
+        {globalData.email}
+      </a>
+    </li>
     {
       globalData.socials.map((social) => (
         <li>

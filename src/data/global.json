@@ -22,7 +22,6 @@
   ],
   "employer": { "name": "HBG Helicopters", "href": "https://www.hbg-helicopteres.aero/" },
   "toolbelt": ["Laravel", "Nuxt", "Vue", "TypeScript", "Docker"],
-  "featuredTags": ["Astro", "React", "Tailwind 4"],
   "languages": ["ES", "FR", "EN"],
   "stack": [
     { "type": "typescript", "name": "TypeScript" },

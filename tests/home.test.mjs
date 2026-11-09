@@ -64,10 +64,19 @@ for (const route of ['/', '/en']) {
     const p = paths[route]
     const href = (area) => tileSlice(html, area).html.match(/<a[^>]*href="([^"]+)"/)?.[1]
     assert.equal(href('journey'), p.resume)
-    assert.equal(href('featured'), p.projects)
+    assert.equal(href('featured'), p.about + '#method')
     assert.equal(href('stack'), p.about)
     assert.equal(href('me'), p.about)
     for (const area of ['hero', 'skills']) assert.ok(!/<a[\s>]/.test(tileSlice(html, area).html), `${area} has a link`)
+  })
+
+  test(`${route}: no home tile links to Projets`, () => {
+    assert.ok(!main.includes(`href="${paths[route].projects}"`))
+  })
+
+  test(`${route}: now role reads developer and AI engineer`, () => {
+    const now = decode(tileSlice(html, 'now').html)
+    assert.ok(now.includes(route === '/' ? 'Développeur & ingénieur IA chez' : 'Developer & AI engineer at'))
   })
 
   test(`${route}: stack tile is one link named after the stack`, () => {
@@ -97,11 +106,11 @@ for (const route of ['/', '/en']) {
     }
   })
 
-  test(`${route}: contact band has social pills and no email`, () => {
+  test(`${route}: contact band has social pills and the email`, () => {
     const contact = tileSlice(html, 'contact').html
     for (const url of ['https://github.com/isfelroz', 'https://www.linkedin.com/in/isfelroz'])
       assert.match(contact, new RegExp(`<a[^>]*href="${url}"[^>]*target="_blank"[^>]*rel="me noopener"[^>]*aria-label="[^"]+"`))
-    assert.ok(!/mailto:|@felroz\.com/.test(contact))
+    assert.match(contact, /<a[^>]*href="mailto:hello@felroz\.com"/)
   })
 
   // DESIGN.md · One Signal Rule: the header's Contact button is chrome and does not count, so count inside <main>
@@ -117,6 +126,15 @@ for (const route of ['/', '/en']) {
   })
 }
 
+test('method tile copy (FR)', () => {
+  const tile = decode(tileSlice(page('/'), 'featured').html)
+  assert.ok(tile.includes('Comment je travaille'))
+  assert.ok(tile.includes("Comme à l'usine : des processus clairs, la qualité sur la ligne."))
+  const idx = ['Spec', 'Issues', 'Revue', 'Prod'].map((l) => tile.indexOf(`>${l}<`))
+  assert.ok(idx.every((i) => i >= 0), String(idx))
+  assert.deepEqual(idx, [...idx].sort((a, b) => a - b))
+})
+
 test('hero h1 reads the final greeting', () => {
   assert.match(decode(page('/')), /<h1[^>]*>[\s\S]*Bonjour, je suis Felipe\.[\s\S]*<\/h1>/)
   assert.match(decode(page('/en')), /<h1[^>]*>[\s\S]*Hello, I'm Felipe\.[\s\S]*<\/h1>/)
@@ -127,6 +145,7 @@ test('glb under 3 MB', () => assert.ok(statSync('public/models/memoji.glb').size
 test('global.json has no skills key and no skill percentages', () => {
   const raw = readFileSync('src/data/global.json', 'utf8')
   const data = JSON.parse(raw)
+  assert.ok(!('featuredTags' in data))
   assert.ok(!('skills' in data))
   assert.ok(!/"value"\s*:\s*\d/.test(JSON.stringify(data.stack)))
 })

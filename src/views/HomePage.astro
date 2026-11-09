@@ -6,7 +6,7 @@ import Tile from '@components/home/Tile.astro'
 import HeroBadge from '@components/home/HeroBadge.astro'
 import NowCard from '@components/home/NowCard.astro'
 import JourneyCard from '@components/home/JourneyCard.astro'
-import FeaturedCard from '@components/home/FeaturedCard.astro'
+import MethodCard from '@components/home/MethodCard.astro'
 import MeCard from '@components/home/MeCard.astro'
 import SkillsCard from '@components/home/SkillsCard.astro'
 import StackCard from '@components/home/StackCard.astro'
@@ -37,8 +37,8 @@ const stackLabel = home.stack.label.replace('{list}', globalData.stack.map((s) =
       <SkillsCard {...home.skills} />
     </Tile>
 
-    <Tile size="2x1" area="featured" index={4} href={localizePath('projects', locale)} label={home.featured.title}>
-      <FeaturedCard {...home.featured} />
+    <Tile size="2x1" area="featured" index={4} href={localizePath('about', locale) + '#method'} label={home.method.title}>
+      <MethodCard {...home.method} />
     </Tile>
 
     <Tile size="1x1" area="stack" index={5} href={localizePath('about', locale)} label={stackLabel}>

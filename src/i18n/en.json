@@ -43,7 +43,7 @@
     },
     "now": {
       "title": "Right now",
-      "role": "AI engineer at",
+      "role": "Developer & AI engineer at",
       "newTab": "(new tab)"
     },
     "journey": {
@@ -84,9 +84,10 @@
         }
       ]
     },
-    "featured": {
-      "title": "Featured project",
-      "text": "This site: art direction, a documented design system and a bilingual Astro build."
+    "method": {
+      "title": "How I work",
+      "text": "Like on the factory floor: clear processes, quality on the line.",
+      "stations": ["Spec", "Issues", "Review", "Ship"]
     },
     "stack": {
       "title": "Stack",

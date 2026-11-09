@@ -43,7 +43,7 @@
     },
     "now": {
       "title": "En ce moment",
-      "role": "Ingénieur IA chez",
+      "role": "Développeur & ingénieur IA chez",
       "newTab": "(nouvel onglet)"
     },
     "journey": {
@@ -84,9 +84,10 @@
         }
       ]
     },
-    "featured": {
-      "title": "Projet phare",
-      "text": "Ce site : direction artistique, design system documenté et build Astro bilingue."
+    "method": {
+      "title": "Comment je travaille",
+      "text": "Comme à l'usine : des processus clairs, la qualité sur la ligne.",
+      "stations": ["Spec", "Issues", "Revue", "Prod"]
     },
     "stack": {
       "title": "Stack",
