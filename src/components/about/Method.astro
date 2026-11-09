@@ -1,0 +1,183 @@
+---
+/**
+ * « Comment je travaille » (spec · À propos 3): the lead, then four stations on a U-shaped line
+ * (top left → top right → bottom right → bottom left), joined by the dotted route in the gaps, never behind text.
+ * Station 1 carries the hollow Prune node, 2 and 3 small Corail rings, 4 the Pêche arrival dot.
+ * The home « Comment je travaille » tile links to #method.
+ */
+interface Props {
+  title: string
+  lead: string
+  stations: { title: string; text: string }[]
+}
+
+const { title, lead, stations } = Astro.props
+---
+
+<section id="method" class="about-sec method" aria-labelledby="method-title">
+  <div>
+    <h2 id="method-title" class="about-h2 mb-4!">{title}</h2>
+    <p class="text-lg text-ink-soft text-pretty">{lead}</p>
+  </div>
+  <ol class="line">
+    {
+      stations.map((s, i) => (
+        <li class:list={['st', `st${i + 1}`]}>
+          <div class="st-face rounded-3xl bg-carbone p-7 shadow-card max-[640px]:p-6">
+            <span class="st-mark" aria-hidden="true" />
+            <h3 class="pr-8 text-[1.375rem] leading-tight font-bold tracking-[-0.02em] text-balance">{s.title}</h3>
+            <p class="text-ink-soft text-pretty">{s.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .method {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+    gap: 56px;
+    align-items: center;
+  }
+  .line {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .st {
+    position: relative;
+    min-width: 0;
+  }
+  .st-face {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+    height: 100%;
+    min-height: 190px;
+  }
+  .st1 {
+    grid-area: 1 / 1;
+  }
+  .st2 {
+    grid-area: 1 / 2;
+  }
+  .st3 {
+    grid-area: 2 / 2;
+  }
+  .st4 {
+    grid-area: 2 / 1;
+  }
+
+  /* The dotted route crosses the gaps only */
+  .st::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    background-image: radial-gradient(circle, var(--color-corail) 1.3px, transparent 1.7px);
+  }
+  .st1::after,
+  .st3::after {
+    top: 50%;
+    width: 56px;
+    height: 4px;
+    margin-top: -2px;
+    background-size: 10px 4px;
+    background-repeat: repeat-x;
+    background-position: 5px 0;
+  }
+  .st1::after {
+    left: 100%;
+  }
+  .st3::after {
+    right: 100%;
+  }
+  .st2::after {
+    top: 100%;
+    left: 50%;
+    width: 4px;
+    height: 56px;
+    margin-left: -2px;
+    background-size: 4px 10px;
+    background-repeat: repeat-y;
+    background-position: 0 5px;
+  }
+  .st4::after {
+    display: none;
+  }
+
+  .st-mark {
+    position: absolute;
+    border-radius: 50%;
+  }
+  .st1 .st-mark {
+    top: 24px;
+    right: 24px;
+    width: 12px;
+    height: 12px;
+    border: 3px solid var(--color-prune);
+    background: var(--color-carbone);
+  }
+  .st2 .st-mark,
+  .st3 .st-mark {
+    top: 26px;
+    right: 26px;
+    width: 9px;
+    height: 9px;
+    border: 2.5px solid var(--color-corail);
+  }
+  .st4 .st-mark {
+    top: 22px;
+    right: 22px;
+    width: 20px;
+    height: 20px;
+    background: var(--color-peche);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .line:hover .st4 .st-mark {
+    transform: translate(4px, -4px);
+  }
+
+  @media (max-width: 1100px) {
+    .method {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+  }
+  @media (max-width: 640px) {
+    .line {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 36px;
+    }
+    .st1,
+    .st2,
+    .st3,
+    .st4 {
+      grid-area: auto;
+    }
+    .st1::after,
+    .st2::after,
+    .st3::after {
+      top: 100%;
+      left: 50%;
+      right: auto;
+      width: 4px;
+      height: 36px;
+      margin: 0 0 0 -2px;
+      background-size: 4px 10px;
+      background-repeat: repeat-y;
+      background-position: 0 3px;
+    }
+    .st-face {
+      min-height: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .st4 .st-mark {
+      transition: none;
+    }
+  }
+</style>

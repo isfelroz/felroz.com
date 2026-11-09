@@ -141,6 +141,114 @@
     },
     "socialLabel": "{name} de Felipe Alarcon"
   },
+  "about": {
+    "story": {
+      "lead": "Je suis né à Bogotá.",
+      "body": [
+        "Ingénieur industriel, j'ai dirigé un atelier de confection.",
+        "En 2017, j'arrive à Annecy et je passe au code.",
+        "Aujourd'hui, je construis des apps web, de l'API à l'interface."
+      ],
+      "signal": "je passe au code",
+      "languages": "Je parle espagnol, français et anglais.",
+      "languagesLabel": "Langues",
+      "badgeAlt": "Le Memoji de Felipe, en sweat blanc.",
+      "name": "Felipe Alarcon",
+      "route": "Bogotá → Annecy"
+    },
+    "toolbox": {
+      "title": "Ma boîte à outils",
+      "groups": [
+        {
+          "id": "front",
+          "label": "Front",
+          "tools": [
+            "TypeScript",
+            "Nuxt / Vue",
+            "Next.js / React",
+            "Astro",
+            "Tailwind"
+          ]
+        },
+        {
+          "id": "back",
+          "label": "Back",
+          "tools": [
+            "PHP / Laravel",
+            "Node / Nitro",
+            "Python",
+            "PostgreSQL",
+            "MariaDB",
+            "Supabase"
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "Mobile",
+          "tools": [
+            "iOS natif",
+            "React Native / Expo"
+          ]
+        },
+        {
+          "id": "prod",
+          "label": "Prod",
+          "tools": [
+            "Docker",
+            "Traefik",
+            "CI/CD avec déploiement par tag et rollback",
+            "Grafana / Prometheus / Loki"
+          ]
+        },
+        {
+          "id": "integrations",
+          "label": "Intégrations",
+          "tools": [
+            "Microsoft Graph / SharePoint",
+            "Entra ID"
+          ]
+        },
+        {
+          "id": "ia",
+          "label": "IA",
+          "tools": [
+            "Développement agentique (Claude Code)",
+            "MCP"
+          ]
+        }
+      ]
+    },
+    "method": {
+      "title": "Comment je travaille",
+      "lead": "Comme à l'usine : des processus clairs, et la qualité contrôlée sur la ligne.",
+      "stations": [
+        {
+          "title": "La spec avant le code.",
+          "text": "On écrit ce qu'on construit, et pourquoi."
+        },
+        {
+          "title": "Des issues, pas des post-it.",
+          "text": "GitHub sert de gestion de projet."
+        },
+        {
+          "title": "Une revue avant chaque merge.",
+          "text": "Rien ne part en production sans relecture."
+        },
+        {
+          "title": "Des agents IA, sous contrôle.",
+          "text": "Tests d'architecture et E2E pour les encadrer."
+        }
+      ]
+    },
+    "offcode": {
+      "title": "Hors du code",
+      "items": [
+        "Photographie",
+        "Culture urbaine",
+        "Pizza au pepperoni"
+      ]
+    }
+  },
   "footer": {
     "credits": "Conçu et développé par Felipe Alarcon",
     "source": "Code source"

@@ -1,0 +1,149 @@
+---
+/**
+ * À propos story (spec · À propos 1): « Je suis né à Bogotá. » in display size, the three body lines a step
+ * smaller with the page's one signal, then the language chips. The hero badge (2D Memoji poster) sits on the
+ * right, tilted 2.5°, and straightens on hover. Not linked, so no Split Card hover.
+ */
+import { Image } from 'astro:assets'
+import me from '@assets/me.png'
+import globalData from '@data/global.json'
+
+interface Props {
+  lead: string
+  body: string[]
+  signal: string
+  languages: string
+  languagesLabel: string
+  badgeAlt: string
+  name: string
+  route: string
+}
+
+const { lead, body, signal, languages, languagesLabel, badgeAlt, name, route } = Astro.props
+const langAttr: Record<string, string> = { ES: 'es', FR: 'fr', EN: 'en' }
+const last = body.length - 1
+---
+
+<section id="story" class="story">
+  <div class="grid gap-[18px]">
+    <p class="text-[clamp(2.5rem,5vw,4rem)] leading-none font-bold tracking-[-0.04em]">{lead}</p>
+    {
+      body.map((line, i) => {
+        const [before, after] = line.includes(signal) ? line.split(signal) : [line]
+        return (
+          <p class:list={['say', { 'text-ink-soft': i === last }]}>
+            {before}
+            {after !== undefined && (
+              <>
+                <span class="text-signal">{signal}</span>
+                {after}
+              </>
+            )}
+          </p>
+        )
+      })
+    }
+    <div class="mt-2.5 flex flex-wrap items-center gap-4 border-t border-dot pt-5">
+      <ul class="flex flex-wrap gap-1.5" aria-label={languagesLabel}>
+        {
+          globalData.languages.map((l) => (
+            <li lang={langAttr[l]} class="label-mono rounded-full border border-dot px-2.5 py-[3px] text-xs text-ink-soft">
+              {l}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-ink-soft">{languages}</p>
+    </div>
+  </div>
+
+  <div class="badge-wrap px-3 py-6">
+    <article class="about-badge relative flex flex-col gap-4 rounded-3xl bg-carbone p-7 pt-9 shadow-card max-[640px]:p-6 max-[640px]:pt-9">
+      <span class="badge-slot" aria-hidden="true"></span>
+      <figure class="badge-photo">
+        <Image src={me} alt={badgeAlt} width={480} height={384} />
+        <span class="absolute top-4 right-4 size-3 rounded-full bg-peche" aria-hidden="true"></span>
+      </figure>
+      <div class="grid gap-1.5">
+        <p class="text-2xl font-bold tracking-[-0.02em]">{name}</p>
+        <p class="label-mono text-label-dark">{route}</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .story {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 72px;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .say {
+    max-width: 22ch;
+    font-size: clamp(1.5rem, 2.5vw, 2.125rem);
+    line-height: 1.18;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .about-badge {
+    transform: rotate(2.5deg);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .about-badge:hover {
+    transform: rotate(0) translateY(-4px);
+  }
+  .badge-slot {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    width: 52px;
+    height: 6px;
+    translate: -50% 0;
+    border-radius: 3px;
+    background: var(--color-carbone-deep);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.6);
+  }
+  .badge-photo {
+    position: relative;
+    display: grid;
+    place-items: end center;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    border-radius: 18px;
+    background-color: var(--color-carbone-deep);
+    background-image: radial-gradient(color-mix(in srgb, var(--color-dot) 70%, transparent) 1.2px, transparent 1.6px);
+    background-size: 14px 14px;
+  }
+  .badge-photo img {
+    width: 78%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .about-badge:hover .badge-photo img {
+    transform: translateY(-6px);
+  }
+  @media (max-width: 1100px) {
+    .story {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+    .badge-wrap {
+      max-width: 520px;
+    }
+  }
+  @media (max-width: 640px) {
+    .about-badge {
+      transform: rotate(1.5deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-badge,
+    .badge-photo img {
+      transition: none;
+    }
+  }
+</style>

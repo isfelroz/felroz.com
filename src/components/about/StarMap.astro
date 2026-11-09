@@ -1,0 +1,131 @@
+---
+/**
+ * Toolbox star map (spec · À propos 2). Decorative: the list beside it carries every tool, so the SVG is
+ * aria-hidden and adds no focus stops. The monochrome Corail f sits at the centre (the page's signal is
+ * elsewhere), six hubs on an ellipse, one satellite per tool spread over an 86° fan, labels outside the nodes.
+ * Hovering a group in the list (`[data-group]` inside #toolbox) lights its hub, spoke and satellites.
+ */
+interface Props {
+  groups: { id: string; label: string; tools: string[] }[]
+}
+
+const { groups } = Astro.props
+const cx = 260
+const cy = 190
+const rad = (deg: number) => (deg * Math.PI) / 180
+const r1 = (n: number) => Math.round(n * 10) / 10
+// Label anchors per hub, clockwise from the top
+const labels = [
+  { x: 260, y: 14, anchor: 'middle' },
+  { x: 460.9, y: 103, anchor: 'start' },
+  { x: 460.9, y: 285, anchor: 'start' },
+  { x: 260, y: 376, anchor: 'middle' },
+  { x: 59.1, y: 285, anchor: 'end' },
+  { x: 59.1, y: 103, anchor: 'end' },
+]
+const hubs = groups.map((g, i) => {
+  const theta = -90 + i * 60
+  const hx = r1(cx + 170 * Math.cos(rad(theta)))
+  const hy = r1(cy + 120 * Math.sin(rad(theta)))
+  const n = g.tools.length
+  const sats = g.tools.map((_, k) => {
+    const a = rad(theta + (n > 1 ? -43 + (86 * k) / (n - 1) : 0))
+    return { x: r1(hx + 40 * Math.cos(a)), y: r1(hy + 40 * Math.sin(a)) }
+  })
+  return { id: g.id, label: g.label.toLocaleUpperCase(), hx, hy, sats, ...labels[i] }
+})
+---
+
+<svg class="star-map" viewBox="-70 0 660 380" aria-hidden="true">
+  {
+    hubs.map((h) => (
+      <g class="hub-group" data-hub={h.id}>
+        <line class="spoke" x1={cx} y1={cy} x2={h.hx} y2={h.hy} stroke-width="1.5" />
+        {h.sats.map((s) => (
+          <>
+            <line class="spoke" x1={h.hx} y1={h.hy} x2={s.x} y2={s.y} stroke-width="1" />
+            <circle class="sat" cx={s.x} cy={s.y} r="3.2" />
+          </>
+        ))}
+        <circle class="hub" cx={h.hx} cy={h.hy} r="11" stroke-width="2" />
+        <text x={h.x} y={h.y} text-anchor={h.anchor}>
+          {h.label}
+        </text>
+      </g>
+    ))
+  }
+  <circle class="fill-carbone stroke-dot" cx={cx} cy={cy} r="34" stroke-width="2"></circle>
+  <g transform={`translate(${cx - 24} ${cy - 24})`}>
+    <svg width="48" height="48" viewBox="0 0 120 120">
+      <rect class="fill-carbone" width="120" height="120" rx="28"></rect>
+      <path class="stroke-corail" d="M46 100 V50 Q46 28 70 28" stroke-width="22" stroke-linecap="round" fill="none"></path>
+    </svg>
+  </g>
+</svg>
+
+<style>
+  .star-map {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .hub-group {
+    --line: var(--color-dot);
+    --sat: var(--color-label-light);
+    --hub-fill: var(--color-carbone);
+    --hub-stroke: var(--color-label-dark);
+    --text: var(--color-ink-soft);
+  }
+  .spoke {
+    stroke: var(--line);
+    transition: stroke 0.3s;
+  }
+  .sat {
+    fill: var(--sat);
+    transition: fill 0.3s;
+  }
+  .hub {
+    fill: var(--hub-fill);
+    stroke: var(--hub-stroke);
+    transition:
+      fill 0.3s,
+      stroke 0.3s;
+  }
+  text {
+    fill: var(--text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    transition: fill 0.3s;
+  }
+  :global(#toolbox:has([data-group='front']:hover)) [data-hub='front'],
+  :global(#toolbox:has([data-group='back']:hover)) [data-hub='back'],
+  :global(#toolbox:has([data-group='mobile']:hover)) [data-hub='mobile'],
+  :global(#toolbox:has([data-group='prod']:hover)) [data-hub='prod'],
+  :global(#toolbox:has([data-group='integrations']:hover)) [data-hub='integrations'],
+  :global(#toolbox:has([data-group='ia']:hover)) [data-hub='ia'] {
+    --line: var(--color-corail);
+    --sat: var(--color-peche);
+    --hub-fill: var(--color-corail);
+    --hub-stroke: var(--color-corail);
+    --text: var(--color-white);
+  }
+  @media (max-width: 640px) {
+    text {
+      /* Larger for small screens, still inside the viewBox for the longest label (INTÉGRATIONS) */
+      font-size: 16px;
+      letter-spacing: 0.8px;
+    }
+    .sat {
+      r: 4.5;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .spoke,
+    .sat,
+    .hub,
+    text {
+      transition: none;
+    }
+  }
+</style>

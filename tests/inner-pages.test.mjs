@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test'
 import assert from 'node:assert/strict'
-import { readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { page, main } from './helpers.mjs'
 
 const MAIL = 'hello@felroz.com'
@@ -168,5 +168,96 @@ describe('journey page', () => {
     ].join('\n')
     const blocks = css.split(/@media/).filter((b) => /^\s*\(prefers-reduced-motion:\s*reduce\)/.test(b))
     assert.ok(blocks.some((b) => /\[data-stage|\.route-panel/.test(b)))
+  })
+})
+
+describe('about page', () => {
+  const decode = (s) => s.replace(/&#39;|&#x27;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"')
+  const routes = {
+    '/a-propos': {
+      title: 'À propos',
+      signal: 'je passe au code',
+      tools: ['Microsoft Graph / SharePoint, Entra ID', 'Développement agentique (Claude Code), MCP'],
+      stations: [
+        'La spec avant le code.',
+        'Des issues, pas des post-it.',
+        'Une revue avant chaque merge.',
+        'Des agents IA, sous contrôle.',
+      ],
+      offcode: ['Photographie', 'Culture urbaine', 'Pizza au pepperoni'],
+    },
+    '/en/about': {
+      title: 'About me',
+      signal: 'switch to code',
+      tools: ['Microsoft Graph / SharePoint, Entra ID', 'Agentic development (Claude Code), MCP'],
+      stations: [
+        'Spec before code.',
+        'Issues, not sticky notes.',
+        'A review before every merge.',
+        'AI agents, kept in check.',
+      ],
+      offcode: ['Photography', 'Street culture', 'Pepperoni pizza'],
+    },
+  }
+  const section = (m, id) => m.match(new RegExp(`<section[^>]*\\sid="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1] ?? ''
+
+  for (const [route, copy] of Object.entries(routes)) {
+    const m = main(page(route))
+
+    test(`${route}: ghost title`, () => {
+      assert.match(m, new RegExp(`<h1[^>]*>[\\s\\S]*${copy.title}`))
+    })
+    test(`${route}: sections in order`, () => {
+      const ids = ['story', 'toolbox', 'method', 'offcode'].map((id) => m.indexOf(`id="${id}"`))
+      for (const i of ids) assert.ok(i > -1)
+      assert.deepEqual([...ids].sort((a, b) => a - b), ids)
+    })
+    test(`${route}: one signal on "${copy.signal}"`, () => {
+      assert.equal((m.match(/(?:text|bg)-signal/g) ?? []).length, 1)
+      assert.match(m, new RegExp(`class="[^"]*text-signal[^"]*"[^>]*>${copy.signal}</`))
+    })
+    test(`${route}: toolbox groups`, () => {
+      const box = section(m, 'toolbox')
+      const groups = [...box.matchAll(/data-group="([\w-]+)"/g)].map((g) => g[1])
+      assert.deepEqual(groups, ['front', 'back', 'mobile', 'prod', 'integrations', 'ia'])
+      const text = decode(box)
+      for (const s of copy.tools) assert.ok(text.includes(s), s)
+      assert.match(box, /<svg[^>]*class="[^"]*star-map[^"]*"[^>]*aria-hidden="true"|<svg[^>]*aria-hidden="true"[^>]*class="[^"]*star-map/)
+    })
+    test(`${route}: method stations`, () => {
+      const titles = [...section(m, 'method').matchAll(/<h3[^>]*>([^<]*)<\/h3>/g)].map((h) => decode(h[1]).trim())
+      assert.deepEqual(titles, copy.stations)
+    })
+    test(`${route}: badge`, () => {
+      const img = section(m, 'story').match(/<img[^>]*>/)?.[0] ?? ''
+      assert.match(img, /src="\/_astro\/me[^"]*"/)
+      assert.match(img, /alt="[^"]+"/)
+    })
+    test(`${route}: off code`, () => {
+      const text = decode(section(m, 'offcode'))
+      for (const s of copy.offcode) assert.ok(text.includes(s), s)
+    })
+  }
+
+  test('reduced motion CSS', () => {
+    const dir = new URL('../dist/_astro/', import.meta.url)
+    const css = [
+      ...readdirSync(dir).filter((f) => f.endsWith('.css')).map((f) => readFileSync(new URL(f, dir), 'utf8')),
+      ...[...page('/a-propos').matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((s) => s[1]),
+    ].join('\n')
+    // Body of every @media (prefers-reduced-motion: reduce) block, braces matched
+    const blocks = []
+    const re = /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{/g
+    for (let hit; (hit = re.exec(css)); ) {
+      let depth = 1
+      let i = re.lastIndex
+      while (depth && i < css.length) depth += css[i] === '{' ? 1 : css[i] === '}' ? -1 : 0, i++
+      blocks.push(css.slice(re.lastIndex, i))
+    }
+    assert.ok(blocks.some((b) => /\.about-badge|\.offcode/.test(b)))
+  })
+
+  test('TitlePage gone', () => {
+    assert.equal(existsSync(new URL('../src/views/TitlePage.astro', import.meta.url)), false)
   })
 })

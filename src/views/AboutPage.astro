@@ -1,0 +1,52 @@
+---
+/**
+ * À propos, "La table" (spec · À propos): story with the hero badge, the toolbox star map,
+ * the U production line (#method, linked from the home tile) and the off-code shelf.
+ * The one gradient signal is « je passe au code » in the story.
+ */
+import Layout from '@layouts/Layout.astro'
+import BigTitle from '@components/react/BigTitle.jsx'
+import Story from '@components/about/Story.astro'
+import Toolbox from '@components/about/Toolbox.astro'
+import Method from '@components/about/Method.astro'
+import OffCode from '@components/about/OffCode.astro'
+import { useTranslations } from '../i18n/index.js'
+
+const { locale, routeKey } = Astro.props
+const t = useTranslations(locale)
+const { story, toolbox, method, offcode } = t.about
+---
+
+<Layout locale={locale} routeKey={routeKey}>
+  <BigTitle client:load>{t.pages[routeKey]}</BigTitle>
+
+  <div class="pb-6">
+    <Story {...story} />
+    <Toolbox {...toolbox} />
+    <Method {...method} />
+    <OffCode {...offcode} />
+  </div>
+</Layout>
+
+<style is:global>
+  /* Shared by the À propos sections: even spacing, every h2 the same size */
+  .about-sec {
+    margin-top: 128px;
+    scroll-margin-top: 104px;
+  }
+  .about-h2 {
+    margin-bottom: 32px;
+    font-size: clamp(2rem, 3.4vw, 2.75rem);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  @media (max-width: 640px) {
+    .about-sec {
+      margin-top: 80px;
+    }
+    .about-h2 {
+      margin-bottom: 20px;
+    }
+  }
+</style>
