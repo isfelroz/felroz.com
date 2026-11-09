@@ -14,7 +14,7 @@
 
 - pnpm only. Commits are semantic (`feat:`, `fix:`, `docs:`, `test:`…) and **never carry a `Co-Authored-By` trailer or any Claude/Anthropic attribution**. Do not push.
 - Copy: the FR copy is verbatim from the spec. The EN copy is written by the implementer: same meaning, short first-person sentences, no pitch. Every string exists in both `fr.json` and `en.json` under the same keys.
-- Forbidden anywhere in `dist/`: `INTERNAL_NAME`, any email other than `hello@felroz.com`, commit counts, module counts or lists, business figures, « Annecy » on Contact, felroz.com as a project.
+- Forbidden anywhere in `dist/`: internal product names, any email other than `hello@felroz.com`, commit counts, module counts or lists, business figures, « Annecy » on Contact, felroz.com as a project.
 - At most one `text-signal` or `bg-signal` inside `<main>` per page (One Signal Rule). DM Mono metadata goes below titles, never above them (no eyebrows).
 - Keep the `BigTitle client:load` ghost title on every inner page, the header and the mobile menu. No new `client:*` islands.
 - Tokens only (`prune`, `corail`, `peche`, `carbone`, `carbone-raised`, `carbone-deep`, `dot`, `craie`, `ink-soft`, `label-dark`, `label-light`). Illustrations reuse home geometry: the dotted route, the hollow node, the Pêche arrival dot, `Helicopter.astro` and the dot field.
@@ -58,7 +58,7 @@
   - `global.json email` → `assert.equal(data.email, 'hello@felroz.com')`.
   - `projects data` → `data.projects.map(p => p.id)` deep-equals `['crm','intranet']`, and every item has exactly 3 `stack` entries.
   - `journey data` → the ids deep-equal `['start','factory','annecy','bachelor','ios','ceovision','walt','mba','hbg']`, and exactly one item has `kind === 'diploma'` (id `mba`, label `Bac+5`).
-  - `no forbidden strings in dist` → for every route in `pages()`, the HTML contains none of `INTERNAL_NAME`, `@gmail`. Every match of `/[\w.+-]+@[\w-]+\.[a-z]{2,}/gi` in the visible text (scripts and styles stripped) equals `hello@felroz.com`.
+  - `no forbidden strings in dist` → for every route in `pages()`, the HTML contains none of the blocked words (checked through `forbiddenWords()` in `tests/helpers.mjs`, which stores only sha256 hashes). Every match of `/[\w.+-]+@[\w-]+\.[a-z]{2,}/gi` in the visible text (scripts and styles stripped) equals `hello@felroz.com`.
   - `no commit counts` → for every route, `main(html)` does not match `/\bcommits?\b/i`.
 
 - [ ] **Step 2: Run them to make sure they fail**

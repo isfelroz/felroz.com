@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { page, pages, main } from './helpers.mjs'
+import { page, pages, main, forbiddenWords } from './helpers.mjs'
 
 const data = JSON.parse(readFileSync(new URL('../src/data/global.json', import.meta.url), 'utf8'))
 
@@ -36,9 +36,7 @@ test('pages() finds the built routes', () => {
 test('no forbidden strings in dist', () => {
   for (const route of pages()) {
     const html = page(route)
-    for (const bad of ['INTERNAL_NAME', '@gmail']) {
-      assert.ok(!html.includes(bad), `${route} contains ${bad}`)
-    }
+    assert.deepEqual(forbiddenWords(html), [], `${route} contains forbidden words`)
     const raw = html.replace(/<style[\s\S]*?<\/style>/gi, '')
     const emails = (raw.match(/[\w.+-]+@[\w-]+\.[a-z]{2,}/gi) ?? []).filter(
       (m) => !/@\d+x\./i.test(m),
@@ -57,4 +55,10 @@ test('no commit counts', () => {
   for (const route of pages()) {
     assert.doesNotMatch(main(page(route)), /\bcommits?\b/i, route)
   }
+})
+
+test('forbiddenWords flags a planted word and ignores clean text', () => {
+  const planted = ['Carre', 'four'].join('')
+  assert.deepEqual(forbiddenWords(`<p>Clients like ${planted}, others</p>`), [planted.toLowerCase()])
+  assert.deepEqual(forbiddenWords('<p>Nothing to see here, plain text.</p>'), [])
 })

@@ -40,7 +40,7 @@ Where this document and a mockup disagree, this document wins.
 
 ## Anti-goals (fail even if it works)
 
-- **Leaking employer internals:** internal product names, commit counts, screenshots of work, business figures (flights, invoices, revenue), or server topology. The infrastructure appears only as a skill.
+- **Leaking employer internals:** internal product names (never named), commit counts, screenshots of work, business figures (flights, invoices, revenue), or server topology. The infrastructure appears only as a skill.
 - **Leaking personal data:** the personal email. The only public email is `hello@felroz.com`.
 - **AI as protagonist:** it is one skill among others.
 - **CV padding:** module lists or counts ("9 modules"). Felipe: "no son importantes".
@@ -183,7 +183,7 @@ The layout follows `final-v4.html#contact`: the reverse of the hero badge, large
 - Exact EN wording.
 - Tests. Keep `pnpm test` green and extend `tests/` to assert at least:
   - FR/EN key parity for the new strings;
-  - no personal email, "INTERNAL_NAME" or commit counts anywhere in `dist/`;
+  - no personal email, internal product names or commit counts anywhere in `dist/`;
   - `hello@felroz.com` present on Contact and the home band;
   - each inner page renders its ghost title;
   - Projets renders exactly the projects in the data list.
@@ -197,7 +197,7 @@ The layout follows `final-v4.html#contact`: the reverse of the hero badge, large
 
 ## Calls I made (not discussed with Felipe)
 
-- **Clients unnamed:** the Colombian factory's clients are not named.
+- **Clients unnamed:** the Colombian factory's clients (well-known retail brands) are not named.
 - **Walt as one chapter:** a single chapter covers both contracts (work-study, then CDI).
 - **Poster, not 3D:** the 2D poster, not the 3D model, on À propos.
 - **No hover on unlinked cards:** project cards get no Split Card hover while they link nowhere.

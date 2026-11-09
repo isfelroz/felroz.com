@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, statSync } from 'node:fs'
-import { page } from './helpers.mjs'
+import { page, forbiddenWords } from './helpers.mjs'
 
 const decode = (s) =>
   s.replace(/&#39;/g, "'").replace(/&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&')
@@ -55,7 +55,8 @@ for (const route of ['/', '/en']) {
   })
 
   test(`${route}: no placeholder or forbidden copy`, () => {
-    for (const s of ['à compléter', 'TODO', 'Travaillons ensemble', 'INTERNAL_NAME', '%</']) assert.ok(!html.includes(s), s)
+    for (const s of ['à compléter', 'TODO', 'Travaillons ensemble', '%</']) assert.ok(!html.includes(s), s)
+    assert.deepEqual(forbiddenWords(html), [])
   })
 
   test(`${route}: no client:load islands on home`, () => assert.ok(!/<astro-island[^>]*\sclient="load"/.test(html)))

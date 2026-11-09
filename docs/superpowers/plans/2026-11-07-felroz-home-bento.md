@@ -190,7 +190,7 @@ test('HBG link only on now tile, new tab', () => {
   assert.match(html, /<a[^>]*href="https:\/\/www\.hbg-helicopteres\.aero\/"[^>]*target="_blank"[^>]*rel="[^"]*noopener/)
 })
 test('no placeholder or forbidden copy', () => {
-  for (const s of ['à compléter', 'TODO', 'Travaillons ensemble', 'INTERNAL_NAME', '%</']) assert.ok(!html.includes(s), s)
+  for (const s of ['à compléter', 'TODO', 'Travaillons ensemble', '%</']) assert.ok(!html.includes(s), s)
 })
 test('no client:load islands on home', () => assert.ok(!/<astro-island[^>]*GridItem/.test(html)))
 ```
