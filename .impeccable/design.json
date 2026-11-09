@@ -253,7 +253,7 @@
           "En ce moment",
           "Parcours",
           "Savoir-faire 2x1",
-          "Projet phare 2x1",
+          "Comment je travaille 2x1",
           "Stack",
           "Moi",
           "Contact band"
@@ -333,6 +333,70 @@
       "description": "Memoji model in a Carbone Deep panel. Poster image first and as fallback; camera orbit follows the pointer (θ = x·38°, φ = 80° ± 14°).",
       "html": "<div class=\"ds-avatar\"><span class=\"ds-poster\">poster</span></div>",
       "css": ".ds-avatar{display:grid;place-items:center;width:240px;height:240px;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.4px);background-size:14px 14px} .ds-poster{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3}"
+    },
+    {
+      "name": "Method Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Home tile: miniature U line (hollow Prune node, Corail rings, Pêche arrival dot) on a Carbone Deep panel, title and one line.",
+      "html": "<div class=\"ds-method\"><div class=\"ds-mpanel\"><svg viewBox=\"0 0 160 116\" width=\"160\" aria-hidden=\"true\"><path d=\"M28 30 H132 V86 H28\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-dasharray=\"1 8\"/><circle cx=\"28\" cy=\"30\" r=\"7\" fill=\"#1F2124\" stroke=\"#9E4B88\" stroke-width=\"3.5\"/><circle cx=\"132\" cy=\"30\" r=\"5\" fill=\"#1F2124\" stroke=\"#CA6678\" stroke-width=\"2.5\"/><circle cx=\"132\" cy=\"86\" r=\"5\" fill=\"#1F2124\" stroke=\"#CA6678\" stroke-width=\"2.5\"/><circle cx=\"28\" cy=\"86\" r=\"9\" fill=\"#E98A77\"/></svg></div><div><div class=\"ds-mtitle\">Comment je travaille</div><p class=\"ds-mtext\">Quatre habitudes, dans l'ordre.</p></div></div>",
+      "css": ".ds-method{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;width:480px;padding:28px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-mpanel{display:grid;place-content:center;padding:20px;border-radius:16px;background:#1F2124} .ds-mtitle{font-weight:700;font-size:1.5rem} .ds-mtext{margin:10px 0 0;color:#D4D5D9}"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Projets gallery card: square illustration panel on Carbone Deep, title, year, one sentence and stack chips. Not linked, no split hover.",
+      "html": "<article class=\"ds-proj\"><div class=\"ds-ppanel\"></div><div><h3 class=\"ds-ptitle\">Outil interne</h3><p class=\"ds-label\">2026</p><p class=\"ds-ptext\">Une phrase qui dit ce que c'est.</p><ul class=\"ds-chips\"><li class=\"ds-chip\">Nuxt</li><li class=\"ds-chip\">Laravel</li><li class=\"ds-chip\">Docker</li></ul></div></article>",
+      "css": ".ds-proj{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center;width:560px;padding:24px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-ppanel{aspect-ratio:1;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.4px);background-size:14px 14px} .ds-ptitle{margin:0 0 8px;font-weight:700;font-size:1.75rem;letter-spacing:-.025em} .ds-label{margin:0;font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-ptext{color:#D4D5D9;font-size:1.125rem} .ds-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none} .ds-chip{padding:3px 10px;border:1px solid #3A3D43;border-radius:999px;font:400 .75rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#D4D5D9}"
+    },
+    {
+      "name": "Default Project Illustration",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Fallback drawing for a project without its own: 7x7 dot field, dotted Corail route from a hollow node to a Pêche arrival dot.",
+      "html": "<svg class=\"ds-default\" viewBox=\"0 0 200 200\" width=\"200\" height=\"200\" aria-hidden=\"true\"><circle cx=\"44\" cy=\"44\" r=\"2\" fill=\"#3A3D43\"/><circle cx=\"100\" cy=\"44\" r=\"2\" fill=\"#3A3D43\"/><circle cx=\"156\" cy=\"44\" r=\"2\" fill=\"#3A3D43\"/><path d=\"M44 150 C70 150 80 100 110 100 S150 56 158 50\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"3\" stroke-dasharray=\"1 9\" stroke-linecap=\"round\"/><circle cx=\"44\" cy=\"150\" r=\"9\" fill=\"#1F2124\" stroke=\"#CA6678\" stroke-width=\"4\"/><circle cx=\"160\" cy=\"48\" r=\"12\" fill=\"#E98A77\"/></svg>",
+      "css": ".ds-default{display:block;background:#1F2124;border-radius:18px}"
+    },
+    {
+      "name": "Route Panel and Chapter",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Parcours scrollytelling: sticky vertical dotted route with one node per stage, the node of the chapter being read turns active.",
+      "html": "<div class=\"ds-route\"><svg viewBox=\"0 0 120 200\" width=\"120\" height=\"200\" aria-hidden=\"true\"><path d=\"M30 20 V100 C30 120 80 110 80 130 V180\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"3\" stroke-dasharray=\"1 10\" stroke-linecap=\"round\"/><circle cx=\"30\" cy=\"20\" r=\"8\" fill=\"#26282C\" stroke=\"#9E4B88\" stroke-width=\"4\"/><circle cx=\"80\" cy=\"130\" r=\"7\" fill=\"#CA6678\"/><circle cx=\"80\" cy=\"180\" r=\"10\" fill=\"#E98A77\"/></svg><section class=\"ds-chapter\"><h3>2017, Annecy</h3><p class=\"ds-label\">Période</p><p>Le texte du chapitre.</p></section></div>",
+      "css": ".ds-route{display:flex;gap:40px;padding:24px;background:#26282C;color:#fff;font-family:'DM Sans',sans-serif} .ds-chapter h3{margin:0 0 8px;font-weight:700;font-size:1.5rem} .ds-chapter p{margin:0 0 8px;color:#D4D5D9} .ds-chapter .ds-label{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3}"
+    },
+    {
+      "name": "Diploma Node and Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The MBA's weight on the Parcours: card with title, dates, school and RNCP chip; a double ring echoes the route's double node.",
+      "html": "<div class=\"ds-diploma\"><span class=\"ds-ring\"></span><h3>MBA</h3><p class=\"ds-label\">2021 – 2023 · École</p><span class=\"ds-chip\">RNCP</span></div>",
+      "css": ".ds-diploma{position:relative;display:grid;gap:14px;width:420px;padding:28px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-diploma h3{margin:0;font-weight:700;font-size:2.5rem;letter-spacing:-.035em} .ds-ring{position:absolute;top:28px;right:28px;width:30px;height:30px;border:2px solid #CA6678;border-radius:50%} .ds-ring::after{content:'';position:absolute;inset:6px;border:3.5px solid #CA6678;border-radius:50%;background:#26282C} .ds-label{margin:0;font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-chip{justify-self:start;padding:3px 10px;border:1px solid #3A3D43;border-radius:999px;font:400 .75rem/1.4 'DM Mono',monospace;letter-spacing:2px;color:#D4D5D9}"
+    },
+    {
+      "name": "Star Map",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Toolbox illustration on À propos: Corail f at the centre, group hubs on an ellipse, one satellite per tool. Decorative.",
+      "html": "<svg class=\"ds-star\" viewBox=\"0 0 520 380\" width=\"360\" aria-hidden=\"true\"><path d=\"M260 190 L430 190 M260 190 L90 190\" stroke=\"#CA6678\" stroke-width=\"2\" stroke-dasharray=\"1 8\" stroke-linecap=\"round\"/><circle cx=\"430\" cy=\"190\" r=\"8\" fill=\"#26282C\" stroke=\"#CA6678\" stroke-width=\"3\"/><circle cx=\"90\" cy=\"190\" r=\"8\" fill=\"#26282C\" stroke=\"#CA6678\" stroke-width=\"3\"/><path d=\"M246 214 V176 Q246 160 262 160\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"12\" stroke-linecap=\"round\"/></svg>",
+      "css": ".ds-star{display:block;background:#1F2124;border-radius:16px}"
+    },
+    {
+      "name": "U Production Line",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Comment je travaille on À propos: four stations on a U-shaped dotted route, hollow Prune node first, Pêche arrival dot last.",
+      "html": "<svg class=\"ds-u\" viewBox=\"0 0 160 116\" width=\"320\" aria-hidden=\"true\"><path d=\"M28 30 H132 V86 H28\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-dasharray=\"1 8\"/><circle cx=\"28\" cy=\"30\" r=\"7\" fill=\"#26282C\" stroke=\"#9E4B88\" stroke-width=\"3.5\"/><circle cx=\"132\" cy=\"30\" r=\"5\" fill=\"#26282C\" stroke=\"#CA6678\" stroke-width=\"2.5\"/><circle cx=\"132\" cy=\"86\" r=\"5\" fill=\"#26282C\" stroke=\"#CA6678\" stroke-width=\"2.5\"/><circle cx=\"28\" cy=\"86\" r=\"9\" fill=\"#E98A77\"/></svg>",
+      "css": ".ds-u{display:block;background:#26282C;border-radius:16px}"
+    },
+    {
+      "name": "Badge Reverse",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Back of the conference badge on Contact: large Carbone card with lanyard slot over a tilted front with a monochrome Corail f; holds the email.",
+      "html": "<div class=\"ds-back\"><span class=\"ds-slot\"></span><p class=\"ds-mail\">hello@felroz.com</p></div>",
+      "css": ".ds-back{position:relative;width:420px;padding:48px 28px 28px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-slot{position:absolute;top:12px;left:50%;width:52px;height:6px;margin-left:-26px;border-radius:3px;background:#1F2124} .ds-mail{margin:0;font-weight:700;font-size:2rem;letter-spacing:-.03em}"
     }
   ],
   "narrative": {

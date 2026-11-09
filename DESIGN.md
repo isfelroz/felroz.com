@@ -140,7 +140,7 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 ### Neutral
 - **Carbone** (`carbone`): main background, the symbol's container, card surface, text on light grounds.
 - **Carbone Raised** (`carbone-raised`): panels that sit one tonal step above Carbone (brand boards, dot-grid fields).
-- **Carbone Deep** (`carbone-deep`, `#1F2124`): one step below Carbone. The hero badge's photo panel and lanyard slot, and the symbol's panel on the Projet phare tile.
+- **Carbone Deep** (`carbone-deep`, `#1F2124`): one step below Carbone. The hero badge's photo panel and lanyard slot, the miniature U line's panel on the *Comment je travaille* tile, and the illustration panels of the project cards.
 - **Craie** (`craie`): light background for print, the brand applications board and any light context.
 - **White** (`white`): running text and headlines on Carbone.
 - **Ink Soft** (`ink-soft`): secondary body text and inactive links on dark.
@@ -184,8 +184,8 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 - **Container:** centered, max content width 1240px with a 16px side gutter (`spacing.gutter`), so square tiles stay roomy between 1101px and 1440px.
 - **Bento grid (home):** every tile is square or spans whole squares. Tiles place themselves with `grid-area`.
   - **Desktop (≥1101px):** 4 columns, gap 28px. 1×1 tiles use `aspect-ratio: 1`; the Hero is 2×2 and square; wide tiles (2×1) take exactly one row height; Contact is a full-width band of natural height.
-  - **Order:** `Hero Hero En-ce-moment Parcours` / `Hero Hero Savoir-faire Savoir-faire` / `Projet-phare Projet-phare Stack Moi` / `Contact ×4`.
-  - **Tablet (≤1100px):** 2 columns; Hero, Savoir-faire and Projet phare span 2; natural heights. Order: Hero, En ce moment + Parcours, Savoir-faire, Projet phare, Stack + Moi, Contact.
+  - **Order:** `Hero Hero En-ce-moment Parcours` / `Hero Hero Savoir-faire Savoir-faire` / `Methode Methode Stack Moi` / `Contact ×4`.
+  - **Tablet (≤1100px):** 2 columns; Hero, Savoir-faire and Comment je travaille span 2; natural heights. Order: Hero, En ce moment + Parcours, Savoir-faire, Comment je travaille, Stack + Moi, Contact.
   - **Mobile (≤640px):** 1 column in the same order, gap 20px, natural heights.
 - **Section rhythm:** 40px vertical padding, 80px on `lg`.
 - **Header:** sticky, translucent Carbone (50%) with backdrop blur. Symbol and wordmark on the left, links in the centre on `lg`, primary button on the right. Below `lg`, links move to a full-height slide-in panel.
@@ -278,6 +278,30 @@ Top-down, H135-inspired drawing for the *En ce moment* tile: fuselage, skids, ta
 ### Parcours Mini-Route
 Card illustration on the *Parcours* tile: a dotted Corail path, a hollow Corail node, a second hollow node and a solid Pêche arrival dot. The three role labels (`Ingénieur · Développeur · AI Engineer`) are all Label on Dark: no accent on any role, the arrival dot carries the direction. On hover or focus the arrival dot nudges up-right (4px, 0.4s).
 
+### Method Card
+The home's 2×1 tile *Comment je travaille* (it replaced the featured-project card). A Carbone Deep panel holds a miniature U line: hollow Prune node at the start, two small Corail rings, a Pêche arrival dot, a 1 9 dotted Corail path in between, and the four station words in Label on Dark. Title row with the arrow-circle icon and one line of Ink Soft text on the right. Links to `#method` on À propos. On hover or focus the node and the arrival dot drift (300ms ease-out).
+
+### Project Card
+Projets gallery card, landscape. A square illustration panel (Carbone Deep, 18px radius, fine 14px dot grid) on the left, then the title (Title scale, fluid up to 2rem), the year in Label on Dark, one sentence of Ink Soft and the stack as chips (1px Dot border, pill, Label type; they wrap). One card per row, data-driven from `global.json` (`projects`: id, year, stack, illustration key), so adding a project is data, not markup. Stacks to one column at ≤760px. The card links nowhere, so it gets no Split Card hover; only the drawings answer the pointer.
+- **Default illustration:** a project without its own drawing falls back to a generic one: a 7×7 Dot field, a dotted Corail route from a hollow Corail node to a Pêche arrival dot. Decorative, `aria-hidden`.
+
+### Route Panel and Chapter (Parcours)
+The Parcours is a scrollytelling route. On desktop (≥1101px) a sticky panel on the left draws the vertical route from Bogotá to today: a dotted Corail path with one node per stage (hollow Prune at the start, Corail nodes, a hinge for Annecy, the double ring for the MBA, the Pêche arrival dot for now) and DM Mono year ticks. An `IntersectionObserver` sets `data-active` on the node of the chapter being read; the node scales up (1.45×, 0.4s ease-out) and its label turns white. The panel is decorative (`aria-hidden`): every fact is in the chapters.
+- **Chapter:** a section per stage in large type: heading, a Label-on-Dark meta line and Body text, beside the panel. The last chapter ends on a Split Card link to Projets. At ≤1100px the panel disappears and a dotted route runs down the left of the chapters.
+- **Without JS or with reduced motion:** every chapter is fully visible and the panel shows its final state.
+
+### Diploma Card
+The MBA's weight on the Parcours: a Card (24px, Card lift) with the diploma title (2.5rem max), dates and school in Label on Dark, and the RNCP chip. A double ring in the top-right corner echoes the route's double node. Max width 560px.
+
+### Star Map
+Toolbox illustration on À propos: a monochrome Corail *f* at the centre (the page's signal is elsewhere), six group hubs on an ellipse, one satellite per tool on an 86° fan, labels outside the nodes, all drawn with the route vocabulary (Corail strokes, hollow nodes). Decorative and `aria-hidden`: the list beside it carries every tool and adds the only focus stops. Hovering a group in the list lights its hub, spoke and satellites.
+
+### U Production Line
+*Comment je travaille* on À propos: four stations on a U-shaped line (top left, top right, bottom right, bottom left), joined by the dotted Corail route in the gaps, never behind text. Station 1 carries the hollow Prune node, stations 2 and 3 small Corail rings, station 4 the Pêche arrival dot. Each station is a numbered list item with a Title heading and Body text. At ≤1100px the lead stacks above the line; at ≤640px the U becomes a single column.
+
+### Badge Reverse
+The back of the conference badge on Contact: a large Carbone card with the lanyard slot (52×6px, Carbone Deep), its front lying tilted underneath (Carbone Raised, monochrome Corail *f* at 55% opacity, because the email is the page's one signal). The card holds the email (`hello@felroz.com`, mailto link), a *Copier* button and the GitHub and LinkedIn links. The button is hidden when the Clipboard API is missing. The tilted front shifts a little further out on hover (0.5s ease-out); no transition with reduced motion.
+
 ### Background Motifs
 - **Dot field:** a full-viewport canvas behind every page's content (fixed, `pointer-events: none`). Dots on a 22px grid, `#3A3D43`, radius 1.3px. Near the pointer they warm toward Corail (`#CA6678`) within 150px, easing quadratically, and grow up to +1.4px. It redraws only on pointer move, scroll or resize and never animates on its own. On touch pointers and under reduced motion it is drawn once, static. The tight 10px grid is reserved for card underlayers, and a fine 14px grid for Carbone Deep panels.
 - **Routes:** dotted Corail paths linking hollow nodes (Prune for the first, Corail for the rest) to a solid Pêche arrival dot. Decoration only, placed at edges and corners.
@@ -286,7 +310,7 @@ Card illustration on the *Parcours* tile: a dotted Corail path, a hollow Corail 
 ## Motion
 
 Two protagonists on load: the dot field (pointer-driven) and the hero greeting (plays once). Everything else moves only on interaction.
-- **On interaction only:** the Memoji turns toward the pointer; the rotor spins on hover; the Parcours arrival dot, the Projet phare symbol node and dot, and the Moi pizza react on hover; the Stack lines and nodes turn Corail on hover or focus; Split cards offset on hover.
+- **On interaction only:** the Memoji turns toward the pointer; the rotor spins on hover; the Parcours arrival dot, the *Comment je travaille* U-line node and arrival dot, and the Moi pizza react on hover; the Stack lines and nodes turn Corail on hover or focus; Split cards offset on hover.
 - **Card entrance:** one short CSS stagger (`tile-in`: opacity 0 → 1, 12px rise, 0.45s ease-out, 70ms between tiles), played once. It replaces the per-card spring.
 - **Reduced motion:** nothing animates and everything is in its final state; the poster replaces the 3D model.
 - **Ghost titles** on inner pages keep their slide-up (y 100% → 0, 0.5s).

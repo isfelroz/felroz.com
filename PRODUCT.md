@@ -20,9 +20,9 @@ All four audiences matter. The site is written for all of them at once, never fo
 felroz.com is Felipe Alarcon's personal site and calling card (*la carta de presentación*). It shows who he is, his brand and what he knows, for the day he looks for a job or for anyone who wants to know about him. Freelance work is possible but is not the current goal.
 
 Success, for any visitor:
-- **understands who he is in seconds**: a full-stack developer who builds web apps from the API to the interface, today at HBG Helicopters, from Bogotá to Annecy;
+- **understands who he is in seconds**: a full-stack developer who builds web apps from the API to the interface, today an AI engineer at HBG Helicopters, from Bogotá to Annecy;
 - **remembers him**: the site has its own personality and does not read like a CV or a generic portfolio;
-- **gets in touch**: through LinkedIn or GitHub today, and by email once he publishes one.
+- **gets in touch**: through LinkedIn, GitHub or by email at hello@felroz.com.
 
 ## Positioning
 
@@ -32,17 +32,18 @@ A developer first, with an engineer's path: an industrial engineer trained in Co
 
 - **Languages:** the site is bilingual. French is at `/` and English is under `/en`. Every string exists in both.
 - **Entry points:** visitors often arrive from LinkedIn or GitHub links, on a phone as often as on a desktop.
-- **Pages:** Home, Projets / Projects, Parcours / Journey, À propos / About, Contact. Each home card sums up one page and links to it.
+- **Pages:** Home, Projets / Projects, Parcours / Journey, À propos / About, Contact. Each home card sums up one page and links to it. All five now have real content.
 
 ## Capabilities and Constraints
 
 - Static site: no backend, no CMS, no contact form and no blog.
-- The home is a summary. Detail lives on the inner pages, whose real content (case studies, Parcours timeline, À propos story) is planned for a later phase and still owed by Felipe.
+- The home is a summary. Detail lives on the inner pages, which now have their content: two projects on Projets, the Parcours route, the À propos story, toolbox and method, and Contact with the email. Case studies and metrics are still absent.
 - A 3D animated avatar (idle, wave) is planned for a later phase. It needs a rigged model.
-- Employer naming: "Ingénieur IA chez HBG Helicopters", with a link to the company, is approved on the "En ce moment" card only. Internal product names are never published.
+- Title: « Développeur & ingénieur IA ».
+- Contact email: `hello@felroz.com`, the only address ever published.
+- Employer naming: employers are named in the Parcours (HBG Helicopters, with a link on the "En ce moment" card). The clients of past employers are not named. Internal product names are never published.
 - Not yet decided or provided:
-  - his contact email;
-  - confirmation of the HBG URL and of "Ingénieur IA" as his official title;
+  - confirmation of the HBG URL;
   - his years of experience.
 
 ## Brand Commitments
@@ -58,10 +59,11 @@ A developer first, with an engineer's path: an industrial engineer trained in Co
   - `src/assets/me.png` is his Memoji (2D).
   - `public/models/memoji.glb` is the optimized 3D Memoji. The ~24 MB source is outside the repo.
 - **Social profiles:** GitHub (`isfelroz`) and LinkedIn (`isfelroz`), listed in `src/data/global.json`.
-- **Featured project:** this site. Its source is public on GitHub.
+- **Projects:** two, listed on Projets: a flights CRM for a helicopter operator and a company intranet. This site's source is public on GitHub. The home's former featured-project tile is now « Comment je travaille ».
+- **Inner pages:** Projets, Parcours, À propos and Contact have their content, in both languages.
 - **Absent:**
   - case studies, metrics, testimonials, client logos and years of experience;
-  - inner-page content.
+  - per-project detail pages.
 
   Future work must not invent them, and placeholder text must never ship.
 
