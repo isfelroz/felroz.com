@@ -1,0 +1,42 @@
+---
+/**
+ * One Parcours chapter: the giant year (or « Bac+5 »), the title, DM Mono meta below it, then the text.
+ * `kind` drives the variants: `hinge` is a single display line, `diploma` holds the DiplomaCard,
+ * `now` ends on the link to Projets. Fully readable as rendered; journey.js only adds `data-active`.
+ */
+import Card from '@components/Card.astro'
+import Icon from '@components/react/Icon.jsx'
+import DiplomaCard from './DiplomaCard.astro'
+
+const { id, kind, label, title, meta, text, chip, link } = Astro.props
+const headingId = `stage-${id}`
+---
+
+<section data-stage={id} data-kind={kind} aria-labelledby={headingId} class="chapter">
+  <p class="year">{label}</p>
+  {
+    kind === 'diploma' ? (
+      <DiplomaCard id={headingId} title={title} meta={meta} chip={chip} />
+    ) : (
+      <>
+        <h2 id={headingId} class={kind === 'hinge' ? 'hinge-title' : 'chapter-title'}>
+          {title}
+        </h2>
+        {meta && <p class="meta label-mono text-label-dark">{meta}</p>}
+        {text && <p class="text">{text}</p>}
+      </>
+    )
+  }
+  {
+    link && (
+      <div class="mt-3 max-w-[420px]">
+        <Card href={link.href}>
+          <span class="flex items-center justify-between gap-4">
+            <span class="text-2xl font-bold tracking-[-0.02em]">{link.label}</span>
+            <Icon type="arrow" />
+          </span>
+        </Card>
+      </div>
+    )
+  }
+</section>

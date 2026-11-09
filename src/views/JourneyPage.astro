@@ -1,0 +1,201 @@
+---
+/**
+ * Parcours, "Le fil" (spec · Parcours): a sticky route panel beside short chapters in large type.
+ * Desktop (≥1101 px) lights the chapter being read and its node; ≤1100 px drops the panel for a
+ * dotted route down the left. Without JS or with reduced motion, every chapter is shown in full.
+ */
+import Layout from '@layouts/Layout.astro'
+import BigTitle from '@components/react/BigTitle.jsx'
+import RoutePanel from '@components/journey/RoutePanel.astro'
+import Chapter from '@components/journey/Chapter.astro'
+import globalData from '@data/global.json'
+import { localizePath, useTranslations } from '../i18n/index.js'
+
+const { locale, routeKey } = Astro.props
+const t = useTranslations(locale)
+const { lead, signal, origin, stages, seeProjects } = t.journey
+const [before, after] = lead.split(signal)
+const journey = globalData.journey.map((stage) => ({ ...stage, ...stages[stage.id] }))
+---
+
+<Layout locale={locale} routeKey={routeKey}>
+  <BigTitle client:load>{t.pages[routeKey]}</BigTitle>
+
+  <div class="journey pb-6" data-journey>
+    <p class="lead">{before}<span class="text-signal">{signal}</span>{after}</p>
+
+    <div class="route-fil">
+      <RoutePanel stages={journey} origin={origin} />
+      <div class="chapters">
+        {
+          journey.map((stage) => (
+            <Chapter
+              {...stage}
+              link={stage.kind === 'now' ? { href: localizePath('projects', locale), label: seeProjects } : undefined}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { initJourney } from '@components/journey/journey.js'
+  initJourney(document.querySelector('[data-journey]'))
+</script>
+
+<style is:global>
+  .journey .lead {
+    max-width: 24ch;
+    margin: -8px 0 24px;
+    font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .journey .route-fil {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 72px;
+    align-items: start;
+  }
+  .journey .chapter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    min-height: 56svh;
+    padding: 48px 0;
+  }
+  .journey .chapter:first-child {
+    min-height: 60svh;
+    padding-top: 8px;
+  }
+  .journey .chapter:last-child {
+    min-height: 68svh;
+  }
+  .journey .chapter[data-kind='diploma'] {
+    gap: 22px;
+  }
+  .journey .year {
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--color-ink-soft);
+  }
+  .journey .chapter-title {
+    font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .journey .hinge-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .journey .meta {
+    margin-top: -4px;
+  }
+  .journey .text {
+    max-width: 52ch;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+    text-wrap: pretty;
+  }
+
+  /* Live (JS, ≥1101 px, motion allowed): the chapter being read lights up, the others dim, all AA */
+  .journey [data-stage] :is(.year, .chapter-title, .hinge-title, .text, .diploma) {
+    transition:
+      color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .journey[data-live] [data-stage]:not([data-active]) :is(.year, .chapter-title, .hinge-title, .text) {
+    color: var(--color-label-dark);
+  }
+  .journey[data-live] [data-stage]:not([data-active]) .diploma {
+    opacity: 0.75;
+  }
+  .journey [data-stage][data-kind='diploma'][data-active] .year {
+    color: var(--color-white);
+  }
+  .journey [data-stage][data-kind='now'][data-active] .year {
+    color: var(--color-peche);
+  }
+
+  /* ≤1100 px: no panel, the route runs down the left with its nodes */
+  @media (max-width: 1100px) {
+    .journey .route-fil {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+    .journey .chapters {
+      margin-left: 10px;
+      border-left: 2px dotted var(--color-corail);
+    }
+    .journey .chapter,
+    .journey .chapter:first-child,
+    .journey .chapter:last-child {
+      position: relative;
+      min-height: 0;
+      padding: 36px 0 36px 28px;
+    }
+    .journey .chapter::before {
+      content: '';
+      position: absolute;
+      left: -11px;
+      top: 46px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--color-carbone);
+      border: 3px solid var(--color-corail);
+    }
+    .journey .chapter[data-kind='start']::before {
+      border-color: var(--color-prune);
+    }
+    .journey .chapter[data-kind='now']::before {
+      left: -13px;
+      width: 22px;
+      height: 22px;
+      background: var(--color-peche);
+      border-color: var(--color-peche);
+    }
+    .journey .chapter[data-kind='diploma']::before {
+      left: -13px;
+      width: 22px;
+      height: 22px;
+      box-shadow:
+        0 0 0 4px var(--color-carbone),
+        0 0 0 6px var(--color-corail);
+    }
+    .journey .year {
+      font-size: 3.25rem;
+    }
+    .journey .chapter[data-kind='diploma'] .year {
+      color: var(--color-white);
+    }
+  }
+  @media (max-width: 640px) {
+    .journey .lead {
+      margin: -4px 0 8px;
+    }
+    .journey .hinge-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .journey [data-stage],
+    .journey [data-stage] * {
+      transition: none !important;
+    }
+  }
+</style>

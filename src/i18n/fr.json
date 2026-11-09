@@ -51,6 +51,23 @@
       }
     }
   },
+  "journey": {
+    "lead": "De la ligne de production au pipeline de déploiement.",
+    "signal": "pipeline de déploiement",
+    "origin": "Bogotá",
+    "stages": {
+      "start": { "node": "Ingénieur", "title": "Ingénieur industriel", "meta": "2008 – 2014 · Bogotá", "text": "Universidad Sergio Arboleda." },
+      "factory": { "node": "Chef de prod.", "title": "Chef de production", "meta": "2014 – 2017 · Bogotá", "text": "Alicia Giraldo, confection pour de grandes marques. Je dirigeais une équipe et j'ai monté des lignes de production modernes : Toyota, modulaire." },
+      "annecy": { "node": "Annecy", "title": "J'arrive à Annecy." },
+      "bachelor": { "node": "Bachelor", "title": "Je reprends les études", "meta": "2018 – 2021 · My Digital School", "text": "Bachelor Développeur Multiplateformes." },
+      "ios": { "node": "iOS", "title": "Développeur iOS, SOS Soirée", "meta": "2019 · Stage", "text": "J'ai porté une app Android en iOS natif." },
+      "ceovision": { "node": "Front", "title": "Développeur front, Ceovision", "meta": "2020 – 2021 · Alternance · Archamps", "text": "Sur GoFAST, l'alternative open source à Microsoft 365." },
+      "walt": { "node": "Walt", "title": "Développeur full stack, Walt", "meta": "2021 – 2025 · Annecy", "text": "En alternance, puis en CDI. Des sites corporate et e-commerce sur mesure, en contact direct avec les clients." },
+      "mba": { "node": "MBA", "title": "MBA Développeur Full Stack & management de projets", "meta": "2021 – 2023 · My Digital School, Annecy", "chip": "RNCP niveau 7" },
+      "hbg": { "node": "HBG · Auj.", "title": "Développeur & ingénieur IA, HBG Helicopters", "meta": "Depuis 2025 · Annecy", "text": "Le CRM de vols et l'intranet du groupe." }
+    },
+    "seeProjects": "Voir les projets"
+  },
   "home": {
     "hero": {
       "greetings": [

@@ -1,5 +1,6 @@
 import { describe, test } from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync, readdirSync } from 'node:fs'
 import { page, main } from './helpers.mjs'
 
 const MAIL = 'hello@felroz.com'
@@ -99,3 +100,73 @@ describe('projects page', () => {
   }
 })
 
+
+describe('journey page', () => {
+  const data = JSON.parse(readFileSync(new URL('../src/data/global.json', import.meta.url), 'utf8'))
+  const ids = data.journey.map((j) => j.id)
+  const decode = (s) => s.replace(/&#39;|&#x27;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"')
+  const routes = {
+    '/parcours': {
+      chip: 'RNCP niveau 7',
+      signal: 'pipeline de déploiement',
+      projects: '/projets',
+      copy: [
+        'Alicia Giraldo, confection pour de grandes marques.',
+        "J'arrive à Annecy.",
+        "Sur GoFAST, l'alternative open source à Microsoft 365.",
+        'MBA Développeur Full Stack & management de projets',
+      ],
+    },
+    '/en/journey': {
+      chip: 'RNCP level 7',
+      signal: 'deployment pipeline',
+      projects: '/en/projects',
+      copy: ['I arrive in Annecy.', 'See the projects'],
+    },
+  }
+  for (const [route, copy] of Object.entries(routes)) {
+    const m = main(page(route))
+    const chapters = [...m.matchAll(/<section([^>]*\sdata-stage="([\w-]+)"[^>]*)>([\s\S]*?)<\/section>/g)]
+    const byId = Object.fromEntries(chapters.map((c) => [c[2], { attrs: c[1], body: c[3] }]))
+    const nodeTag = (id) => m.match(new RegExp(`<[^>]*\\sdata-node="${id}"[^>]*>`))?.[0]
+
+    test(`${route}: stages in order, one node each`, () => {
+      assert.deepEqual(chapters.map((c) => c[2]), ids)
+      for (const id of ids) assert.ok(nodeTag(id), `no node for ${id}`)
+    })
+    test(`${route}: readable without JS`, () => {
+      for (const c of chapters) {
+        assert.doesNotMatch(c[1], /\shidden[\s=>]|\shidden$|aria-hidden="true"|opacity:\s*0/, c[2])
+      }
+      assert.doesNotMatch(m, /\sdata-active[\s=>]/)
+    })
+    test(`${route}: MBA weight`, () => {
+      assert.match(byId.mba.attrs, /data-kind="diploma"/)
+      assert.ok(byId.mba.body.includes('Bac+5'))
+      assert.ok(byId.mba.body.includes(copy.chip))
+      assert.match(nodeTag('mba'), /data-ring="double"/)
+    })
+    test(`${route}: one signal on the pipeline`, () => {
+      const hits = m.match(/(?:text|bg)-signal/g) ?? []
+      assert.equal(hits.length, 1)
+      assert.match(m, new RegExp(`class="[^"]*text-signal[^"]*"[^>]*>${copy.signal}</`))
+    })
+    test(`${route}: HBG links to projects`, () => {
+      assert.ok(byId.hbg.body.includes(`<a href="${copy.projects}"`))
+    })
+    test(`${route}: copy`, () => {
+      const text = decode(m)
+      for (const s of copy.copy) assert.ok(text.includes(s), s)
+    })
+  }
+
+  test('reduced motion CSS', () => {
+    const dir = new URL('../dist/_astro/', import.meta.url)
+    const css = [
+      ...readdirSync(dir).filter((f) => f.endsWith('.css')).map((f) => readFileSync(new URL(f, dir), 'utf8')),
+      ...[...page('/parcours').matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((s) => s[1]),
+    ].join('\n')
+    const blocks = css.split(/@media/).filter((b) => /^\s*\(prefers-reduced-motion:\s*reduce\)/.test(b))
+    assert.ok(blocks.some((b) => /\[data-stage|\.route-panel/.test(b)))
+  })
+})
