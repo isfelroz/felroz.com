@@ -1,0 +1,45 @@
+---
+/** "Parcours": a single-colour mini route (Corail path and nodes, Pêche arrival dot) and the three roles. */
+import Icon from '@components/react/Icon.jsx'
+
+const { title, roles, text } = Astro.props
+---
+
+<div class="journey @container flex h-full flex-col justify-end gap-2.5">
+  <svg class="h-auto min-h-0 w-full shrink overflow-visible" viewBox="0 0 240 64" aria-hidden="true">
+    <path
+      d="M16 52 C 50 52, 76 40, 112 40 S 180 30, 222 20"
+      fill="none"
+      stroke="#CA6678"
+      stroke-width="3"
+      stroke-linecap="round"
+      stroke-dasharray="1 9"></path>
+    <circle cx="16" cy="52" r="7" fill="#26282C" stroke="#CA6678" stroke-width="3"></circle>
+    <circle cx="112" cy="40" r="6" fill="#26282C" stroke="#CA6678" stroke-width="3"></circle>
+    <circle class="arrival" cx="222" cy="20" r="9" fill="#E98A77"></circle>
+  </svg>
+  <!-- Labels scale with the tile (6cqi, capped at 13px) so the row fits from 1101px up; wrap is a fallback -->
+  <p class="flex flex-wrap justify-between gap-x-1.5 text-[min(.8125rem,6cqi)] text-label-dark">
+    {roles.map((r) => <span class="whitespace-nowrap">{r}</span>)}
+  </p>
+  <div class="flex items-center justify-between gap-4">
+    <h2 class="text-2xl font-bold tracking-[-0.02em]">{title}</h2>
+    <span class="shrink-0"><Icon type="arrow" /></span>
+  </div>
+  <p class="text-ink-soft text-pretty">{text}</p>
+</div>
+
+<style>
+  .arrival {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  :global(.tile:hover) .arrival,
+  :global(.tile:focus-within) .arrival {
+    transform: translate(4px, -4px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .arrival {
+      transition: none;
+    }
+  }
+</style>

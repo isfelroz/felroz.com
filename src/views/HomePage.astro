@@ -1,0 +1,56 @@
+---
+import globalData from '@data/global.json'
+import Layout from '@layouts/Layout.astro'
+import Bento from '@components/home/Bento.astro'
+import Tile from '@components/home/Tile.astro'
+import HeroBadge from '@components/home/HeroBadge.astro'
+import NowCard from '@components/home/NowCard.astro'
+import JourneyCard from '@components/home/JourneyCard.astro'
+import MethodCard from '@components/home/MethodCard.astro'
+import MeCard from '@components/home/MeCard.astro'
+import SkillsCard from '@components/home/SkillsCard.astro'
+import StackCard from '@components/home/StackCard.astro'
+import ContactBand from '@components/home/ContactBand.astro'
+import { localizePath, useTranslations } from '../i18n/index.js'
+
+const { locale } = Astro.props
+const t = useTranslations(locale)
+const home = t.home
+const stackLabel = home.stack.label.replace('{list}', globalData.stack.map((s) => s.name).join(', '))
+---
+
+<Layout locale={locale} routeKey="home">
+  <Bento>
+    <Tile size="2x2" area="hero" index={0} labelledby="hero-title">
+      <HeroBadge {...home.hero} />
+    </Tile>
+
+    <Tile size="1x1" area="now" index={1} labelledby="now-title">
+      <NowCard {...home.now} />
+    </Tile>
+
+    <Tile size="1x1" area="journey" index={2} href={localizePath('resume', locale)} label={home.journey.title}>
+      <JourneyCard {...home.journey} />
+    </Tile>
+
+    <Tile size="2x1" area="skills" index={3} labelledby="skills-title">
+      <SkillsCard {...home.skills} />
+    </Tile>
+
+    <Tile size="2x1" area="featured" index={4} href={localizePath('about', locale) + '#method'} label={home.method.title}>
+      <MethodCard {...home.method} />
+    </Tile>
+
+    <Tile size="1x1" area="stack" index={5} href={localizePath('about', locale)} label={stackLabel}>
+      <StackCard title={home.stack.title} />
+    </Tile>
+
+    <Tile size="1x1" area="me" index={6} href={localizePath('about', locale)} label={home.me.title}>
+      <MeCard {...home.me} />
+    </Tile>
+
+    <Tile size="band" area="contact" index={7} labelledby="contact-title">
+      <ContactBand title={home.contact.title} socialLabel={home.socialLabel} />
+    </Tile>
+  </Bento>
+</Layout>

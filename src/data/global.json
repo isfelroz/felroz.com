@@ -1,40 +1,34 @@
 {
-  "navigation": {
-    "menu": [
-      {
-        "label": "Home",
-        "href": "/"
-      },
-      {
-        "label": "About",
-        "href": "/about"
-      },
-      {
-        "label": "Works",
-        "href": "/works"
-      },
-      {
-        "label": "Resume",
-        "href": "/resume"
-      }
-    ]
-  },
   "socials": [
-    {
-      "type": "github",
-      "href": "/"
-    },
-    {
-      "type": "npm",
-      "href": "/"
-    },
-    {
-      "type": "twitter",
-      "href": "/"
-    },
-    {
-      "type": "linkedin",
-      "href": "/"
-    }
+    { "type": "github", "name": "GitHub", "href": "https://github.com/isfelroz" },
+    { "type": "linkedin", "name": "LinkedIn", "href": "https://www.linkedin.com/in/isfelroz" }
+  ],
+  "sourceCode": "https://github.com/isfelroz/felroz.com",
+  "email": "hello@felroz.com",
+  "projects": [
+    { "id": "crm", "year": 2026, "stack": ["Nuxt", "Laravel", "Docker"], "illustration": "crm" },
+    { "id": "intranet", "year": 2025, "stack": ["Nuxt", "PostgreSQL", "MS Graph"], "illustration": "intranet" }
+  ],
+  "journey": [
+    { "id": "start", "label": "2008", "kind": "start" },
+    { "id": "factory", "label": "2014", "kind": "stop" },
+    { "id": "annecy", "label": "2017", "kind": "hinge" },
+    { "id": "bachelor", "label": "2018", "kind": "stop" },
+    { "id": "ios", "label": "2019", "kind": "stop" },
+    { "id": "ceovision", "label": "2020", "kind": "stop" },
+    { "id": "walt", "label": "2021", "kind": "stop" },
+    { "id": "mba", "label": "Bac+5", "kind": "diploma" },
+    { "id": "hbg", "label": "2025", "kind": "now" }
+  ],
+  "employer": { "name": "HBG Helicopters", "href": "https://www.hbg-helicopteres.aero/" },
+  "toolbelt": ["Laravel", "Nuxt", "Vue", "TypeScript", "Docker"],
+  "languages": ["ES", "FR", "EN"],
+  "stack": [
+    { "type": "typescript", "name": "TypeScript" },
+    { "type": "nuxt", "name": "Nuxt" },
+    { "type": "laravel", "name": "Laravel" },
+    { "type": "postgresql", "name": "PostgreSQL" },
+    { "type": "docker", "name": "Docker" },
+    { "type": "python", "name": "Python" }
   ]
 }

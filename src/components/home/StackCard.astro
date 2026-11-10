@@ -1,0 +1,47 @@
+---
+/**
+ * "Stack": a static constellation, the felroz symbol at the centre linked to each stack logo on an ellipse.
+ * Decorative only (the tile's link carries the stack in its name): no per-node focus, no JS.
+ * Lines and node strokes turn Corail on the tile link's hover/focus.
+ */
+import globalData from '@data/global.json'
+import Symbol from '@components/brand/Symbol.astro'
+import Icon from '@components/react/Icon.jsx'
+
+const { title } = Astro.props
+
+const centre = { x: 130, y: 80 }
+const radius = { x: 100, y: 60 }
+const nodeR = 16
+const iconSize = 16
+const nodes = globalData.stack.map((s, k) => {
+  const a = -Math.PI / 2 + (k * 2 * Math.PI) / globalData.stack.length
+  const round = (n) => Math.round(n * 10) / 10
+  return { type: s.type, x: round(centre.x + radius.x * Math.cos(a)), y: round(centre.y + radius.y * Math.sin(a)) }
+})
+const stroke = 'stroke-dot transition-colors group-hover:stroke-corail group-focus-visible:stroke-corail motion-reduce:transition-none'
+---
+
+<div class="flex h-full flex-col justify-end gap-2.5">
+  <svg class="min-h-0 w-full grow overflow-visible" viewBox="26 2 208 156" aria-hidden="true">
+    {nodes.map((n) => <line x1={centre.x} y1={centre.y} x2={n.x} y2={n.y} stroke-width="2" class={stroke} />)}
+    {
+      nodes.map((n) => (
+        <g>
+          <circle cx={n.x} cy={n.y} r={nodeR} stroke-width="2" class:list={['fill-carbone-raised', stroke]} />
+          <g class="text-ink-soft" transform={`translate(${n.x - iconSize / 2} ${n.y - iconSize / 2})`}>
+            <Icon type={n.type} size={`${iconSize}px`} />
+          </g>
+        </g>
+      ))
+    }
+    <circle cx={centre.x} cy={centre.y} r="26" stroke-width="2" class:list={['fill-carbone', stroke]} />
+    <g transform={`translate(${centre.x - 22} ${centre.y - 22})`}>
+      <Symbol size={44} shape="circle" />
+    </g>
+  </svg>
+  <div class="flex items-center justify-between gap-4">
+    <h2 class="text-2xl font-bold tracking-[-0.02em]">{title}</h2>
+    <span class="shrink-0"><Icon type="arrow" /></span>
+  </div>
+</div>

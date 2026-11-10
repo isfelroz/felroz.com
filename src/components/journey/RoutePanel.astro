@@ -1,0 +1,146 @@
+---
+/**
+ * Parcours sticky panel (desktop only): the vertical route from Bogotá to today.
+ * One `[data-node]` per journey stage; journey.js sets `data-active` on the node of the chapter being read.
+ * Decorative: every fact is in the chapters, so the panel is hidden from assistive tech.
+ * Geometry follows the symbol: hollow Prune node at the start, Corail nodes, Pêche arrival dot.
+ */
+interface Stage {
+  id: string
+  label: string
+  kind: string
+  node: string
+}
+const { stages, origin }: { stages: Stage[]; origin: string } = Astro.props
+
+/** Where each stage sits on the route (layout, not copy). */
+const at: Record<string, { x: number; y: number }> = {
+  start: { x: 70, y: 40 },
+  factory: { x: 70, y: 253 },
+  annecy: { x: 210, y: 363 },
+  bachelor: { x: 210, y: 396 },
+  ios: { x: 210, y: 431 },
+  ceovision: { x: 210, y: 467 },
+  walt: { x: 210, y: 509 },
+  mba: { x: 210, y: 573 },
+  hbg: { x: 210, y: 659 },
+}
+const ticks = [2008, 2011, 2014, 2017, 2020, 2023, 2026]
+const upper = (s: string) => s.toLocaleUpperCase('fr')
+---
+
+<div class="route-panel" aria-hidden="true">
+  <svg viewBox="0 0 340 720" class="route-svg">
+    <path
+      d="M70 40 V339 C70 369 210 355 210 385 V659"
+      fill="none"
+      stroke="#CA6678"
+      stroke-width="3"
+      stroke-dasharray="1 10"
+      stroke-linecap="round"></path>
+    {ticks.map((year, i) => <text x="8" y={44 + i * 106.67} class="mono">{year}</text>)}
+    <text x="92" y="26" class="mono city">{upper(origin)}</text>
+    {
+      stages.map(({ id, label, kind, node }) => {
+        const { x, y } = at[id] ?? { x: 210, y: 659 }
+        if (kind === 'hinge')
+          return (
+            <g data-node={id} data-kind={kind} class="node">
+              <text x={x + 22} y={y + 4} class="mono city">{upper(node)}</text>
+            </g>
+          )
+        if (kind === 'diploma')
+          return (
+            <g data-node={id} data-kind={kind} data-ring="double" class="node">
+              <circle cx={x} cy={y} r="14" fill="none" stroke="#CA6678" stroke-width="2" />
+              <circle cx={x} cy={y} r="8" fill="#26282C" stroke="#CA6678" stroke-width="3.5" />
+              <text x={x + 26} y={y - 2} class="mono city">{upper(node)}</text>
+              <text x={x + 26} y={y + 13} class="mono">{upper(label)}</text>
+            </g>
+          )
+        if (kind === 'now')
+          return (
+            <g data-node={id} data-kind={kind} class="node">
+              <circle cx={x} cy={y} r="15" fill="#E98A77" />
+              <text x={x + 26} y={y + 4} class="mono">{upper(node)}</text>
+            </g>
+          )
+        return (
+          <g data-node={id} data-kind={kind} class="node">
+            <circle
+              cx={x}
+              cy={y}
+              r={kind === 'start' ? 11 : 8}
+              fill="#26282C"
+              stroke={kind === 'start' ? '#9E4B88' : '#CA6678'}
+              stroke-width="3.5"
+            />
+            <text x={x + 22} y={y + 4} class="mono">{upper(node)}</text>
+          </g>
+        )
+      })
+    }
+  </svg>
+</div>
+
+<style>
+  .route-panel {
+    position: sticky;
+    top: 112px;
+    display: grid;
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    place-items: center;
+    height: calc(100svh - 150px);
+    max-height: 680px;
+    padding: 36px 24px;
+    border-radius: 18px;
+    background-color: var(--color-carbone-deep);
+    background-image: radial-gradient(rgba(58, 61, 67, 0.7) 1.2px, transparent 1.6px);
+    background-size: 14px 14px;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+  .route-svg {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    overflow: visible;
+  }
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    fill: var(--color-label-dark);
+    transition: fill 0.3s;
+  }
+  .city {
+    font-size: 12px;
+    letter-spacing: 2.4px;
+    fill: var(--color-ink-soft);
+  }
+  .node circle {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .node[data-active] circle {
+    transform: scale(1.45);
+  }
+  .node[data-ring='double'][data-active] circle {
+    transform: scale(1.25);
+  }
+  .node[data-active] text {
+    fill: var(--color-white);
+  }
+  @media (max-width: 1100px) {
+    .route-panel {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .route-panel .node circle,
+    .route-panel .mono {
+      transition: none;
+    }
+  }
+</style>

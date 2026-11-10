@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "siteName": "felroz",
+    "titles": {
+      "home": "felroz — Développeur full-stack & ingénieur IA",
+      "about": "À propos · felroz",
+      "projects": "Projets · felroz",
+      "resume": "Parcours · felroz",
+      "contact": "Contact · felroz"
+    },
+    "description": "Felipe Alarcon (felroz), développeur full-stack et ingénieur IA à Annecy. Des apps web de l'API à l'interface."
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "resume": "Parcours",
+    "contact": "Contact",
+    "main": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "switchLanguage": "English version",
+    "switchLabel": "EN",
+    "skip": "Aller au contenu"
+  },
+  "pages": {
+    "about": "À propos",
+    "projects": "Projets",
+    "resume": "Parcours",
+    "contact": "Contact"
+  },
+  "contact": {
+    "lead": "Une question, une idée, un projet ? Écrivez-moi.",
+    "copy": "Copier",
+    "copied": "Copié",
+    "copyFailed": "Copie impossible",
+    "languages": "Je réponds en espagnol, en français ou en anglais."
+  },
+  "projects": {
+    "stack": "Stack technique",
+    "items": {
+      "crm": {
+        "title": "CRM de vols",
+        "text": "Il remplace l'app de 2022 : API et front séparés.",
+        "illustrationLabel": "Neuf métiers autour d'un même outil : ops, chefs de base, pilotes, responsables d'exploitation, CAMO, comptabilité, commercial, mécaniciens, RH."
+      },
+      "intranet": {
+        "title": "Intranet de groupe",
+        "text": "Elle remplace un Drupal pour plus de 100 collaborateurs.",
+        "illustrationLabel": "Plus de 100 collaborateurs"
+      }
+    }
+  },
+  "journey": {
+    "lead": "De la ligne de production au pipeline de déploiement.",
+    "signal": "pipeline de déploiement",
+    "origin": "Bogotá",
+    "stages": {
+      "start": { "node": "Ingénieur", "title": "Ingénieur industriel", "meta": "2008 – 2014 · Bogotá", "text": "Universidad Sergio Arboleda." },
+      "factory": { "node": "Chef de prod.", "title": "Chef de production", "meta": "2014 – 2017 · Bogotá", "text": "Alicia Giraldo, confection pour de grandes marques. Je dirigeais une équipe et j'ai monté des lignes de production modernes : Toyota, modulaire." },
+      "annecy": { "node": "Annecy", "title": "J'arrive à Annecy." },
+      "bachelor": { "node": "Bachelor", "title": "Je reprends les études", "meta": "2018 – 2021 · My Digital School", "text": "Bachelor Développeur Multiplateformes." },
+      "ios": { "node": "iOS", "title": "Développeur iOS, SOS Soirée", "meta": "2019 · Stage", "text": "J'ai porté une app Android en iOS natif." },
+      "ceovision": { "node": "Front", "title": "Développeur front, Ceovision", "meta": "2020 – 2021 · Alternance · Archamps", "text": "Sur GoFAST, l'alternative open source à Microsoft 365." },
+      "walt": { "node": "Walt", "title": "Développeur full stack, Walt", "meta": "2021 – 2025 · Annecy", "text": "En alternance, puis en CDI. Des sites corporate et e-commerce sur mesure, en contact direct avec les clients." },
+      "mba": { "node": "MBA", "title": "MBA Développeur Full Stack & management de projets", "meta": "2021 – 2023 · My Digital School, Annecy", "chip": "RNCP niveau 7" },
+      "hbg": { "node": "HBG · Auj.", "title": "Développeur & ingénieur IA, HBG Helicopters", "meta": "Depuis 2025 · Annecy", "text": "Le CRM de vols et l'intranet du groupe." }
+    },
+    "seeProjects": "Voir les projets"
+  },
+  "home": {
+    "hero": {
+      "greetings": [
+        { "word": "Hola,", "lang": "es" },
+        { "word": "Hello,", "lang": "en" },
+        { "word": "Bonjour,", "lang": "fr" }
+      ],
+      "name": "je suis Felipe.",
+      "lead": "Développeur full-stack. Je conçois et livre des apps web, ",
+      "signal": "de l'API à l'interface.",
+      "avatarAlt": "Avatar 3D de Felipe, assis en méditation"
+    },
+    "now": {
+      "title": "En ce moment",
+      "role": "Développeur & ingénieur IA chez",
+      "newTab": "(nouvel onglet)"
+    },
+    "journey": {
+      "title": "Parcours",
+      "roles": [
+        "Ingénieur",
+        "Développeur",
+        "AI Engineer"
+      ],
+      "text": "D'ingénieur industriel à AI engineer, de Bogotá à Annecy."
+    },
+    "skills": {
+      "title": "Savoir-faire",
+      "items": [
+        {
+          "icon": "api",
+          "label": "APIs"
+        },
+        {
+          "icon": "web",
+          "label": "Interfaces web"
+        },
+        {
+          "icon": "mobile",
+          "label": "Apps mobiles"
+        },
+        {
+          "icon": "automation",
+          "label": "Automatisations"
+        },
+        {
+          "icon": "deploy",
+          "label": "Mise en prod"
+        },
+        {
+          "icon": "agents",
+          "label": "Agents IA"
+        }
+      ]
+    },
+    "method": {
+      "title": "Comment je travaille",
+      "text": "Comme à l'usine : des processus clairs, la qualité sur la ligne.",
+      "stations": ["Spec", "Issues", "Revue", "Prod"]
+    },
+    "stack": {
+      "title": "Stack",
+      "label": "Stack : {list}. En savoir plus sur moi"
+    },
+    "me": {
+      "title": "Colombien à Annecy",
+      "text": "Photo, culture urbaine et pizza au pepperoni."
+    },
+    "contact": {
+      "title": "Parlons-en."
+    },
+    "socialLabel": "{name} de Felipe Alarcon"
+  },
+  "about": {
+    "story": {
+      "lead": "Je suis né à Bogotá.",
+      "body": [
+        "Ingénieur industriel, j'ai dirigé un atelier de confection.",
+        "En 2017, j'arrive à Annecy et je passe au code.",
+        "Aujourd'hui, je construis des apps web, de l'API à l'interface."
+      ],
+      "signal": "je passe au code",
+      "languages": "Je parle espagnol, français et anglais.",
+      "languagesLabel": "Langues",
+      "badgeAlt": "Le Memoji de Felipe, en sweat blanc.",
+      "name": "Felipe Alarcon",
+      "route": "Bogotá → Annecy"
+    },
+    "toolbox": {
+      "title": "Ma boîte à outils",
+      "groups": [
+        {
+          "id": "front",
+          "label": "Front",
+          "tools": [
+            "TypeScript",
+            "Nuxt / Vue",
+            "Next.js / React",
+            "Astro",
+            "Tailwind"
+          ]
+        },
+        {
+          "id": "back",
+          "label": "Back",
+          "tools": [
+            "PHP / Laravel",
+            "Node / Nitro",
+            "Python",
+            "PostgreSQL",
+            "MariaDB",
+            "Supabase"
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "Mobile",
+          "tools": [
+            "iOS natif",
+            "React Native / Expo"
+          ]
+        },
+        {
+          "id": "prod",
+          "label": "Prod",
+          "tools": [
+            "Docker",
+            "Traefik",
+            "CI/CD avec déploiement par tag et rollback",
+            "Grafana / Prometheus / Loki"
+          ]
+        },
+        {
+          "id": "integrations",
+          "label": "Intégrations",
+          "tools": [
+            "Microsoft Graph / SharePoint",
+            "Entra ID"
+          ]
+        },
+        {
+          "id": "ia",
+          "label": "IA",
+          "tools": [
+            "Développement agentique (Claude Code)",
+            "MCP"
+          ]
+        }
+      ]
+    },
+    "method": {
+      "title": "Comment je travaille",
+      "lead": "Comme à l'usine : des processus clairs, et la qualité contrôlée sur la ligne.",
+      "stations": [
+        {
+          "title": "La spec avant le code.",
+          "text": "On écrit ce qu'on construit, et pourquoi."
+        },
+        {
+          "title": "Des issues, pas des post-it.",
+          "text": "GitHub sert de gestion de projet."
+        },
+        {
+          "title": "Une revue avant chaque merge.",
+          "text": "Rien ne part en production sans relecture."
+        },
+        {
+          "title": "Des agents IA, sous contrôle.",
+          "text": "Tests d'architecture et E2E pour les encadrer."
+        }
+      ]
+    },
+    "offcode": {
+      "title": "Hors du code",
+      "items": [
+        "Photographie",
+        "Culture urbaine",
+        "Pizza au pepperoni"
+      ]
+    }
+  },
+  "footer": {
+    "credits": "Conçu et développé par Felipe Alarcon",
+    "source": "Code source"
+  }
+}

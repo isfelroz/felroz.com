@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-07T09:09:16.275200+00:00",
+  "generatedAt": "2026-11-08T17:42:52.598891+00:00",
   "title": "Design System: felroz",
   "extensions": {
     "colorMeta": {
@@ -93,6 +93,36 @@
           "#FCFBFA",
           "#FEFDFD"
         ]
+      },
+      "carbone-deep": {
+        "role": "neutral",
+        "displayName": "Carbone Deep",
+        "purpose": "One step below Carbone: hero photo panel, lanyard slot, symbol panel.",
+        "tonalRamp": [
+          "#0B0C0D",
+          "#131415",
+          "#191B1D",
+          "#1F2124",
+          "#585A5C",
+          "#8E9092",
+          "#BBBCBD",
+          "#E4E4E5"
+        ]
+      },
+      "dot": {
+        "role": "neutral",
+        "displayName": "Dot",
+        "purpose": "Resting color of the background dot field and fine panel dots.",
+        "tonalRamp": [
+          "#14151A",
+          "#1F2125",
+          "#2B2E33",
+          "#3A3D43",
+          "#686A6F",
+          "#97999C",
+          "#C3C4C6",
+          "#E7E7E8"
+        ]
       }
     },
     "typographyMeta": {
@@ -133,7 +163,7 @@
       {
         "name": "signal",
         "value": "linear-gradient(to right, #9E4B88, #CA6678, #E98A77)",
-        "purpose": "The one gradient accent per screen."
+        "purpose": "The one gradient accent per screen. As text, the first stop is lightened to #BD5E7D for 3:1 contrast on Carbone."
       },
       {
         "name": "symbol",
@@ -145,7 +175,7 @@
       {
         "name": "card-lift",
         "value": "rgba(0,0,0,0.25) 4px 4px 4px, rgba(247,244,244,0.02) -4px -4px 10px",
-        "purpose": "Every card at rest (CSS var --shadow1)."
+        "purpose": "Every card at rest (Tailwind shadow-card)."
       }
     ],
     "motion": [
@@ -155,9 +185,9 @@
         "purpose": "3D hover on linked cards."
       },
       {
-        "name": "tile-entrance",
-        "value": "spring stiffness 100, scale 0.8→1, opacity 0→1",
-        "purpose": "Bento tiles on load."
+        "name": "tile-in",
+        "value": "opacity 0→1, translate 0 12px→0, 0.45s ease-out, 70ms stagger, once",
+        "purpose": "Bento tiles on load (CSS, replaces the spring)."
       },
       {
         "name": "ghost-title",
@@ -165,32 +195,78 @@
         "purpose": "Display Ghost reveal."
       },
       {
-        "name": "progress-ring",
-        "value": "spring stiffness 50, delay 0.5s",
-        "purpose": "Skill ring fill on view."
+        "name": "greeting",
+        "value": "Hola → Hello → Bonjour, 1.3s per word, slide-up 0.7s, plays once",
+        "purpose": "Hero greeting; rests on the page language."
+      },
+      {
+        "name": "avatar-orbit",
+        "value": "camera-orbit θ = x·38°, φ = 80° ± 14°, returns to front on leave",
+        "purpose": "Memoji follows the pointer over the hero."
+      },
+      {
+        "name": "rotor-spin",
+        "value": "rotate 360deg, 1.2s linear infinite, on tile hover only",
+        "purpose": "Helicopter rotor."
+      },
+      {
+        "name": "dot-field",
+        "value": "22px grid, 150px radius, #3A3D43 → #CA6678, redraw on pointer/scroll only",
+        "purpose": "Pointer-reactive background; static on touch and reduced motion."
       }
     ],
     "breakpoints": [
       {
+        "name": "tablet",
+        "value": "1100px",
+        "purpose": "Bento goes 4 → 2 columns."
+      },
+      {
+        "name": "mobile",
+        "value": "640px",
+        "purpose": "Bento goes to 1 column."
+      },
+      {
         "name": "md",
-        "value": "768px"
+        "value": "768px",
+        "purpose": "Page chrome (header, nav) only, never the bento; currently unused."
       },
       {
         "name": "lg",
-        "value": "1024px"
+        "value": "1024px",
+        "purpose": "Page chrome only, never the bento: header links and nav panel, footer row, section rhythm."
       },
       {
         "name": "xl",
-        "value": "1280px"
+        "value": "1280px",
+        "purpose": "Page chrome only, never the bento: inner-page ghost title size."
       }
-    ]
+    ],
+    "layout": {
+      "container": "max 1240px, 16px gutter",
+      "bento": {
+        "desktop": "4 columns, gap 28px, squares (≥1101px)",
+        "tablet": "2 columns (≤1100px)",
+        "mobile": "1 column, gap 20px (≤640px)",
+        "order": [
+          "Hero 2x2",
+          "En ce moment",
+          "Parcours",
+          "Savoir-faire 2x1",
+          "Comment je travaille 2x1",
+          "Stack",
+          "Moi",
+          "Contact band"
+        ]
+      }
+    }
   },
   "components": [
     {
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Pill CTA in the brand gradient; the screen's one signal.",
+      "description": "Pill CTA in the brand gradient; persistent header chrome.",
       "html": "<a class=\"ds-btn-primary\" href=\"#\">Contact</a>",
       "css": ".ds-btn-primary{display:inline-block;padding:8px 16px;border-radius:999px;background:linear-gradient(to right, #9E4B88, #CA6678, #E98A77);color:#fff;font:500 1rem/1.5 'DM Sans',sans-serif;text-decoration:none} .ds-btn-primary:focus-visible{outline:2px solid #E98A77;outline-offset:3px}"
     },
@@ -199,24 +275,24 @@
       "kind": "card",
       "refersTo": "card",
       "description": "Linked card with soft lift and 3D split hover revealing a colored dot-grid underlayer.",
-      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-layer\"></span><span class=\"ds-card-face\"><span class=\"ds-label\">Welcome</span><span class=\"ds-card-row\"><span class=\"ds-card-title\">My Resume</span><svg class=\"ds-arrow\" viewBox=\"0 0 16 16\" width=\"30\" height=\"30\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z\"/></svg></span></span></a>",
-      "css": ".ds-card{position:relative;display:block;width:280px;height:220px;isolation:isolate;text-decoration:none;color:#fff;font-family:'DM Sans',sans-serif} .ds-card-face{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;height:100%;box-sizing:border-box;padding:32px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;transition:all .15s} .ds-card-layer{position:absolute;inset:0;z-index:-1;border-radius:24px;background-color:#CA6678;background-image:radial-gradient(#26282C 3px,transparent 4px);background-size:10px 10px;transition:all .15s} .ds-card:hover .ds-card-face{transform:translate(8px,-8px)} .ds-card:hover .ds-card-layer{transform:translate(-8px,8px)} .ds-card-row{display:flex;justify-content:space-between;align-items:flex-end} .ds-card-title{font-weight:700;font-size:1.5rem} .ds-label{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-arrow{fill:#9CA3AF;transform:rotate(45deg);transition:all .15s} .ds-card:hover .ds-arrow{fill:#CA6678;transform:rotate(0)} .ds-card:focus-visible{outline:2px solid #E98A77;outline-offset:6px;border-radius:24px}"
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-layer\"></span><span class=\"ds-card-face\"><span class=\"ds-card-row\"><span class=\"ds-card-title\">My Resume</span><svg class=\"ds-arrow\" viewBox=\"0 0 16 16\" width=\"30\" height=\"30\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z\"/></svg></span></span></a>",
+      "css": ".ds-card{position:relative;display:block;width:280px;height:220px;isolation:isolate;text-decoration:none;color:#fff;font-family:'DM Sans',sans-serif} .ds-card-face{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;height:100%;box-sizing:border-box;padding:28px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;transition:all .15s} .ds-card-layer{position:absolute;inset:0;z-index:-1;border-radius:24px;background-color:#CA6678;background-image:radial-gradient(#26282C 3px,transparent 4px);background-size:10px 10px;transition:all .15s} .ds-card:hover .ds-card-face{transform:translate(8px,-8px)} .ds-card:hover .ds-card-layer{transform:translate(-8px,8px)} .ds-card-row{display:flex;justify-content:space-between;align-items:flex-end} .ds-card-title{font-weight:700;font-size:1.5rem} .ds-label{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-arrow{fill:#9CA3AF;transform:rotate(45deg);transition:all .15s} .ds-card:hover .ds-arrow{fill:#CA6678;transform:rotate(0)} .ds-card:focus-visible{outline:2px solid #E98A77;outline-offset:6px;border-radius:24px}"
     },
     {
       "name": "Navigation",
       "kind": "nav",
       "refersTo": "nav-link",
       "description": "Header nav: white links, Corail underline on hover and active.",
-      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link is-active\" href=\"#\">Projets</a><a class=\"ds-nav-link\" href=\"#\">Articles</a></nav>",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Projets</a><a class=\"ds-nav-link is-active\" href=\"#\">Parcours</a><a class=\"ds-nav-link\" href=\"#\">À propos</a></nav>",
       "css": ".ds-nav{display:flex;gap:48px;font:500 1rem/1.5 'DM Sans',sans-serif;background:#26282C;padding:16px} .ds-nav-link{color:#fff;text-decoration:none;border-bottom:2px solid transparent} .ds-nav-link:hover{color:#CA6678;border-color:#CA6678} .ds-nav-link.is-active{border-color:#CA6678} .ds-nav-link:focus-visible{outline:2px solid #E98A77;outline-offset:4px}"
     },
     {
-      "name": "Eyebrow Label",
+      "name": "Metadata Label",
       "kind": "chip",
-      "refersTo": "label-eyebrow",
-      "description": "DM Mono machine voice for section numbers and metadata.",
-      "html": "<span class=\"ds-eyebrow\">01 · Symbole</span>",
-      "css": ".ds-eyebrow{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3}"
+      "refersTo": "label-metadata",
+      "description": "DM Mono machine voice for metadata next to content; never above a heading.",
+      "html": "<span class=\"ds-meta\">Laravel · Nuxt · Vue · TypeScript · Docker</span>",
+      "css": ".ds-meta{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3}"
     },
     {
       "name": "Lockup",
@@ -231,24 +307,114 @@
       "kind": "custom",
       "refersTo": "display",
       "description": "Headline with one gradient keyword (One Signal Rule).",
-      "html": "<p class=\"ds-display\">L'IA agentique, <span class=\"ds-signal\">en production.</span></p>",
-      "css": ".ds-display{margin:0;font:700 3.5rem/1.05 'DM Sans',sans-serif;letter-spacing:-1.5px;color:#fff;background:#26282C;padding:24px} .ds-signal{background:linear-gradient(to right, #9E4B88, #CA6678, #E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
+      "html": "<p class=\"ds-display\">Développeur full-stack. Je conçois et livre des apps web, <span class=\"ds-signal\">de l'API à l'interface.</span></p>",
+      "css": ".ds-display{margin:0;font:700 3.5rem/1.05 'DM Sans',sans-serif;letter-spacing:-1.5px;color:#fff;background:#26282C;padding:24px} .ds-signal{background:linear-gradient(to right,#BD5E7D, #CA6678, #E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
+    },
+    {
+      "name": "Hero Badge",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Conference-badge hero: lanyard slot, Carbone Deep photo panel with the 3D avatar and a Pêche dot, greeting, lead with one gradient part.",
+      "html": "<div class=\"ds-badge\"><span class=\"ds-slot\"></span><div class=\"ds-stage\"><span class=\"ds-pdot\"></span></div><h1 class=\"ds-greet\">Bonjour,<br>je suis Felipe.</h1><p class=\"ds-lead\">Développeur full-stack. <span class=\"ds-signal\">de l'API à l'interface.</span></p></div>",
+      "css": ".ds-badge{position:relative;display:flex;flex-direction:column;gap:18px;width:360px;height:360px;box-sizing:border-box;padding:28px;border-radius:24px;background:#26282C;color:#fff;font-family:'DM Sans',sans-serif;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px} .ds-slot{position:absolute;top:9px;left:50%;width:52px;height:6px;margin-left:-26px;border-radius:3px;background:#1F2124;box-shadow:inset 0 1px 2px rgba(0,0,0,.6)} .ds-stage{position:relative;flex:1;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.4px);background-size:14px 14px} .ds-pdot{position:absolute;top:16px;right:16px;width:14px;height:14px;border-radius:50%;background:#E98A77} .ds-greet{margin:0;font-weight:700;font-size:2.4rem;line-height:1.02;letter-spacing:-.035em} .ds-lead{margin:0;font-weight:700;font-size:1.25rem;line-height:1.2} .ds-signal{background:linear-gradient(to right,#BD5E7D,#CA6678,#E98A77);-webkit-background-clip:text;background-clip:text;color:transparent}"
+    },
+    {
+      "name": "Helicopter Illustration",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Top-down H135-inspired card illustration; rotor spins on hover only.",
+      "html": "<div class=\"ds-heli\"><svg viewBox=\"0 0 160 160\" width=\"160\" height=\"160\" aria-hidden=\"true\"><circle cx=\"80\" cy=\"66\" r=\"62\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"2\" stroke-dasharray=\"1 8\" stroke-linecap=\"round\"/><path d=\"M80 34 C92 34 97 48 97 66 C97 84 90 96 84 100 L82.5 136 H77.5 L76 100 C70 96 63 84 63 66 C63 48 68 34 80 34 Z\" fill=\"#3A3D43\" stroke=\"#D4D5D9\" stroke-width=\"1.5\"/><g class=\"ds-rotor\" fill=\"#D4D5D9\" opacity=\".85\"><rect x=\"78\" y=\"4\" width=\"4\" height=\"124\" rx=\"2\"/><rect x=\"18\" y=\"64\" width=\"124\" height=\"4\" rx=\"2\"/></g><circle cx=\"80\" cy=\"66\" r=\"6\" fill=\"#E98A77\"/></svg></div>",
+      "css": ".ds-heli{display:inline-block;background:#26282C;padding:24px;border-radius:24px} .ds-rotor{transform-origin:80px 66px;transform-box:view-box} @media (prefers-reduced-motion:no-preference){.ds-heli:hover .ds-rotor{animation:ds-spin 1.2s linear infinite}} @keyframes ds-spin{to{rotate:360deg}}"
+    },
+    {
+      "name": "3D Avatar",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Memoji model in a Carbone Deep panel. Poster image first and as fallback; camera orbit follows the pointer (θ = x·38°, φ = 80° ± 14°).",
+      "html": "<div class=\"ds-avatar\"><span class=\"ds-poster\">poster</span></div>",
+      "css": ".ds-avatar{display:grid;place-items:center;width:240px;height:240px;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.4px);background-size:14px 14px} .ds-poster{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3}"
+    },
+    {
+      "name": "Method Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Home tile: miniature U line (hollow Prune node, Corail rings, Pêche arrival dot) on a Carbone Deep panel, title and one line.",
+      "html": "<div class=\"ds-method\"><div class=\"ds-mpanel\"><svg viewBox=\"0 0 160 116\" width=\"160\" aria-hidden=\"true\"><path d=\"M28 30 H132 V86 H28\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-dasharray=\"1 8\"/><circle cx=\"28\" cy=\"30\" r=\"7\" fill=\"#1F2124\" stroke=\"#9E4B88\" stroke-width=\"3.5\"/><circle cx=\"132\" cy=\"30\" r=\"5\" fill=\"#1F2124\" stroke=\"#CA6678\" stroke-width=\"2.5\"/><circle cx=\"132\" cy=\"86\" r=\"5\" fill=\"#1F2124\" stroke=\"#CA6678\" stroke-width=\"2.5\"/><circle cx=\"28\" cy=\"86\" r=\"9\" fill=\"#E98A77\"/></svg></div><div><div class=\"ds-mtitle\">Comment je travaille</div><p class=\"ds-mtext\">Quatre habitudes, dans l'ordre.</p></div></div>",
+      "css": ".ds-method{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;width:480px;padding:28px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-mpanel{display:grid;place-content:center;padding:20px;border-radius:16px;background:#1F2124} .ds-mtitle{font-weight:700;font-size:1.5rem} .ds-mtext{margin:10px 0 0;color:#D4D5D9}"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Projets gallery card: square illustration panel on Carbone Deep, title, year, one sentence and stack chips. Not linked, no split hover.",
+      "html": "<article class=\"ds-proj\"><div class=\"ds-ppanel\"></div><div><h3 class=\"ds-ptitle\">Outil interne</h3><p class=\"ds-label\">2026</p><p class=\"ds-ptext\">Une phrase qui dit ce que c'est.</p><ul class=\"ds-chips\"><li class=\"ds-chip\">Nuxt</li><li class=\"ds-chip\">Laravel</li><li class=\"ds-chip\">Docker</li></ul></div></article>",
+      "css": ".ds-proj{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center;width:560px;padding:24px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-ppanel{aspect-ratio:1;border-radius:18px;background-color:#1F2124;background-image:radial-gradient(rgba(58,61,67,.7) 1.2px,transparent 1.6px);background-size:14px 14px} .ds-ptitle{margin:0 0 8px;font-weight:700;font-size:1.75rem;letter-spacing:-.025em} .ds-label{margin:0;font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-ptext{color:#D4D5D9;font-size:1.125rem} .ds-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none} .ds-chip{padding:3px 10px;border:1px solid #3A3D43;border-radius:999px;font:400 .75rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#D4D5D9}"
+    },
+    {
+      "name": "Default Project Illustration",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Fallback drawing for a project without its own: 7x7 dot field, dotted Corail route from a hollow node to a Pêche arrival dot.",
+      "html": "<svg class=\"ds-default\" viewBox=\"0 0 200 200\" width=\"200\" height=\"200\" aria-hidden=\"true\"><circle cx=\"44\" cy=\"44\" r=\"2\" fill=\"#3A3D43\"/><circle cx=\"100\" cy=\"44\" r=\"2\" fill=\"#3A3D43\"/><circle cx=\"156\" cy=\"44\" r=\"2\" fill=\"#3A3D43\"/><path d=\"M44 150 C70 150 80 100 110 100 S150 56 158 50\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"3\" stroke-dasharray=\"1 9\" stroke-linecap=\"round\"/><circle cx=\"44\" cy=\"150\" r=\"9\" fill=\"#1F2124\" stroke=\"#CA6678\" stroke-width=\"4\"/><circle cx=\"160\" cy=\"48\" r=\"12\" fill=\"#E98A77\"/></svg>",
+      "css": ".ds-default{display:block;background:#1F2124;border-radius:18px}"
+    },
+    {
+      "name": "Route Panel and Chapter",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Parcours scrollytelling: sticky vertical dotted route with one node per stage, the node of the chapter being read turns active.",
+      "html": "<div class=\"ds-route\"><svg viewBox=\"0 0 120 200\" width=\"120\" height=\"200\" aria-hidden=\"true\"><path d=\"M30 20 V100 C30 120 80 110 80 130 V180\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"3\" stroke-dasharray=\"1 10\" stroke-linecap=\"round\"/><circle cx=\"30\" cy=\"20\" r=\"8\" fill=\"#26282C\" stroke=\"#9E4B88\" stroke-width=\"4\"/><circle cx=\"80\" cy=\"130\" r=\"7\" fill=\"#CA6678\"/><circle cx=\"80\" cy=\"180\" r=\"10\" fill=\"#E98A77\"/></svg><section class=\"ds-chapter\"><h3>2017, Annecy</h3><p class=\"ds-label\">Période</p><p>Le texte du chapitre.</p></section></div>",
+      "css": ".ds-route{display:flex;gap:40px;padding:24px;background:#26282C;color:#fff;font-family:'DM Sans',sans-serif} .ds-chapter h3{margin:0 0 8px;font-weight:700;font-size:1.5rem} .ds-chapter p{margin:0 0 8px;color:#D4D5D9} .ds-chapter .ds-label{font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3}"
+    },
+    {
+      "name": "Diploma Node and Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The MBA's weight on the Parcours: card with title, dates, school and RNCP chip; a double ring echoes the route's double node.",
+      "html": "<div class=\"ds-diploma\"><span class=\"ds-ring\"></span><h3>MBA</h3><p class=\"ds-label\">2021 – 2023 · École</p><span class=\"ds-chip\">RNCP</span></div>",
+      "css": ".ds-diploma{position:relative;display:grid;gap:14px;width:420px;padding:28px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-diploma h3{margin:0;font-weight:700;font-size:2.5rem;letter-spacing:-.035em} .ds-ring{position:absolute;top:28px;right:28px;width:30px;height:30px;border:2px solid #CA6678;border-radius:50%} .ds-ring::after{content:'';position:absolute;inset:6px;border:3.5px solid #CA6678;border-radius:50%;background:#26282C} .ds-label{margin:0;font:400 .8125rem/1.4 'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#9A9CA3} .ds-chip{justify-self:start;padding:3px 10px;border:1px solid #3A3D43;border-radius:999px;font:400 .75rem/1.4 'DM Mono',monospace;letter-spacing:2px;color:#D4D5D9}"
+    },
+    {
+      "name": "Star Map",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Toolbox illustration on À propos: Corail f at the centre, group hubs on an ellipse, one satellite per tool. Decorative.",
+      "html": "<svg class=\"ds-star\" viewBox=\"0 0 520 380\" width=\"360\" aria-hidden=\"true\"><path d=\"M260 190 L430 190 M260 190 L90 190\" stroke=\"#CA6678\" stroke-width=\"2\" stroke-dasharray=\"1 8\" stroke-linecap=\"round\"/><circle cx=\"430\" cy=\"190\" r=\"8\" fill=\"#26282C\" stroke=\"#CA6678\" stroke-width=\"3\"/><circle cx=\"90\" cy=\"190\" r=\"8\" fill=\"#26282C\" stroke=\"#CA6678\" stroke-width=\"3\"/><path d=\"M246 214 V176 Q246 160 262 160\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"12\" stroke-linecap=\"round\"/></svg>",
+      "css": ".ds-star{display:block;background:#1F2124;border-radius:16px}"
+    },
+    {
+      "name": "U Production Line",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Comment je travaille on À propos: four stations on a U-shaped dotted route, hollow Prune node first, Pêche arrival dot last.",
+      "html": "<svg class=\"ds-u\" viewBox=\"0 0 160 116\" width=\"320\" aria-hidden=\"true\"><path d=\"M28 30 H132 V86 H28\" fill=\"none\" stroke=\"#CA6678\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-dasharray=\"1 8\"/><circle cx=\"28\" cy=\"30\" r=\"7\" fill=\"#26282C\" stroke=\"#9E4B88\" stroke-width=\"3.5\"/><circle cx=\"132\" cy=\"30\" r=\"5\" fill=\"#26282C\" stroke=\"#CA6678\" stroke-width=\"2.5\"/><circle cx=\"132\" cy=\"86\" r=\"5\" fill=\"#26282C\" stroke=\"#CA6678\" stroke-width=\"2.5\"/><circle cx=\"28\" cy=\"86\" r=\"9\" fill=\"#E98A77\"/></svg>",
+      "css": ".ds-u{display:block;background:#26282C;border-radius:16px}"
+    },
+    {
+      "name": "Badge Reverse",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Back of the conference badge on Contact: large Carbone card with lanyard slot over a tilted front with a monochrome Corail f; holds the email.",
+      "html": "<div class=\"ds-back\"><span class=\"ds-slot\"></span><p class=\"ds-mail\">hello@felroz.com</p></div>",
+      "css": ".ds-back{position:relative;width:420px;padding:48px 28px 28px;border-radius:24px;background:#26282C;box-shadow:rgba(0,0,0,.25) 4px 4px 4px,rgba(247,244,244,.02) -4px -4px 10px;color:#fff;font-family:'DM Sans',sans-serif} .ds-slot{position:absolute;top:12px;left:50%;width:52px;height:6px;margin-left:-26px;border-radius:3px;background:#1F2124} .ds-mail{margin:0;font-weight:700;font-size:2rem;letter-spacing:-.03em}"
     }
   ],
   "narrative": {
-    "northStar": "The Agent Control Room",
-    "overview": "felroz is a network of agents seen from a control room at night. The dot grid is the infrastructure, every node is an agent, and the Prune → Corail → Pêche gradient is the signal travelling between them toward an arrival point. Nothing moves unsupervised: routes are deliberate, the signal is rare, and the room stays dark and calm so the signal reads instantly.",
+    "northStar": "The Calling Card",
+    "overview": "felroz is Felipe introducing himself: the site is his calling card (la carta de presentación), for the day he looks for a job or for anyone who wants to know who he is. It opens like a conference badge with his face, a greeting and his name, then square cards on a dark table, each stating one fact about him in a single look with a small drawing in place of a paragraph. It closes with an invitation to talk. The warm gradient marks only the one thing that matters most; the dots answer the visitor's pointer and nothing moves on its own. Developer first; AI is one skill, never the hero.",
     "keyCharacteristics": [
+      "A badge first: face, greeting and name before anything else.",
+      "Square cards, one fact each, illustrated rather than written.",
       "Dark Carbone ground, white text, warm gradient used as a single signal.",
       "Symbol: a gradient f followed by a hollow node and a Pêche arrival dot.",
-      "Motifs: dot grid plus dotted routes linking nodes, always in the background.",
+      "Motifs: a pointer-reactive dot field plus dotted routes linking nodes, in the background or as single-colour card illustrations.",
       "Cards with soft shadows and an offset hover that reveals a colored dot-grid layer.",
       "DM Sans for everything human; DM Mono in spaced uppercase for everything machine."
     ],
     "rules": [
       {
         "name": "The One Signal Rule",
-        "body": "The gradient (left → right: Prune, Corail, Pêche) appears once per screen: on the symbol, one keyword, or one accent such as the primary button. If two things on a screen are gradient, one of them is wrong.",
+        "body": "The gradient (left → right: Prune, Corail, Pêche) appears once per screen's content: one keyword or one accent. The persistent chrome (the symbol and the header's Contact button) does not count, as in the DA's own header. If two things in the page content are gradient, one of them is wrong.",
         "section": "colors"
       },
       {
@@ -263,13 +429,18 @@
       },
       {
         "name": "The Machine Voice Rule",
-        "body": "DM Mono is always uppercase with 2px tracking, and only for labels, code and metadata. Never for sentences.",
+        "body": "DM Mono is always uppercase with 2px tracking, and only for labels, code and metadata. Never for sentences, never as an eyebrow.",
         "section": "typography"
       },
       {
         "name": "The Split Card Rule",
         "body": "Linked cards keep the offset hover: face translate(8px, -8px), underlayer translate(-8px, 8px), both with transition-all. Do not flatten it.",
         "section": "elevation"
+      },
+      {
+        "name": "The Motion Budget",
+        "body": "Two protagonists on load: the dot field and the hero greeting (once). Everything else moves only on interaction. Card entrance is one short CSS stagger; under reduced motion nothing animates.",
+        "section": "motion"
       }
     ],
     "dos": [
@@ -278,16 +449,21 @@
       "Do use DM Mono, uppercase with 2px tracking, for labels, metadata and code.",
       "Do keep the card shadow and the split offset hover on every linked card.",
       "Do use the symbol from 24px up and the lone Corail f below 24px.",
-      "Do size UI to the longer French copy."
+      "Do size UI to the longer French copy.",
+      "Do let headings stand alone: no eyebrow label above them.",
+      "Do keep home tiles square or whole-square, and keep the poster as the 3D avatar's fallback."
     ],
     "donts": [
+      "Don't make an animation run at rest on the home (besides the dot field's pointer response and the greeting, once).",
       "Don't draw the f with a crossbar. The decided mark has none.",
       "Don't use the retired falroz wordmark or name.",
       "Don't place routes or dotted lines behind text, or use dashed lines anywhere outside the route motif.",
       "Don't add a second type family (Aclonica is retired).",
       "Don't set body copy, paragraphs or long labels in gradient.",
-      "Don't use the third-party brand colors outside their own cards.",
-      "Don't replace the 3D card treatment with flat cards."
+      "Don't use the third-party brand colors outside their own icons.",
+      "Don't replace the 3D card treatment with flat cards.",
+      "Don't make AI the hero: no agent diagrams, no fake logs, no \"AI Engineer\" as the loudest element.",
+      "Don't pitch: no \"let's work together\" sales copy, no invented metrics or placeholder text in production."
     ]
   }
 }

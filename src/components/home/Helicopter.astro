@@ -1,0 +1,47 @@
+---
+/** Top-down H135-inspired helicopter for the "En ce moment" tile. The rotor spins only while the tile is hovered. */
+const { class: className, ring = true } = Astro.props
+---
+
+<svg class:list={['helicopter', className]} viewBox="0 0 160 160" aria-hidden="true">
+  {ring && <circle cx="80" cy="66" r="62" fill="none" stroke="#CA6678" stroke-width="2" stroke-dasharray="1 8" stroke-linecap="round"></circle>}
+  <g stroke="#5F6168" stroke-width="3" stroke-linecap="round" fill="none" opacity=".9">
+    <path d="M60 50 V96 M100 50 V96 M60 62 H70 M60 86 H70 M100 62 H90 M100 86 H90"></path>
+  </g>
+  <path
+    d="M80 34 C 92 34, 97 48, 97 66 C 97 84, 90 96, 84 100 L 82.5 136 H 77.5 L 76 100 C 70 96, 63 84, 63 66 C 63 48, 68 34, 80 34 Z"
+    fill="#3A3D43"
+    stroke="#D4D5D9"
+    stroke-width="1.5"
+    stroke-linejoin="round"></path>
+  <path d="M72 44 C 75 39, 85 39, 88 44 L 86 54 H 74 Z" fill="#26282C" opacity=".9"></path>
+  <rect x="64" y="122" width="32" height="5" rx="2.5" fill="#3A3D43" stroke="#D4D5D9" stroke-width="1.2"></rect>
+  <rect x="62" y="118" width="4" height="13" rx="2" fill="#D4D5D9"></rect>
+  <rect x="94" y="118" width="4" height="13" rx="2" fill="#D4D5D9"></rect>
+  <circle cx="80" cy="142" r="7" fill="#26282C" stroke="#D4D5D9" stroke-width="2"></circle>
+  <g class="rotor">
+    <g fill="#D4D5D9" opacity=".85">
+      <rect x="78" y="4" width="4" height="124" rx="2"></rect>
+      <rect x="18" y="64" width="124" height="4" rx="2"></rect>
+    </g>
+  </g>
+  <circle cx="80" cy="66" r="6" fill="#E98A77"></circle>
+</svg>
+
+<style>
+  .rotor {
+    transform-origin: 80px 66px;
+    transform-box: view-box;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.tile:hover) .rotor,
+    :global(.proj:hover) .rotor {
+      animation: rotor 1.2s linear infinite;
+    }
+  }
+  @keyframes rotor {
+    to {
+      rotate: 360deg;
+    }
+  }
+</style>

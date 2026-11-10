@@ -1,0 +1,82 @@
+---
+/**
+ * « Ma boîte à outils » (spec · À propos 2): the decorative star map on a Deep panel, and the list of six
+ * groups that carries the content. Hovering a group lights its constellation (CSS :has, see StarMap).
+ */
+import StarMap from './StarMap.astro'
+
+interface Props {
+  title: string
+  groups: { id: string; label: string; tools: string[] }[]
+}
+
+const { title, groups } = Astro.props
+---
+
+<section id="toolbox" class="about-sec" aria-labelledby="toolbox-title">
+  <h2 id="toolbox-title" class="about-h2">{title}</h2>
+  <div class="tools-grid">
+    <figure class="map-panel shadow-card">
+      <StarMap groups={groups} />
+    </figure>
+    <dl class="groups">
+      {
+        groups.map((g) => (
+          <div data-group={g.id} class="group-row">
+            <dt class="label-mono text-label-dark">{g.label}</dt>
+            <dd class="mt-1.5 text-[1.0625rem] leading-normal text-pretty">{g.tools.join(', ')}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .tools-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 48px;
+    align-items: center;
+  }
+  .map-panel {
+    padding: 28px 20px;
+    border-radius: 18px;
+    background-color: var(--color-carbone-deep);
+    background-image: radial-gradient(color-mix(in srgb, var(--color-dot) 70%, transparent) 1.2px, transparent 1.6px);
+    background-size: 14px 14px;
+  }
+  .groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+    align-content: center;
+  }
+  .group-row {
+    padding: 14px 0;
+    border-top: 1px solid var(--color-dot);
+    transition: border-color 0.25s;
+  }
+  .group-row:hover {
+    border-color: var(--color-corail);
+  }
+  @media (max-width: 1100px) {
+    .tools-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+  }
+  @media (max-width: 640px) {
+    .map-panel {
+      padding: 20px 8px;
+    }
+    .groups {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .group-row {
+      transition: none;
+    }
+  }
+</style>

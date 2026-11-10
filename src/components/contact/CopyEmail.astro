@@ -1,0 +1,47 @@
+---
+/**
+ * Copy-to-clipboard button. Hidden until the script confirms the Clipboard API exists,
+ * so it never shows as a dead control. The live region announces the result.
+ */
+interface Props {
+  email: string
+  label: string
+  copied: string
+  failed: string
+}
+
+const { email, label, copied, failed } = Astro.props
+---
+
+<div class="flex items-center gap-3" data-copy-root data-copied={copied} data-failed={failed}>
+  <button
+    type="button"
+    data-copy={email}
+    hidden
+    class="label-mono cursor-pointer rounded-full border border-dot px-3 py-1.5 text-ink-soft transition-colors hover:border-corail hover:text-white focus-visible:border-corail focus-visible:text-white"
+  >
+    {label}
+  </button>
+  <span aria-live="polite" role="status" class="label-mono text-label-dark" data-copy-status></span>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-copy-root]').forEach((root) => {
+    const button = root.querySelector<HTMLButtonElement>('[data-copy]')
+    const status = root.querySelector<HTMLElement>('[data-copy-status]')
+    if (!button || !status || !navigator.clipboard?.writeText) return
+    button.hidden = false
+    let timer: number | undefined
+    const say = (text: string) => {
+      status.textContent = text
+      clearTimeout(timer)
+      timer = window.setTimeout(() => (status.textContent = ''), 2000)
+    }
+    button.addEventListener('click', () => {
+      navigator.clipboard.writeText(button.dataset.copy ?? '').then(
+        () => say(root.dataset.copied ?? ''),
+        () => say(root.dataset.failed ?? ''),
+      )
+    })
+  })
+</script>

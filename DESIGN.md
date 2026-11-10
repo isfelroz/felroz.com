@@ -1,22 +1,21 @@
 ---
 name: felroz
-description: Personal site of Felipe Alarcon (isfelroz), AI Engineer. Agentic AI, in production.
+description: Personal site of Felipe Alarcon (felroz), full-stack developer and AI engineer. Web apps from the API to the interface.
 colors:
   prune: "#9E4B88"
   corail: "#CA6678"
   peche: "#E98A77"
   carbone: "#26282C"
   carbone-raised: "#2E3035"
+  carbone-deep: "#1F2124"
   craie: "#F4F1EE"
   white: "#FFFFFF"
   ink-soft: "#D4D5D9"
   label-on-dark: "#9A9CA3"
   label-on-light: "#5F6168"
+  dot: "#3A3D43"
   brand-github: "#6E40C9"
-  brand-npm: "#CB0000"
   brand-linkedin: "#0A66C2"
-  brand-twitter: "#1D9BF0"
-  brand-javascript: "#FFF208"
 typography:
   display-ghost:
     fontFamily: "DM Sans, sans-serif"
@@ -71,8 +70,9 @@ rounded:
 spacing:
   gutter: "16px"
   grid-gap: "20px"
-  grid-gap-lg: "32px"
-  card-padding: "32px"
+  grid-gap-lg: "28px"
+  card-padding: "28px"
+  card-padding-sm: "24px"
   section-y: "40px"
   section-y-lg: "80px"
 components:
@@ -96,7 +96,7 @@ components:
   nav-link-active:
     textColor: "{colors.white}"
     typography: "{typography.body-strong}"
-  label-eyebrow:
+  label-metadata:
     textColor: "{colors.label-on-dark}"
     typography: "{typography.label}"
   symbol:
@@ -109,18 +109,22 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Agent Control Room"**
+**Creative North Star: "The Calling Card"** (*la carta de presentación*)
 
-felroz is a network of agents seen from a control room at night. The dot grid is the infrastructure, every node is an agent, and the Prune → Corail → Pêche gradient is the signal travelling between them toward an arrival point. Nothing moves unsupervised: routes are deliberate, the signal is rare, and the room stays dark and calm so the signal reads instantly. The line on the banner says it: *L'IA agentique, en production.*
+felroz is Felipe introducing himself. The site is his calling card, for the day he looks for a job or for anyone who wants to know who he is: not a sales pitch, not a showcase of AI. It opens like a conference badge, with his face (a calm 3D Memoji), a greeting in his three languages and his name. Then come square cards on a dark table. Each card states one fact about him in a single look, with a small drawing in place of a paragraph: the helicopter for his current job, a route for his path, a constellation for his stack, a pizza for the person behind it. It closes with an invitation to talk, *Parlons-en.*
 
-The surface is dark by default: Carbone with white text. Color is warm and scarce: one gradient accent per screen, on the word or object that matters. Cards keep a tactile, almost physical presence through soft shadows and an offset hover that splits the card from its colored, dot-patterned underlayer. The result reads as 3D. Type is a single family, DM Sans, set tight and bold for headlines. DM Mono speaks for the machine: labels, code, metadata.
+Every rule follows from that idea. Name and face come first. A card says one thing, briefly, and links to the page that says more. The warm gradient marks only the one thing that matters most on the screen. The room listens without speaking first: the dots warm up where the visitor moves the pointer, and nothing moves on its own. He reads as a developer first; AI is one of his skills, never the hero.
+
+The surface is dark by default: Carbone with white text. Cards keep a tactile, almost physical presence through soft shadows and an offset hover that splits the card from its colored, dot-patterned underlayer. The result reads as 3D. Type is a single family, DM Sans, set tight and bold for headlines. DM Mono speaks for the machine: tags, code, metadata.
 
 The site is bilingual (French and English). Copy lengths differ between the two, so layouts must hold both.
 
 **Key Characteristics:**
+- A badge first: face, greeting and name before anything else.
+- Square cards, one fact each, illustrated rather than written.
 - Dark Carbone ground, white text, warm gradient used as a single signal.
 - Symbol: a gradient *f* followed by a hollow node and a Pêche arrival dot.
-- Motifs: dot grid plus dotted routes linking nodes, always in the background.
+- A pointer-reactive dot field that answers the visitor and never animates on its own.
 - Cards with soft shadows and an offset hover that reveals a colored dot-grid layer.
 - DM Sans for everything human; DM Mono in spaced uppercase for everything machine.
 
@@ -136,17 +140,21 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 ### Neutral
 - **Carbone** (`carbone`): main background, the symbol's container, card surface, text on light grounds.
 - **Carbone Raised** (`carbone-raised`): panels that sit one tonal step above Carbone (brand boards, dot-grid fields).
+- **Carbone Deep** (`carbone-deep`, `#1F2124`): one step below Carbone. The hero badge's photo panel and lanyard slot, the miniature U line's panel on the *Comment je travaille* tile, and the illustration panels of the project cards.
 - **Craie** (`craie`): light background for print, the brand applications board and any light context.
 - **White** (`white`): running text and headlines on Carbone.
 - **Ink Soft** (`ink-soft`): secondary body text and inactive links on dark.
 - **Label on Dark** (`label-on-dark`): DM Mono labels and metadata on Carbone.
 - **Label on Light** (`label-on-light`): DM Mono labels and metadata on Craie or white.
+- **Dot** (`dot`, `#3A3D43`): resting color of the background dot field, and of the fine dots inside Carbone Deep panels.
 
 ### Third-party brand colors
-`brand-github`, `brand-npm`, `brand-linkedin`, `brand-twitter`, `brand-javascript` exist only to fill the hover layer of the matching social or skill card. They never appear elsewhere.
+`brand-github` and `brand-linkedin` exist only as the hover fill of their own icons (the footer's social links). They never appear elsewhere.
 
 ### Named Rules
-**The One Signal Rule.** The gradient (left → right: Prune, Corail, Pêche) appears once per screen: on the symbol, one keyword, or one accent such as the primary button. If two things on a screen are gradient, one of them is wrong.
+**The One Signal Rule.** The gradient (left → right: Prune, Corail, Pêche) appears once per screen's content: one keyword or one accent. The persistent chrome (the symbol and the header's Contact button) does not count, as in the DA's own header. If two things in the page content are gradient, one of them is wrong.
+
+**Text exception.** As text (`text-signal`), the gradient starts at a lighter stop, `color-mix(in srgb, Prune 30%, Corail)` (#BD5E7D), because pure Prune is only 2.68:1 on Carbone; the text gradient is then 3.56:1 on Carbone and 3.18:1 on Carbone Raised at its darkest point (large bold text, 3:1). Backgrounds (`bg-signal`, the header button) keep the pure Prune start.
 
 **The Plain Text Rule.** Running text is white on Carbone or Carbone on Craie. Never gradient, never Corail.
 
@@ -160,23 +168,27 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 
 ### Hierarchy
 - **Display Ghost** (700, 12rem; 9xl on lg, 7xl on mobile; line-height 1; 10% opacity): giant section titles on inner pages, revealed by a slide-up.
-- **Display** (700, 3.5rem, 1.05, -1.5px): hero statements, e.g. *L'IA agentique, en production.*
-- **Headline** (700, 1.875rem, 1.15, -0.8px): page and section leads, e.g. *Je fais travailler des agents IA, avec des garde-fous.*
-- **Title** (700, 1.5rem): card titles.
+- **Display** (700, 3.5rem, 1.05, -1.5px): hero and closing statements, e.g. *Bonjour, je suis Felipe.* and *Parlons-en.* Fluid on the home (`clamp()`), set tighter (about -0.035em).
+- **Headline** (700, 1.875rem, 1.15, -0.8px): page and section leads, e.g. the hero lead *Développeur full-stack. Je conçois et livre des apps web, de l'API à l'interface.*
+- **Title** (700, 1.5rem): card titles (*En ce moment*, *Parcours*, *Savoir-faire*).
 - **Wordmark** (700, -1px tracking): *felroz* next to the symbol. Scale with the symbol; tracking stays tight.
 - **Body** (400, 1.125rem, 1.55): reading text, max 65–75ch.
 - **Body Strong** (500, 1rem): nav links, buttons.
-- **Label** (DM Mono 400, 0.8125rem, 2px tracking, uppercase): section numbers (`01 · SYMBOLE`), eyebrows, metadata, domain (`FELROZ.COM`).
+- **Label** (DM Mono 400, 0.8125rem, 2px tracking, uppercase): metadata such as tags (`ASTRO`, `REACT`, `TAILWIND 4`), the toolbelt line (`LARAVEL · NUXT · VUE · TYPESCRIPT · DOCKER`), language chips (`ES FR EN`) and the language switch (`EN` / `FR`). Section numbers (`01 · SYMBOLE`) only on brand boards, never on the site.
 
 ### Named Rules
 **The One Family Rule.** DM Sans and DM Mono only. No display or decorative faces.
 
-**The Machine Voice Rule.** DM Mono is always uppercase with 2px tracking, and only for labels, code and metadata. Never for sentences.
+**The Machine Voice Rule.** DM Mono is always uppercase with 2px tracking, and only for labels, code and metadata. Never for sentences, never as an eyebrow.
 
 ## Layout
 
-- **Container:** centered, 16px side gutter (`spacing.gutter`).
-- **Bento grid:** 2 columns on mobile, 4 on `lg`; gaps 20px, 32px on `lg`. Small tiles are 300px tall; medium tiles span 2 columns. Nested 2×2 sub-grids hold social and skill tiles.
+- **Container:** centered, max content width 1240px with a 16px side gutter (`spacing.gutter`), so square tiles stay roomy between 1101px and 1440px.
+- **Bento grid (home):** every tile is square or spans whole squares. Tiles place themselves with `grid-area`.
+  - **Desktop (≥1101px):** 4 columns, gap 28px. 1×1 tiles use `aspect-ratio: 1`; the Hero is 2×2 and square; wide tiles (2×1) take exactly one row height; Contact is a full-width band of natural height.
+  - **Order:** `Hero Hero En-ce-moment Parcours` / `Hero Hero Savoir-faire Savoir-faire` / `Methode Methode Stack Moi` / `Contact ×4`.
+  - **Tablet (≤1100px):** 2 columns; Hero, Savoir-faire and Comment je travaille span 2; natural heights. Order: Hero, En ce moment + Parcours, Savoir-faire, Comment je travaille, Stack + Moi, Contact.
+  - **Mobile (≤640px):** 1 column in the same order, gap 20px, natural heights.
 - **Section rhythm:** 40px vertical padding, 80px on `lg`.
 - **Header:** sticky, translucent Carbone (50%) with backdrop blur. Symbol and wordmark on the left, links in the centre on `lg`, primary button on the right. Below `lg`, links move to a full-height slide-in panel.
 - **Footer:** centered stack of symbol and wordmark, nav, social icons and credits.
@@ -187,7 +199,7 @@ A dark, warm palette: three gradient stops from plum to peach over a near-black 
 Depth is physical. Cards sit on Carbone with a soft dual shadow, a dark drop to the bottom-right and a faint light lift to the top-left, so they read as slightly raised tiles. On hover a linked card splits in two: the face moves up-right while a colored, dot-patterned underlayer moves down-left, which creates a 3D parallax.
 
 ### Shadow Vocabulary
-- **Card lift** (`box-shadow: rgba(0,0,0,0.25) 4px 4px 4px, rgba(247,244,244,0.02) -4px -4px 10px`; CSS var `--shadow1`): every card at rest.
+- **Card lift** (`box-shadow: rgba(0,0,0,0.25) 4px 4px 4px, rgba(247,244,244,0.02) -4px -4px 10px`; Tailwind `shadow-card`): every card at rest.
 
 ### Named Rules
 **The Split Card Rule.** Linked cards keep the offset hover: face `translate(8px, -8px)`, underlayer `translate(-8px, 8px)`, both with `transition-all`. Do not flatten it.
@@ -198,8 +210,8 @@ Depth is physical. Cards sit on Carbone with a soft dual shadow, a dark drop to 
 - **Buttons:** pill (fully rounded).
 - **Symbol container:** rounded square, radius 28/120 of its side (~23%). Circular on avatars.
 - **Panels and swatches:** 16px and 12px.
-- **Strokes:** round caps and joins everywhere: the *f*, the routes, the progress rings.
-- **Dashed lines** exist only in the route motif (`stroke-dasharray: 1 12`, round caps), which renders as dotted.
+- **Strokes:** round caps and joins everywhere: the *f*, the routes, the illustrations.
+- **Dashed lines** exist only in the route motif and the helicopter's rotor ring: `stroke-dasharray: 1 N` with N from 8 to 12 (rotor ring `1 8`, Parcours mini-route `1 9`), always with round caps, so they render as dotted.
 
 ## Components
 
@@ -209,6 +221,7 @@ The mark. A gradient *f* without a crossbar, followed by a hollow Corail node an
 - **Clear space:** the height of the arrival dot on every side.
 - **Minimum size:** 24px. Below that, use the *f* alone in Corail (favicon).
 - **Lockup:** symbol + *felroz* in the Wordmark style.
+- **Hover:** when the lockup is a link, the node and the arrival dot drift up-right (2px and 4px, 300ms ease-out). No motion with reduced-motion.
 
 ```svg
 <svg viewBox="0 0 120 120" role="img" aria-label="felroz">
@@ -226,33 +239,83 @@ Favicon (*f* alone): same container, `<path d="M46 100 V50 Q46 28 70 28" stroke=
 
 ### Buttons
 - **Shape:** pill.
-- **Primary:** gradient background (Prune → Corail → Pêche, left to right), white Body Strong text, 8px 16px padding. It counts as the screen's one gradient signal. Used for *Contact*.
+- **Primary:** gradient background (Prune → Corail → Pêche, left to right), white Body Strong text, 8px 16px padding. Used only for *Contact* in the header and the mobile menu (persistent chrome).
 - **Hover / Focus:** visible focus ring in Pêche; no color shift needed.
 
 ### Cards
 - **Corner Style:** 24px.
 - **Background:** Carbone face.
 - **Shadow Strategy:** Card lift at rest (see Elevation & Depth).
-- **Hover (linked cards):** the Split Card Rule. The underlayer takes the card's accent (Corail by default, or the third-party brand color for social and skill cards) overlaid with the dot grid (`radial-gradient(#26282C 3px, transparent 4px)`, 10px cell).
-- **Internal Padding:** 32px.
-- **Footer row:** title on the left, arrow-circle icon on the right (gray-400, rotates 45° → 0° and turns Corail on hover).
-- **Entrance:** spring scale 0.8 → 1 with opacity 0 → 1.
+- **Hover (linked cards):** the Split Card Rule. The underlayer is Corail, overlaid with the dot grid (`radial-gradient(#26282C 3px, transparent 4px)`, 10px cell).
+- **Internal Padding:** 28px (`p-7`), 24px at ≤640px (`p-6`).
+- **Content:** title row with the arrow-circle icon on the right (Label on Dark, rotates 45° → 0° and turns Corail on hover or focus), then the text in Ink Soft at full card width. No label above the title.
+- **Entrance:** the CSS stagger described in Motion.
+- **Square tiles:** on the home, tiles stay square (see Layout).
 
 ### Navigation
+- **Header:** lockup on the left, links centred on `lg` (Projets / Parcours / À propos, or Projects / Journey / About), language switch (Label style, `EN` / `FR`) and the Contact button on the right.
+- **Pages:** the CV page is now *Parcours* (FR `/parcours`, EN `/en/journey`, label *Journey*). Old `/cv`, `/resume` and `/en/resume` redirect.
 - **Style:** Body Strong, white.
 - **Hover:** Corail text with a 2px Corail underline.
-- **Active:** 2px Corail underline.
-- **Mobile:** full-height slide-in panel (90% width) over a blurred Carbone at 95% with the inverse dot grid; links in uppercase 2.25rem bold, centred.
+- **Active:** 2px Corail underline and `aria-current="page"`.
+- **Mobile:** full-height slide-in panel (90% width) over a blurred Carbone at 95% with the inverse dot grid; links in uppercase 2.25rem bold, centred; language switch and Contact at the bottom. Closes with Escape.
 
-### Label / Eyebrow
-DM Mono uppercase with 2px tracking, Label on Dark (or Label on Light on Craie). Section numbering uses the pattern `01 · NAME`.
+### Metadata Label
+DM Mono uppercase with 2px tracking, Label on Dark (or Label on Light on Craie). For metadata next to content (tags, the toolbelt line, language chips), never as an eyebrow above a heading.
 
-### Skill Progress Ring
-Circular gauge: a 15%-opacity track and a vertical Prune → Corail → Pêche gradient arc with round caps. It animates on scroll into view (spring, stiffness 50, 0.5s delay). The skill icon sits centred.
+### Hero Badge
+The home's 2×2 tile, styled like a conference badge (a nod, not a copy). A small lanyard slot (52×6px, Carbone Deep, inset shadow) hangs at the top centre of the card face. Below it, a photo panel (Carbone Deep, 18px radius, fine 14px dot grid in Dot at 70%) holds the 3D avatar, with a small Pêche dot in its top-right corner. Bottom: the greeting and name, then the lead; the lead's last part (*de l'API à l'interface.*) carries the page's one signal. No meta line and no link on this tile.
+- **Greeting:** `Hola, → Hello, → Bonjour,` over *je suis Felipe.*. The h1 exposes only the final greeting to assistive tech; the cycling words are decorative. It plays once (1.3s per word, slide-up) and rests on the page language's word. Under reduced motion it shows the final word at once.
+
+### 3D Avatar
+A Memoji model in the hero's photo panel (`@google/model-viewer`, `public/models/memoji.glb`, ~2.2 MB, no external decoder).
+- **Poster first:** `me.png` through `astro:assets` is the only thing in the HTML. model-viewer and the `.glb` load after first paint (browser idle, no later than 4s, and once the hero is visible).
+- **Fallback:** under reduced motion, without WebGL, or if the model fails, the poster stays as the only image and keeps its alt text.
+- **Pointer orbit:** the camera follows the pointer over the hero tile: θ = x·38°, φ = 80° ± 14° (y·14°), x and y normalised to the photo panel, clamped to ±1. It returns to front on leave. Touch pointers never orbit; the model stays facing front.
+- No camera controls, zoom, pan or tap; neutral environment, exposure 1.05, field of view 28°.
+
+### Helicopter Illustration
+Top-down, H135-inspired drawing for the *En ce moment* tile: fuselage, skids, tail boom, stabiliser, fenestron, four-blade rotor, Pêche hub and a dotted Corail rotor-disc ring. Single-colour card illustration (see Routes). The rotor spins only while the tile is hovered (1.2s linear loop), never at rest, and not at all under reduced motion.
+
+### Parcours Mini-Route
+Card illustration on the *Parcours* tile: a dotted Corail path, a hollow Corail node, a second hollow node and a solid Pêche arrival dot. The three role labels (`Ingénieur · Développeur · AI Engineer`) are all Label on Dark: no accent on any role, the arrival dot carries the direction. On hover or focus the arrival dot nudges up-right (4px, 0.4s).
+
+### Method Card
+The home's 2×1 tile *Comment je travaille* (it replaced the featured-project card). A Carbone Deep panel holds a miniature U line: hollow Prune node at the start, two small Corail rings, a Pêche arrival dot, a 1 8 dotted Corail path in between, and the four station words in Label on Dark. Title row with the arrow-circle icon and one line of Ink Soft text on the right. Links to `#method` on À propos. On hover or focus the node and the arrival dot drift (300ms ease-out).
+
+### Project Card
+Projets gallery card, landscape. A square illustration panel (Carbone Deep, 18px radius, fine 14px dot grid) on the left, then the title (Title scale, fluid up to 2rem), the year in Label on Dark, one sentence of Ink Soft and the stack as chips (1px Dot border, pill, Label type; they wrap). One card per row, data-driven from `global.json` (`projects`: id, year, stack, illustration key), so adding a project is data, not markup. Stacks to one column at ≤760px. The card links nowhere, so it gets no Split Card hover; only the drawings answer the pointer.
+- **Default illustration:** a project without its own drawing falls back to a generic one: a 7×7 Dot field, a dotted Corail route from a hollow Corail node to a Pêche arrival dot. Decorative, `aria-hidden`.
+
+### Route Panel and Chapter (Parcours)
+The Parcours is a scrollytelling route. On desktop (≥1101px) a sticky panel on the left draws the vertical route from Bogotá to today: a dotted Corail path with one node per stage (hollow Prune at the start, Corail nodes, a hinge for Annecy, the double ring for the MBA, the Pêche arrival dot for now) and DM Mono year ticks. An `IntersectionObserver` sets `data-active` on the node of the chapter being read; the node scales up (1.45×, 0.4s ease-out) and its label turns white. The panel is decorative (`aria-hidden`): every fact is in the chapters.
+- **Chapter:** a section per stage in large type: heading, a Label-on-Dark meta line and Body text, beside the panel. The last chapter ends on a Split Card link to Projets. At ≤1100px the panel disappears and a dotted route runs down the left of the chapters.
+- **Without JS or with reduced motion:** every chapter is fully visible and the panel shows its final state.
+
+### Diploma Card
+The MBA's weight on the Parcours: a Card (24px, Card lift) with the diploma title (2.5rem max), dates and school in Label on Dark, and the RNCP chip. A double ring in the top-right corner echoes the route's double node. Max width 560px.
+
+### Star Map
+Toolbox illustration on À propos: a monochrome Corail *f* at the centre (the page's signal is elsewhere), six group hubs on an ellipse, one satellite per tool on an 86° fan, labels outside the nodes, all drawn with the route vocabulary (Corail strokes, hollow nodes). Decorative and `aria-hidden`: the list beside it carries every tool and adds the only focus stops. Hovering a group in the list lights its hub, spoke and satellites.
+
+### U Production Line
+*Comment je travaille* on À propos: four stations on a U-shaped line (top left, top right, bottom right, bottom left), joined by the dotted Corail route in the gaps, never behind text. Station 1 carries the hollow Prune node, stations 2 and 3 small Corail rings, station 4 the Pêche arrival dot. Each station is a numbered list item with a Title heading and Body text. At ≤1100px the lead stacks above the line; at ≤640px the U becomes a single column.
+
+### Badge Reverse
+The back of the conference badge on Contact: a large Carbone card with the lanyard slot (52×6px, Carbone Deep), its front lying tilted underneath (Carbone Raised, monochrome Corail *f* at 55% opacity, because the email is the page's one signal). The card holds the email (`hello@felroz.com`, mailto link), a *Copier* button and the GitHub and LinkedIn links. The button is hidden when the Clipboard API is missing. The tilted front shifts a little further out on hover (0.5s ease-out); no transition with reduced motion.
 
 ### Background Motifs
-- **Dot grid:** small dots on Carbone (`#3A3D43`, ~1.4px, 22–24px cell) for large fields; the tight 10px grid is reserved for card underlayers.
+- **Dot field:** a full-viewport canvas behind every page's content (fixed, `pointer-events: none`). Dots on a 22px grid, `#3A3D43`, radius 1.3px. Near the pointer they warm toward Corail (`#CA6678`) within 150px, easing quadratically, and grow up to +1.4px. It redraws only on pointer move, scroll or resize and never animates on its own. On touch pointers and under reduced motion it is drawn once, static. The tight 10px grid is reserved for card underlayers, and a fine 14px grid for Carbone Deep panels.
 - **Routes:** dotted Corail paths linking hollow nodes (Prune for the first, Corail for the rest) to a solid Pêche arrival dot. Decoration only, placed at edges and corners.
+- **Routes as card illustrations:** a route may also be the illustration of a card (the Parcours mini-route), in a single colour: Corail dotted path, Corail hollow nodes, Pêche arrival dot, so it never reads as a second gradient. The rule below still holds: never behind text.
+
+## Motion
+
+Two protagonists on load: the dot field (pointer-driven) and the hero greeting (plays once). Everything else moves only on interaction.
+- **On interaction only:** the Memoji turns toward the pointer; the rotor spins on hover; the Parcours arrival dot, the *Comment je travaille* U-line node and arrival dot, and the Moi pizza react on hover; the Stack lines and nodes turn Corail on hover or focus; Split cards offset on hover.
+- **Card entrance:** one short CSS stagger (`tile-in`: opacity 0 → 1, 12px rise, 0.45s ease-out, 70ms between tiles), played once. It replaces the per-card spring.
+- **Reduced motion:** nothing animates and everything is in its final state; the poster replaces the 3D model.
+- **Ghost titles** on inner pages keep their slide-up (y 100% → 0, 0.5s).
 
 ## Do's and Don'ts
 
@@ -263,12 +326,17 @@ Circular gauge: a 15%-opacity track and a vertical Prune → Corail → Pêche g
 - **Do** keep the card shadow and the split offset hover on every linked card.
 - **Do** use the symbol from 24px up and the lone Corail *f* below 24px.
 - **Do** size UI to the longer French copy.
+- **Do** let headings stand alone: no eyebrow label above them.
+- **Do** keep home tiles square or whole-square, and keep the poster as the 3D avatar's fallback.
 
 ### Don't:
 - **Don't** draw the *f* with a crossbar. The decided mark has none.
 - **Don't** use the retired *falroz* wordmark or name.
+- **Don't** make an animation run at rest on the home (besides the dot field's pointer response and the greeting, once).
 - **Don't** place routes or dotted lines behind text, or use dashed lines anywhere outside the route motif.
 - **Don't** add a second type family (Aclonica is retired).
 - **Don't** set body copy, paragraphs or long labels in gradient.
-- **Don't** use the third-party brand colors outside their own cards.
+- **Don't** use the third-party brand colors outside their own icons.
+- **Don't** make AI the hero: no agent diagrams, no fake logs, no "AI Engineer" as the loudest element.
+- **Don't** pitch: no "let's work together" sales copy, no invented metrics or placeholder text in production.
 - **Don't** replace the 3D card treatment with flat cards.

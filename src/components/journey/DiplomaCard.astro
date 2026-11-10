@@ -1,0 +1,55 @@
+---
+/**
+ * The MBA's weight (spec · Parcours): a card with the diploma title, dates and school, and the RNCP chip.
+ * The double ring echoes the only double node on the route.
+ */
+import Card from '@components/Card.astro'
+
+const { id, title, meta, chip } = Astro.props
+---
+
+<div class="diploma max-w-[560px]">
+  <Card>
+    <div class="relative grid gap-3.5">
+      <span class="ring" aria-hidden="true"></span>
+      <h2 id={id} class="title pr-10">{title}</h2>
+      <p class="label-mono text-label-dark">{meta}</p>
+      <ul class="flex flex-wrap gap-1.5 pt-1">
+        <li class="label-mono rounded-full border border-dot px-2.5 py-[3px] text-xs text-ink-soft">{chip}</li>
+      </ul>
+    </div>
+  </Card>
+</div>
+
+<style>
+  .title {
+    max-width: 18ch;
+    font-size: clamp(1.875rem, 3.2vw, 2.5rem);
+    line-height: 1.08;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .ring {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--color-corail);
+  }
+  .ring::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    border: 3.5px solid var(--color-corail);
+    background: var(--color-carbone);
+  }
+  @media (max-width: 640px) {
+    .title {
+      font-size: 1.625rem;
+    }
+  }
+</style>

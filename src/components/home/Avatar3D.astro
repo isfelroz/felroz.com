@@ -1,0 +1,132 @@
+---
+/**
+ * 3D Memoji (spec §4.4). The HTML only carries the poster: model-viewer and the .glb load after first paint,
+ * once the browser is idle and the hero is visible, and never under reduced motion or without WebGL.
+ * The camera orbit follows the pointer over the hero tile.
+ */
+import { Image } from 'astro:assets'
+import me from '@assets/me.png'
+
+interface Props {
+  alt: string
+}
+
+const { alt } = Astro.props
+---
+
+<div class="memo">
+  <model-viewer
+    data-avatar
+    data-src="/models/memoji.glb"
+    alt={alt}
+    camera-orbit="0deg 80deg auto"
+    min-camera-orbit="auto auto auto"
+    max-camera-orbit="auto auto auto"
+    field-of-view="28deg"
+    interpolation-decay="120"
+    environment-image="neutral"
+    exposure="1.05"
+    shadow-intensity="0"
+    interaction-prompt="none"
+    disable-zoom
+    disable-pan
+    disable-tap
+    loading="eager"
+  >
+    <Image slot="poster" src={me} alt={alt} width={420} height={336} loading="eager" draggable="false" />
+  </model-viewer>
+</div>
+
+<style>
+  /* Same box before and after the upgrade: the unknown element is a block, the poster fills it */
+  .memo {
+    height: 100%;
+    max-width: 100%;
+    aspect-ratio: 1;
+  }
+  model-viewer {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    background: transparent;
+    --poster-color: transparent;
+  }
+  img[slot='poster'] {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    user-select: none;
+  }
+</style>
+
+<script>
+  type ModelViewer = HTMLElement & { src: string | null; showPoster(): void }
+  const mv = document.querySelector<ModelViewer>('[data-avatar]')
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const probe = document.createElement('canvas')
+  const webgl = !!(probe.getContext('webgl2') || probe.getContext('webgl'))
+
+  // Under reduced motion or without WebGL nothing loads: the poster keeps the alt it ships with
+  if (mv && !reduce && webgl) {
+    const poster = mv.querySelector<HTMLImageElement>('img[slot="poster"]')
+    const alt = mv.getAttribute('alt') ?? ''
+    const hero = mv.closest<HTMLElement>('.tile') ?? mv
+    const stage = mv.closest<HTMLElement>('[data-stage]') ?? mv
+
+    // Idle, but no later than 4s: a busy page must not keep the model from ever loading
+    const idle = new Promise<void>((resolve) =>
+      'requestIdleCallback' in window ? requestIdleCallback(() => resolve(), { timeout: 4000 }) : setTimeout(resolve, 1500),
+    )
+    const visible = new Promise<void>((resolve) => {
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect()
+          resolve()
+        }
+      })
+      io.observe(hero)
+    })
+
+    // A failed model (first load or any later src) brings the poster and its alt back
+    const fallBack = () => {
+      mv.removeAttribute('src')
+      mv.src = null
+      mv.showPoster()
+      if (poster) poster.alt = alt
+    }
+
+    // No camera controls: the model is not interactive, so keep it (and its inner .userInput) out of the tab order.
+    // The inner element keeps role="img" and the aria-label, so the alt stays available.
+    const skipTab = () => {
+      // Only write when it differs: setting the same value still queues a mutation record and would loop the observer
+      for (const el of [mv, mv.shadowRoot?.querySelector('.userInput')]) if (el && el.getAttribute('tabindex') !== '-1') el.setAttribute('tabindex', '-1')
+    }
+
+    Promise.all([idle, visible])
+      .then(() => import('@google/model-viewer'))
+      .then(() => {
+        // model-viewer now carries the alt; the poster becomes decorative duplication
+        if (poster) poster.alt = ''
+        mv.addEventListener('error', fallBack)
+        skipTab()
+        mv.addEventListener('load', skipTab)
+        // model-viewer may reapply tabindex when its attributes change
+        new MutationObserver(skipTab).observe(mv.shadowRoot ?? mv, { subtree: true, attributes: true, attributeFilter: ['tabindex'] })
+        mv.setAttribute('src', mv.dataset.src ?? '')
+      })
+      // The import failed: model-viewer never upgrades and the poster keeps its alt
+      .catch(() => {})
+
+    // The camera turns toward the pointer: θ = x·38°, φ = 80° − y·14° (y up). The attribute works before the upgrade too.
+    const aim = (x: number, y: number) => mv.setAttribute('camera-orbit', `${x * 38}deg ${80 - y * 14}deg auto`)
+    const clamp = (v: number) => Math.max(-1, Math.min(1, v))
+    hero.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return
+      const r = stage.getBoundingClientRect()
+      aim(clamp((e.clientX - r.left - r.width / 2) / (r.width / 2)), clamp(-(e.clientY - r.top - r.height / 2) / (r.height / 2)))
+    })
+    hero.addEventListener('pointerleave', () => aim(0, 0))
+  }
+</script>

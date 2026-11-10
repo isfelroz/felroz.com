@@ -1,0 +1,58 @@
+---
+import Layout from '@layouts/Layout.astro'
+import BigTitle from '@components/react/BigTitle.jsx'
+import Icon from '@components/react/Icon.jsx'
+import BadgeReverse from '@components/contact/BadgeReverse.astro'
+import CopyEmail from '@components/contact/CopyEmail.astro'
+import globalData from '@data/global.json'
+import { useTranslations } from '../i18n/index.js'
+
+const { locale, routeKey } = Astro.props
+const t = useTranslations(locale)
+const { email, socials } = globalData
+const handle = (href: string) => href.split('/').filter(Boolean).pop()
+---
+
+<Layout locale={locale} routeKey={routeKey}>
+  <BigTitle client:load>{t.pages[routeKey]}</BigTitle>
+
+  <BadgeReverse name="felroz">
+    <h2 class="max-w-[22ch] text-[clamp(1.5rem,2.6vw,2.25rem)] leading-[1.1] font-bold tracking-[-0.03em]">
+      {t.contact.lead}
+    </h2>
+
+    <div class="flex flex-wrap items-center gap-4">
+      <a
+        href={`mailto:${email}`}
+        class="group/mail text-[clamp(1.6rem,5.4vw,3.5rem)] leading-[1.05] font-bold tracking-[-0.035em] [overflow-wrap:anywhere]"
+      >
+        <span class="text-signal border-b-2 border-transparent transition-colors group-hover/mail:border-corail">{email}</span>
+      </a>
+      <CopyEmail email={email} label={t.contact.copy} copied={t.contact.copied} failed={t.contact.copyFailed} />
+    </div>
+
+    <ul class="grid border-t border-dot">
+      {
+        socials.map((social) => (
+          <li>
+            <a
+              href={social.href}
+              target="_blank"
+              rel="me noopener"
+              aria-label={t.home.socialLabel.replace('{name}', social.name)}
+              class="group grid grid-cols-[1fr_auto_auto] items-center gap-5 border-b border-dot py-[18px] max-[640px]:gap-3"
+            >
+              <span class="text-2xl font-bold tracking-[-0.02em] transition-colors group-hover:text-corail group-focus-visible:text-corail">
+                {social.name}
+              </span>
+              <span class="label-mono text-label-dark max-[400px]:hidden">{handle(social.href)}</span>
+              <Icon type="arrow" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="text-ink-soft">{t.contact.languages}</p>
+  </BadgeReverse>
+</Layout>

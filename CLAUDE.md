@@ -12,19 +12,20 @@ Personal portfolio (felroz.com) built with Astro 7 as a static site, with React 
 ## Architecture
 
 - **Default to `.astro` components** (zero client-side JS). Only use React (`src/components/react/`) when state or `motion` animation is needed, and hydrate with the least eager directive that works (`client:visible`, `client:idle`, `client:media`; `client:load` only when unavoidable).
-- React components without a `client:*` directive (e.g. `Icon`, `SocialIcon`) render server-side only; using them that way is fine.
+- React components without a `client:*` directive (e.g. `Icon`) render server-side only; using them that way is fine.
 - Animations: import from `motion/react`, not `framer-motion`.
 - The active route comes from `Astro.url.pathname` normalized with `normalizePath` (`src/lib/path.js`); pass it to islands as a prop.
 - Images: put them in `src/assets/` and use `<Image>` from `astro:assets`. `public/` is only for files served unprocessed (fonts, favicon).
-- Content lives in `src/data/*.json`; do not hardcode copy that already exists there.
+- Language-neutral data (socials, sourceCode, employer, stack, toolbelt, languages, featuredTags) lives in `src/data/global.json`; do not hardcode copy in components.
 - Import aliases (tsconfig): `@components/*`, `@layouts/*`, `@data/*`, `@assets/*`.
+- i18n: French at `/`, English under `/en`. Route keys and localized paths live in `src/i18n/index.js`; all copy lives in `src/i18n/fr.json` and `src/i18n/en.json` (keep both in sync). Pages in `src/pages` are thin wrappers around `src/views/*`.
 
 ## Styles (Tailwind 4)
 
 - Any visual change must follow `DESIGN.md` (One Signal Rule, Plain Text Rule, Split Card Rule, symbol without crossbar). Update `DESIGN.md` when the system intentionally changes.
 - There is no `tailwind.config.js`: colors, fonts, sizes and shadows are defined in `@theme` inside `src/styles/global.css`.
 - Use v4 syntax: `bg-linear-to-r` (not `bg-gradient-to-r`), `drop-shadow-sm`/`shadow-sm`/`rounded-sm` for the old defaults, `shrink`/`grow`.
-- Theme colors: `primary-black`, `primary`, `primary-dark`, `primary-ligth` (sic), `github`, `npm`, `linkedin`, `twitter`, `javascript`.
+- Theme colors use the brand names: `prune`, `corail`, `peche`, `carbone`, `carbone-raised`, `craie`, `ink-soft`, `label-dark`, `label-light`, plus `github`, `linkedin` (hover fill of their own icons only). Utilities: `bg-signal`, `text-signal`, `label-mono`, `shadow-card`.
 
 ## Verification
 

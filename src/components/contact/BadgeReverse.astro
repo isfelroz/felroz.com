@@ -1,0 +1,79 @@
+---
+/**
+ * The back of the badge (spec · Contact): a large Carbone card with a lanyard slot, its front lying
+ * tilted underneath. The front uses a monochrome Corail f, because the email is the page's one signal.
+ * Content goes in the default slot.
+ */
+import Card from '@components/Card.astro'
+
+interface Props {
+  name: string
+}
+
+const { name } = Astro.props
+---
+
+<div class="badge-desk group relative mx-auto mt-2 max-w-[780px] pt-6 pb-10">
+  <div
+    aria-hidden="true"
+    class="badge-front absolute inset-x-0 top-6 bottom-10 flex flex-col items-start justify-center gap-2 rounded-3xl bg-carbone-raised pl-4 shadow-card"
+  >
+    <span class="absolute top-3 left-1/2 h-1.5 w-[52px] -translate-x-1/2 rounded-[3px] bg-carbone-deep"></span>
+    <svg viewBox="0 0 120 120" class="size-14 opacity-55" aria-hidden="true">
+      <rect width="120" height="120" rx="28" fill="#26282C"></rect>
+      <path d="M46 100 V50 Q46 28 70 28" stroke="#CA6678" stroke-width="22" stroke-linecap="round" fill="none"></path>
+    </svg>
+    <span class="text-lg font-bold tracking-[-0.5px] opacity-35">{name}</span>
+  </div>
+
+  <div class="relative">
+    <Card>
+      <div class="relative flex flex-col gap-7 px-12 pt-14 pb-10 max-[640px]:px-4 max-[640px]:pt-12 max-[640px]:pb-6">
+        <span
+          aria-hidden="true"
+          class="absolute top-2.5 left-1/2 h-1.5 w-[52px] -translate-x-1/2 rounded-[3px] bg-carbone-deep shadow-[inset_0_1px_2px_rgb(0_0_0/0.6)]"
+        ></span>
+        <slot />
+      </div>
+    </Card>
+  </div>
+</div>
+
+<style>
+  /* How far the front may shift left of the desk: keeps its rotated corner >= 8px inside the viewport (26px allows for the rotation, 48px for the steeper hover tilt). Zero on narrow screens, where the front is scaled down instead so its rotated corners stay inside. */
+  .badge-desk {
+    --badge-room: max(0px, calc(max(1rem, (100vw - 780px) / 2) - 26px));
+    --badge-room-hover: max(0px, calc(max(1rem, (100vw - 780px) / 2) - 48px));
+  }
+  .badge-front {
+    transform: rotate(-6deg) translate(calc(-1 * min(120px, var(--badge-room))), 28px);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .badge-desk:hover .badge-front {
+    transform: rotate(-9deg) translate(calc(-1 * min(150px, var(--badge-room-hover))), 40px);
+  }
+  @media (max-width: 1100px) {
+    .badge-front {
+      transform: rotate(-4deg) translate(calc(-1 * min(80px, var(--badge-room))), 20px);
+    }
+    .badge-desk:hover .badge-front {
+      transform: rotate(-5deg) translate(calc(-1 * min(96px, var(--badge-room-hover))), 24px);
+    }
+  }
+  @media (max-width: 840px) {
+    .badge-front {
+      scale: 0.94;
+    }
+  }
+  @media (max-width: 640px) {
+    .badge-front,
+    .badge-desk:hover .badge-front {
+      transform: rotate(-3deg) translate(calc(-1 * min(8px, var(--badge-room-hover))), 14px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .badge-front {
+      transition: none;
+    }
+  }
+</style>

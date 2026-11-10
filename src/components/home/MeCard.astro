@@ -1,0 +1,64 @@
+---
+/** "Moi": a flat pepperoni pizza (turns on hover), spoken languages, and a line about Felipe. */
+import globalData from '@data/global.json'
+import Icon from '@components/react/Icon.jsx'
+
+const { title, text } = Astro.props
+const langAttr = { ES: 'es', FR: 'fr', EN: 'en' }
+---
+
+<div class="me flex h-full flex-col justify-end gap-2.5">
+  <div class="flex grow items-start justify-between gap-3">
+    <svg class="pizza size-16 shrink-0" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" fill="#E98A77"></circle>
+      <circle cx="50" cy="50" r="38" fill="#F4F1EE" fill-opacity=".85"></circle>
+      <g stroke="#E98A77" stroke-width="2.5" opacity=".7">
+        <line x1="50" y1="12" x2="50" y2="88"></line>
+        <line x1="12" y1="50" x2="88" y2="50"></line>
+        <line x1="23" y1="23" x2="77" y2="77"></line>
+        <line x1="77" y1="23" x2="23" y2="77"></line>
+      </g>
+      <g fill="#CA6678">
+        <circle cx="38" cy="30" r="7"></circle>
+        <circle cx="66" cy="36" r="7"></circle>
+        <circle cx="32" cy="60" r="7"></circle>
+        <circle cx="60" cy="66" r="7"></circle>
+        <circle cx="50" cy="48" r="5"></circle>
+      </g>
+      <g fill="#9E4B88">
+        <circle cx="70" cy="58" r="2.5"></circle>
+        <circle cx="44" cy="72" r="2.5"></circle>
+        <circle cx="28" cy="44" r="2.5"></circle>
+      </g>
+    </svg>
+    <ul class="flex flex-wrap justify-end gap-1.5">
+      {
+        globalData.languages.map((l) => (
+          <li lang={langAttr[l]} class="label-mono rounded-full border border-dot px-2 py-0.5 text-ink-soft">
+            {l}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="flex items-center justify-between gap-4">
+    <h2 class="text-2xl font-bold tracking-[-0.02em] text-balance">{title}</h2>
+    <span class="shrink-0"><Icon type="arrow" /></span>
+  </div>
+  <p class="text-ink-soft text-pretty">{text}</p>
+</div>
+
+<style>
+  .pizza {
+    transition: rotate 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  :global(.tile:hover) .pizza,
+  :global(.tile:focus-within) .pizza {
+    rotate: 200deg;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pizza {
+      transition: none;
+    }
+  }
+</style>

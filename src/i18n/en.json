@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "siteName": "felroz",
+    "titles": {
+      "home": "felroz — Full-stack developer & AI engineer",
+      "about": "About · felroz",
+      "projects": "Projects · felroz",
+      "resume": "Journey · felroz",
+      "contact": "Contact · felroz"
+    },
+    "description": "Felipe Alarcon (felroz), full-stack developer and AI engineer in Annecy. Web apps from the API to the interface."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "resume": "Journey",
+    "contact": "Contact",
+    "main": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLanguage": "Version française",
+    "switchLabel": "FR",
+    "skip": "Skip to content"
+  },
+  "pages": {
+    "about": "About me",
+    "projects": "Projects",
+    "resume": "Journey",
+    "contact": "Contact"
+  },
+  "contact": {
+    "lead": "A question, an idea, a project? Write to me.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyFailed": "Copy failed",
+    "languages": "I answer in Spanish, French or English."
+  },
+  "projects": {
+    "stack": "Tech stack",
+    "items": {
+      "crm": {
+        "title": "Flight CRM",
+        "text": "It replaces the 2022 app: separate API and front end.",
+        "illustrationLabel": "Nine trades around one tool: ops, base managers, pilots, operations managers, CAMO, accounting, sales, mechanics, HR."
+      },
+      "intranet": {
+        "title": "Group intranet",
+        "text": "It replaces a Drupal site for more than 100 colleagues.",
+        "illustrationLabel": "More than 100 colleagues"
+      }
+    }
+  },
+  "journey": {
+    "lead": "From the production line to the deployment pipeline.",
+    "signal": "deployment pipeline",
+    "origin": "Bogotá",
+    "stages": {
+      "start": { "node": "Engineer", "title": "Industrial engineer", "meta": "2008 – 2014 · Bogotá", "text": "Universidad Sergio Arboleda." },
+      "factory": { "node": "Prod. manager", "title": "Production manager", "meta": "2014 – 2017 · Bogotá", "text": "Alicia Giraldo, garment manufacturing for major brands. I led a team and set up modern production lines: Toyota, modular." },
+      "annecy": { "node": "Annecy", "title": "I arrive in Annecy." },
+      "bachelor": { "node": "Bachelor", "title": "I go back to school", "meta": "2018 – 2021 · My Digital School", "text": "Bachelor's degree in multiplatform development." },
+      "ios": { "node": "iOS", "title": "iOS developer, SOS Soirée", "meta": "2019 · Internship", "text": "I ported an Android app to native iOS." },
+      "ceovision": { "node": "Front", "title": "Front-end developer, Ceovision", "meta": "2020 – 2021 · Work-study · Archamps", "text": "On GoFAST, the open-source alternative to Microsoft 365." },
+      "walt": { "node": "Walt", "title": "Full stack developer, Walt", "meta": "2021 – 2025 · Annecy", "text": "Work-study, then a permanent contract. Custom corporate and e-commerce sites, working directly with clients." },
+      "mba": { "node": "MBA", "title": "MBA Full Stack Developer & project management", "meta": "2021 – 2023 · My Digital School, Annecy", "chip": "RNCP level 7" },
+      "hbg": { "node": "HBG · Now", "title": "Developer & AI engineer, HBG Helicopters", "meta": "Since 2025 · Annecy", "text": "The flight CRM and the group intranet." }
+    },
+    "seeProjects": "See the projects"
+  },
+  "home": {
+    "hero": {
+      "greetings": [
+        { "word": "Hola,", "lang": "es" },
+        { "word": "Bonjour,", "lang": "fr" },
+        { "word": "Hello,", "lang": "en" }
+      ],
+      "name": "I'm Felipe.",
+      "lead": "Full-stack developer. I design and ship web apps, ",
+      "signal": "from the API to the interface.",
+      "avatarAlt": "3D avatar of Felipe, sitting in meditation"
+    },
+    "now": {
+      "title": "Right now",
+      "role": "Developer & AI engineer at",
+      "newTab": "(new tab)"
+    },
+    "journey": {
+      "title": "Journey",
+      "roles": [
+        "Engineer",
+        "Developer",
+        "AI Engineer"
+      ],
+      "text": "From industrial engineer to AI engineer, from Bogotá to Annecy."
+    },
+    "skills": {
+      "title": "Know-how",
+      "items": [
+        {
+          "icon": "api",
+          "label": "APIs"
+        },
+        {
+          "icon": "web",
+          "label": "Web interfaces"
+        },
+        {
+          "icon": "mobile",
+          "label": "Mobile apps"
+        },
+        {
+          "icon": "automation",
+          "label": "Automations"
+        },
+        {
+          "icon": "deploy",
+          "label": "Shipping to prod"
+        },
+        {
+          "icon": "agents",
+          "label": "AI agents"
+        }
+      ]
+    },
+    "method": {
+      "title": "How I work",
+      "text": "Like on the factory floor: clear processes, quality on the line.",
+      "stations": ["Spec", "Issues", "Review", "Ship"]
+    },
+    "stack": {
+      "title": "Stack",
+      "label": "Stack: {list}. More about me"
+    },
+    "me": {
+      "title": "Colombian in Annecy",
+      "text": "Photography, street culture and pepperoni pizza."
+    },
+    "contact": {
+      "title": "Let's talk."
+    },
+    "socialLabel": "Felipe Alarcon on {name}"
+  },
+  "about": {
+    "story": {
+      "lead": "I was born in Bogotá.",
+      "body": [
+        "Trained as an industrial engineer, I ran a garment workshop.",
+        "In 2017, I arrive in Annecy and switch to code.",
+        "Today, I build web apps, from the API to the interface."
+      ],
+      "signal": "switch to code",
+      "languages": "I speak Spanish, French and English.",
+      "languagesLabel": "Languages",
+      "badgeAlt": "Felipe's Memoji, in a white sweatshirt.",
+      "name": "Felipe Alarcon",
+      "route": "Bogotá → Annecy"
+    },
+    "toolbox": {
+      "title": "My toolbox",
+      "groups": [
+        {
+          "id": "front",
+          "label": "Front",
+          "tools": [
+            "TypeScript",
+            "Nuxt / Vue",
+            "Next.js / React",
+            "Astro",
+            "Tailwind"
+          ]
+        },
+        {
+          "id": "back",
+          "label": "Back",
+          "tools": [
+            "PHP / Laravel",
+            "Node / Nitro",
+            "Python",
+            "PostgreSQL",
+            "MariaDB",
+            "Supabase"
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "Mobile",
+          "tools": [
+            "Native iOS",
+            "React Native / Expo"
+          ]
+        },
+        {
+          "id": "prod",
+          "label": "Prod",
+          "tools": [
+            "Docker",
+            "Traefik",
+            "CI/CD with tag-based deploys and rollback",
+            "Grafana / Prometheus / Loki"
+          ]
+        },
+        {
+          "id": "integrations",
+          "label": "Integrations",
+          "tools": [
+            "Microsoft Graph / SharePoint",
+            "Entra ID"
+          ]
+        },
+        {
+          "id": "ia",
+          "label": "AI",
+          "tools": [
+            "Agentic development (Claude Code)",
+            "MCP"
+          ]
+        }
+      ]
+    },
+    "method": {
+      "title": "How I work",
+      "lead": "Like on the factory floor: clear processes, and quality checked on the line.",
+      "stations": [
+        {
+          "title": "Spec before code.",
+          "text": "We write down what we build, and why."
+        },
+        {
+          "title": "Issues, not sticky notes.",
+          "text": "GitHub runs the project management."
+        },
+        {
+          "title": "A review before every merge.",
+          "text": "Nothing ships to production without a second read."
+        },
+        {
+          "title": "AI agents, kept in check.",
+          "text": "Architecture and E2E tests keep them on track."
+        }
+      ]
+    },
+    "offcode": {
+      "title": "Off the code",
+      "items": [
+        "Photography",
+        "Street culture",
+        "Pepperoni pizza"
+      ]
+    }
+  },
+  "footer": {
+    "credits": "Designed and built by Felipe Alarcon",
+    "source": "Source code"
+  }
+}

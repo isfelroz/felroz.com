@@ -1,0 +1,32 @@
+---
+import Layout from '@layouts/Layout.astro'
+import BigTitle from '@components/react/BigTitle.jsx'
+import ProjectCard from '@components/projects/ProjectCard.astro'
+import globalData from '@data/global.json'
+import { illustrationKey } from '../lib/projects.js'
+import { useTranslations } from '../i18n/index.js'
+
+const { locale, routeKey } = Astro.props
+const t = useTranslations(locale)
+---
+
+<Layout locale={locale} routeKey={routeKey}>
+  <BigTitle client:load>{t.pages[routeKey]}</BigTitle>
+
+  <ol class="grid grid-cols-1 gap-7 pt-4 pb-6 min-[1101px]:grid-cols-2">
+    {
+      globalData.projects.map((project) => (
+        <li class="grid min-w-0">
+          <ProjectCard
+            id={project.id}
+            year={project.year}
+            stack={project.stack}
+            stackLabel={t.projects.stack}
+            illustration={illustrationKey(project)}
+            {...t.projects.items[project.id]}
+          />
+        </li>
+      ))
+    }
+  </ol>
+</Layout>

@@ -1,21 +1,49 @@
 ---
 import '../styles/global.css'
-import globalData from '@data/global.json'
 import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
+import DotField from '@components/DotField.astro'
 import Container from '@components/Container.astro'
+import { locales, localizePath, ogLocales, otherLocale, useTranslations } from '../i18n/index.js'
 
-const { title = 'falroz | portfolio' } = Astro.props
-const { navigation, socials } = globalData
+const { locale = 'fr', routeKey = 'home' } = Astro.props
+const t = useTranslations(locale)
+const title = t.meta.titles[routeKey] ?? t.meta.titles.home
+const description = t.meta.description
+const canonical = new URL(localizePath(routeKey, locale), Astro.site).href
+const alternates = locales.map((l) => ({
+  hreflang: l,
+  href: new URL(localizePath(routeKey, l), Astro.site).href,
+}))
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(localizePath(routeKey, 'fr'), Astro.site).href} />
+    <meta name="theme-color" content="#26282C" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t.meta.siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocales[locale]} />
+    <meta property="og:locale:alternate" content={ogLocales[otherLocale(locale)]} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
     <script is:inline>
       ;(function (w, d, s, l, i) {
         w[l] = w[l] || []
@@ -29,11 +57,17 @@ const { navigation, socials } = globalData
       })(window, document, 'script', 'dataLayer', 'GTM-KZBN4VFF')
     </script>
   </head>
-  <body class="bg-primary-black w-screen font-DMSans overflow-hidden overflow-y-visible min-h-screen flex flex-col">
-    <Header menu={navigation.menu} />
-    <main class="flex-auto">
+  <body class="flex min-h-dvh flex-col overflow-x-clip bg-carbone font-sans text-white">
+    <DotField />
+    <a
+      href="#main"
+      class="sr-only rounded-full bg-carbone-raised px-4 py-2 focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50"
+      >{t.nav.skip}</a
+    >
+    <Header locale={locale} routeKey={routeKey} />
+    <main id="main" class="relative z-[1] flex-auto">
       <Container><slot /></Container>
     </main>
-    <Footer menu={navigation.menu} socials={socials} />
+    <Footer locale={locale} />
   </body>
 </html>

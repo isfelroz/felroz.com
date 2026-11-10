@@ -1,0 +1,34 @@
+---
+/** A matrix of 108 dots (more than 100 colleagues). They light up Corail in a diagonal wave on card hover. */
+const { label } = Astro.props
+const COLS = 12
+const ROWS = 9
+const dots = Array.from({ length: COLS * ROWS }, (_, i) => {
+  const col = i % COLS
+  const row = Math.floor(i / COLS)
+  return { x: 11 + col * 22, y: 11 + row * 22, d: (col + row) * 18 }
+})
+---
+
+<svg class="people" viewBox="0 0 264 198" role="img">
+  <title>{label}</title>
+  {dots.map((p) => <circle cx={p.x} cy={p.y} r="5" style={`--d:${p.d}ms`} />)}
+</svg>
+
+<style>
+  .people {
+    width: 88%;
+    height: auto;
+  }
+  circle {
+    fill: var(--color-label-light);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    circle {
+      transition: fill 0.3s var(--d) cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  }
+  :global(.proj:hover) circle {
+    fill: var(--color-corail);
+  }
+</style>
